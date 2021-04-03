@@ -1,5 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --info-hover: #138496;
+}
+
 html, body {
   background: ghostwhite;
+}
+
+/*
+ * remove button focus outlines
+ */
+
+.btn:focus {
+  box-shadow: none;
+}
+
+/*
+ * accordion buttons
+ */
+
+.bg-info > button {
+  color: white;
+}
+
+.bg-info > button:hover {
+  color: white;
+  font-weight: bold;
+  text-decoration-line: underline;
 }
