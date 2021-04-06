@@ -8,19 +8,23 @@ import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ManageQuestionsComponent} from './pages/manage-questions/manage-questions.component';
+import {EditQuestionComponent} from './pages/manage-questions/edit-question/edit-question.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartComponent,
-    ManageQuestionsComponent
+    ManageQuestionsComponent,
+    EditQuestionComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

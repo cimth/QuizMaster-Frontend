@@ -1,5 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
+/*
+ * colors
+ */
+
+.color-red {
+  color: red;
+}
+
+/*
+ * outer elements
+ */
+
 :root {
   --info-hover: #138496;
 }
@@ -28,4 +40,15 @@ html, body {
   color: white;
   font-weight: bold;
   text-decoration-line: underline;
+}
+
+/*
+ * modals
+ */
+.modal-content {
+  padding: 1em;
+}
+
+.component-host-scrollable {
+  overflow-y: auto !important;
 }

@@ -1,0 +1,96 @@
+import {Component, Input, OnInit} from '@angular/core';
+import {MESSAGE_ID} from '../../../constants/localization/message-id';
+import {LocalizationService} from '../../../service/localization/localization.service';
+import {QuestionInRawFormat} from '../../../model/question';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {QuestionService} from '../../../service/question/question.service';
+import {ResponseDecoderService} from '../../../service/response-decoder/response-decoder.service';
+
+@Component({
+  selector: 'app-edit-question',
+  templateUrl: './edit-question.component.html',
+  styleUrls: ['./edit-question.component.css'],
+  // needed for nicer UI
+  host: {
+    '[class.modal-content]': 'true'
+  }
+})
+export class EditQuestionComponent implements OnInit {
+
+  /*======================================*
+   * FIELDS
+   *======================================*/
+
+  public MESSAGE_ID = MESSAGE_ID;
+
+  @Input() public originalQuestion: QuestionInRawFormat;
+  @Input() public modalRef: NgbModalRef;
+
+  public editedQuestion: QuestionInRawFormat;
+  public editableAnswers: boolean = false;
+  public errorMessage: string;
+  public adminToken: string = '';
+
+  /*======================================*
+   * CONSTRUCTOR AND INITIALIZATION
+   *======================================*/
+
+  constructor(public loc: LocalizationService,
+              private questionService: QuestionService,
+              private responseDecoderService: ResponseDecoderService) { }
+
+  ngOnInit(): void {
+    this.editedQuestion = {
+      id: this.originalQuestion.id,
+      questionText: this.originalQuestion.questionText,
+      correctAnswer: this.originalQuestion.correctAnswer,
+      wrongAnswer1: this.originalQuestion.wrongAnswer1,
+      wrongAnswer2: this.originalQuestion.wrongAnswer2,
+      wrongAnswer3: this.originalQuestion.wrongAnswer3,
+    }
+  }
+
+  /*======================================*
+   * ACTIONS FOR COMPONENT
+   *======================================*/
+
+  /**
+   * @param editableAnswers true if answers should be editable, else false
+   */
+  setEditableAnswers(editableAnswers: boolean): void {
+    this.editableAnswers = editableAnswers;
+
+    // reset answers if answers should not be editable
+    if (!editableAnswers) {
+      this.editedQuestion.correctAnswer = this.originalQuestion.correctAnswer;
+      this.editedQuestion.wrongAnswer1 = this.originalQuestion.wrongAnswer1;
+      this.editedQuestion.wrongAnswer2 = this.originalQuestion.wrongAnswer2;
+      this.editedQuestion.wrongAnswer3 = this.originalQuestion.wrongAnswer3;
+    }
+  }
+
+  /**
+   * Saves the edited question at the backend.
+   * If an error occurs, the error message will be displayed in the component.
+   */
+  saveQuestion(): void {
+    // reset error message
+    this.errorMessage = undefined;
+
+    console.log(this.editedQuestion);
+
+    // update question
+    this.questionService.saveUpdatedQuestion(this.editedQuestion, this.adminToken)
+      .subscribe(response => {
+        const resultString = String.fromCharCode.apply(null, new Uint8Array(response));
+        console.log(resultString);
+        alert(resultString);
+        this.modalRef.close(this.editedQuestion);
+      }, err => {
+        console.log(err);
+        const errorDetails = this.responseDecoderService.decodeArrayBufferResponseToString(err.error);
+        console.log("Error while saving the Question: ", errorDetails);
+        this.errorMessage = errorDetails;
+      });
+  }
+}

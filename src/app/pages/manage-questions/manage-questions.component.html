@@ -1,7 +1,7 @@
 <h1 class="h1 text-center mb-4">Fragen verwalten</h1>
 
 <ngb-accordion *ngIf="allQuestions.length > 0" [closeOthers]="true" activeIds="static-{{allQuestions[0].id}}" type="info">
-  <ngb-panel *ngFor="let question of allQuestions"  id="static-{{question.id}}" title="{{question.questionText}}">
+  <ngb-panel *ngFor="let question of allQuestions; let idx = index"  id="static-{{question.id}}" title="{{question.questionText}}">
     <ng-template ngbPanelContent style="background: var(--info)">
       <!-- question data -->
       <table class="table table-borderless">
@@ -81,7 +81,7 @@
           </td>
           <!-- edit -->
           <td style="width: 33.33%">
-            <button class="btn btn-block btn-info">
+            <button class="btn btn-block btn-info" (click)="editQuestion(question.id, idx)">
               {{loc.localize(MESSAGE_ID.ACTION_LABELS.EDIT)}}
             </button>
           </td>

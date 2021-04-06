@@ -15,12 +15,17 @@ export const ATTRIBUTE_NAMES = {
   WRONG_ANSWER_1: 'Wrong Answer 1',
   WRONG_ANSWER_2: 'Wrong Answer 2',
   WRONG_ANSWER_3: 'Wrong Answer 3',
+  ADMIN_TOKEN: 'Admin Token'
 }
 
 export const ACTION_LABELS = {
   ACTIONS: 'Actions',
   EDIT: 'Edit',
   DELETE: 'Delete',
+  CANCEL: 'Cancel',
+  SAVE: 'Save',
   SHOW_ANSWERS: 'Show Answers',
-  HIDE_ANSWERS: 'Hide Answers'
+  HIDE_ANSWERS: 'Hide Answers',
+  EDIT_ANSWERS: 'Edit Answers',
+  NO_EDIT_ANSWERS: 'Don\'t edit Answers',
 }
