@@ -21,5 +21,6 @@ export const ACTION_LABELS = {
   ACTIONS: 'Actions',
   EDIT: 'Edit',
   DELETE: 'Delete',
-  SHOW_ANSWERS: 'Show Answers'
+  SHOW_ANSWERS: 'Show Answers',
+  HIDE_ANSWERS: 'Hide Answers'
 }

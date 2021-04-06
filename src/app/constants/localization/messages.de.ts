@@ -22,4 +22,5 @@ export const ACTION_LABELS = {
   EDIT: 'Bearbeiten',
   DELETE: 'Löschen',
   SHOW_ANSWERS: 'Antworten anzeigen',
+  HIDE_ANSWERS: 'Antworten ausblenden'
 }

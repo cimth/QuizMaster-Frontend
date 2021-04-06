@@ -13,6 +13,7 @@ export class ManageQuestionsComponent implements OnInit {
 
   public MESSAGE_ID = MESSAGE_ID;
   public allQuestions: QuestionInRawFormat[] = [];
+  public showAnswersIds: number[] = [];
 
   constructor(public loc: LocalizationService,
               private questionService: QuestionService) { }
@@ -27,4 +28,14 @@ export class ManageQuestionsComponent implements OnInit {
       });
   }
 
+  showAnswers(questionId: number) {
+    this.showAnswersIds.push(questionId);
+  }
+
+  hideAnswers(questionId: number) {
+    const index = this.showAnswersIds.indexOf(questionId);
+    if (index > -1) {
+      this.showAnswersIds.splice(index, 1);
+    }
+  }
 }
