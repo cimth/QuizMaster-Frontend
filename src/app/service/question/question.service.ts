@@ -16,7 +16,46 @@ export class QuestionService {
   constructor(private httpClient: HttpClient) { }
 
   /*======================================*
-   * GET QUESTIONS
+   * CREATE QUESTION
+   *======================================*/
+
+  /**
+   * Adds the given question to the backend.
+   * Returns an Observable for this request.
+   * <br/>
+   * Needs the Admin Token from the backend console to work.
+   *
+   * @param question the question to add
+   * @param adminToken the Admin Token from the backend console
+   */
+  addQuestion(question: QuestionInRawFormat, adminToken: string) {
+
+    // prepare request
+    const url = URL.QUESTION_ENDPOINT;
+
+    const body = {
+      questionText: question.questionText,
+      correctAnswer: question.correctAnswer,
+      wrongAnswers: [
+        question.wrongAnswer1,
+        question.wrongAnswer2,
+        question.wrongAnswer3
+      ]
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': adminToken                 // admin token from backend console
+      }),
+      responseType: 'arraybuffer' as 'arraybuffer'  // necessary for processing the response correctly
+    }
+
+    // do request and return Observable
+    return this.httpClient.post(url, body, httpOptions);
+  }
+
+  /*======================================*
+   * READ QUESTIONS
    *======================================*/
 
   /**

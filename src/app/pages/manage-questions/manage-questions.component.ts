@@ -6,6 +6,7 @@ import {MESSAGE_ID} from '../../constants/localization/message-id';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {EditQuestionComponent} from './edit-question/edit-question.component';
 import {DeleteQuestionComponent} from './delete-question/delete-question.component';
+import {AddQuestionComponent} from './add-question/add-question.component';
 
 @Component({
   selector: 'app-manage-questions',
@@ -74,7 +75,29 @@ export class ManageQuestionsComponent implements OnInit {
    * CREATE QUESTION
    *======================================*/
 
-  // TODO: add modal for creating questions
+  /**
+   * Opens a modal for adding a question.
+   * If the question is added, the UI will be updated too.
+   */
+  addQuestion() {
+
+    // open modal for creating a new question
+    const options = {
+      size: 'lg',
+      centered: true,
+      scrollable: true,
+      keyboard: false
+    }
+    const modal = this.modalService.open(AddQuestionComponent, options);
+    modal.componentInstance.modalRef = modal;
+
+    // update UI with edited question data if the question was changed
+    modal.result.then(addedQuestion => {
+      this.allQuestions.push(addedQuestion);
+    }, err => {
+      console.log("Closed creation dialog without creating a question.");
+    });
+  }
 
   /*======================================*
    * UPDATE QUESTION
@@ -142,4 +165,5 @@ export class ManageQuestionsComponent implements OnInit {
       console.log("Closed confirmation dialog without deleting the question.");
     });
   }
+
 }

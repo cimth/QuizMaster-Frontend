@@ -12,7 +12,8 @@ export const ERRORS =  {
 
 export const HEADERS = {
   EDIT_QUESTION: 'Edit Question',
-  DELETE_QUESTION: 'Delete Question'
+  DELETE_QUESTION: 'Delete Question',
+  ADD_QUESTION: 'Add Question'
 }
 
 export const ATTRIBUTE_NAMES = {
@@ -38,8 +39,13 @@ export const ACTION_LABELS = {
   HIDE_ANSWERS: 'Hide Answers',
   EDIT_ANSWERS: 'Edit Answers',
   NO_EDIT_ANSWERS: 'Don\'t edit Answers',
+  ADD_QUESTION: 'Add Question'
 }
 
 export const CONFIRMATION = {
   DELETE_QUESTION: 'Do you really wish to delete the Question?'
+}
+
+export const SUCCESS = {
+  QUESTION_CREATED: 'The Question was created successfully!'
 }

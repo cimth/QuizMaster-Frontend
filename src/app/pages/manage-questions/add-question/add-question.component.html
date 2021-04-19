@@ -1,0 +1,86 @@
+<!-- title and close button -->
+<div class="modal-header">
+  <h4>{{loc.localize(MESSAGE_ID.HEADERS.ADD_QUESTION)}}</h4>
+  <button type="button" class="close">
+    <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
+  </button>
+</div>
+
+<!-- question data -->
+<table class="table table-borderless">
+  <!-- configure column size -->
+  <thead>
+  <tr>
+    <td style="width: 25%"></td>
+    <td style="width: 75%"></td>
+  </tr>
+  </thead>
+  <!-- question text -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_TEXT)}}</th>
+    <td>
+      <input class="w-100 p-2" [(ngModel)]="newQuestion.questionText"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </td>
+  </tr>
+  <!-- question correct answer -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.CORRECT_ANSWER)}}</th>
+    <td>
+      <input class="w-100 p-2" [(ngModel)]="newQuestion.correctAnswer"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </td>
+  </tr>
+  <!-- wrong answer 1 -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_1)}}</th>
+    <td>
+      <input class="w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer1"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </td>
+  </tr>
+  <!-- wrong answer 2 -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_2)}}</th>
+    <td>
+      <input class="w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer2"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </td>
+  </tr>
+  <!-- wrong answer 3 -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_3)}}</th>
+    <td>
+      <input class="w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer3"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </td>
+  </tr>
+  <!-- admin token -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ADMIN_TOKEN)}}</th>
+    <td>
+      <input class="w-100 p-2" [(ngModel)]="adminToken"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </td>
+  </tr>
+</table>
+
+<!-- error message -->
+<div *ngIf="errorMessage" class="text-center color-red">
+  <p>{{errorMessage}}</p>
+</div>
+
+<!-- actions -->
+<div class="btn-group">
+  <!-- cancel -->
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()">
+    {{loc.localize(MESSAGE_ID.ACTION_LABELS.CANCEL)}}
+  </button>
+  <!-- save -->
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="addQuestion()" [disabled]="!addingEnabled">
+    {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_QUESTION)}}
+  </button>
+</div>
+
+<!-- div with explicit space for workaround margin when scrollable -->
+<div>&nbsp;</div>

@@ -1,5 +1,9 @@
 <h1 class="h1 text-center mb-4">Fragen verwalten</h1>
 
+<button class="btn btn-block btn-info" (click)="addQuestion()">
+  {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_QUESTION)}}
+</button>
+
 <ngb-accordion *ngIf="allQuestions.length > 0" [closeOthers]="true" activeIds="static-{{allQuestions[0].id}}" type="info"
                class="p-5">
   <ngb-panel *ngFor="let question of allQuestions; let idx = index"  id="static-{{question.id}}" title="{{question.questionText}}">
