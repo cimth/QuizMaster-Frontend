@@ -10,13 +10,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ManageQuestionsComponent} from './pages/manage-questions/manage-questions.component';
 import {EditQuestionComponent} from './pages/manage-questions/edit-question/edit-question.component';
 import {FormsModule} from '@angular/forms';
+import {DeleteQuestionComponent} from './pages/manage-questions/delete-question/delete-question.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartComponent,
     ManageQuestionsComponent,
-    EditQuestionComponent
+    EditQuestionComponent,
+    DeleteQuestionComponent
   ],
   imports: [
     BrowserModule,

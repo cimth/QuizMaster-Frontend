@@ -6,7 +6,13 @@ export const BUTTONS = {
 }
 
 export const ERRORS =  {
-  NOT_EMPTY_ALL: 'The shown input fields must not be empty.'
+  NOT_EMPTY_ALL: 'The shown input fields must not be empty.',
+  ADMIN_TOKEN: 'The Admin Token is missing.'
+}
+
+export const HEADERS = {
+  EDIT_QUESTION: 'Edit Question',
+  DELETE_QUESTION: 'Delete Question'
 }
 
 export const ATTRIBUTE_NAMES = {
@@ -32,4 +38,8 @@ export const ACTION_LABELS = {
   HIDE_ANSWERS: 'Hide Answers',
   EDIT_ANSWERS: 'Edit Answers',
   NO_EDIT_ANSWERS: 'Don\'t edit Answers',
+}
+
+export const CONFIRMATION = {
+  DELETE_QUESTION: 'Do you really wish to delete the Question?'
 }

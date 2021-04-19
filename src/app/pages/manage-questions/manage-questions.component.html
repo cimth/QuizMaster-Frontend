@@ -87,7 +87,7 @@
           </td>
           <!-- delete -->
           <td style="width: 33.33%">
-            <button class="btn btn-block btn-info">
+            <button class="btn btn-block btn-info" (click)="deleteQuestion(question.id, idx)">
               {{loc.localize(MESSAGE_ID.ACTION_LABELS.DELETE)}}
             </button>
           </td>

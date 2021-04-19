@@ -6,7 +6,13 @@ export const BUTTONS = {
 }
 
 export const ERRORS =  {
-  NOT_EMPTY_ALL: 'Die angezeigten Eingabefelder dürfen nicht leer sein.'
+  NOT_EMPTY_ALL: 'Die angezeigten Eingabefelder dürfen nicht leer sein.',
+  ADMIN_TOKEN: 'Das Admin-Token fehlt.'
+}
+
+export const HEADERS = {
+  EDIT_QUESTION: 'Frage bearbeiten',
+  DELETE_QUESTION: 'Frage löschen'
 }
 
 export const ATTRIBUTE_NAMES = {
@@ -32,4 +38,8 @@ export const ACTION_LABELS = {
   HIDE_ANSWERS: 'Antworten ausblenden',
   EDIT_ANSWERS: 'Antworten bearbeiten',
   NO_EDIT_ANSWERS: 'Antworten nicht bearbeiten',
+}
+
+export const CONFIRMATION = {
+  DELETE_QUESTION: 'Soll die Frage wirklich gelöscht werden?'
 }

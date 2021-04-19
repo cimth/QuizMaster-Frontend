@@ -64,4 +64,33 @@ export class QuestionService {
     // do request and return Observable
     return this.httpClient.put(url, body, httpOptions);
   }
+
+  /*======================================*
+   * DELETE QUESTION
+   *======================================*/
+
+  /**
+   * Deletes the question given by its id.
+   * Returns an Observable for this request.
+   * <br/>
+   * Needs the Admin Token from the backend console to work.
+   *
+   * @param questionId the id of the question to be deleted
+   * @param adminToken the Admin Token from the backend console
+   */
+  public deleteQuestion(questionId: number, adminToken: string): Observable<any> {
+
+    // prepare request
+    const url = `${URL.QUESTION_ENDPOINT}/${questionId}`;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': adminToken                 // admin token from backend console
+      }),
+      responseType: 'arraybuffer' as 'arraybuffer'  // necessary for processing the response correctly
+    }
+
+    // do request and return Observable
+    return this.httpClient.delete(url, httpOptions);
+  }
 }

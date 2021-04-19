@@ -5,6 +5,7 @@ import {LocalizationService} from '../../service/localization/localization.servi
 import {MESSAGE_ID} from '../../constants/localization/message-id';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {EditQuestionComponent} from './edit-question/edit-question.component';
+import {DeleteQuestionComponent} from './delete-question/delete-question.component';
 
 @Component({
   selector: 'app-manage-questions',
@@ -111,5 +112,34 @@ export class ManageQuestionsComponent implements OnInit {
    * DELETE QUESTION
    *======================================*/
 
-  // TODO: delete question after user confirmation
+  /**
+   * Opens a modal for confirming that the question with the given ID should be deleted. Inside the dialog
+   * the user can also provide the Admin Token needed for this action.
+   * If the question is deleted, the UI will be updated too.
+   *
+   * @param questionId the ID of the question
+   * @param arrayIndex the array index of the question where the array is 'allQuestions'
+   */
+  deleteQuestion(questionId: number, arrayIndex: number) {
+
+    // open modal for confirming the delete operation
+    const options = {
+      size: 'lg',
+      centered: true,
+      scrollable: true,
+      keyboard: false
+    }
+    const modal = this.modalService.open(DeleteQuestionComponent, options);
+    modal.componentInstance.question = this.allQuestions[arrayIndex];
+    modal.componentInstance.modalRef = modal;
+
+    // update UI if the question was deleted
+    modal.result.then(deleted => {
+      if (deleted === true) {
+        this.allQuestions.splice(arrayIndex, 1);
+      }
+    }, err => {
+      console.log("Closed confirmation dialog without deleting the question.");
+    });
+  }
 }
