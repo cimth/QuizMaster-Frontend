@@ -5,6 +5,10 @@ export const BUTTONS = {
   MANAGE_QUESTIONS: 'Fragen verwalten'
 }
 
+export const ERRORS =  {
+  NOT_EMPTY_ALL: 'Die angezeigten Eingabefelder dürfen nicht leer sein.'
+}
+
 export const ATTRIBUTE_NAMES = {
   // common
   ID: 'ID',
