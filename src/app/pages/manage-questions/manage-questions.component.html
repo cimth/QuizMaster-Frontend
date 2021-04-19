@@ -1,6 +1,7 @@
 <h1 class="h1 text-center mb-4">Fragen verwalten</h1>
 
-<ngb-accordion *ngIf="allQuestions.length > 0" [closeOthers]="true" activeIds="static-{{allQuestions[0].id}}" type="info">
+<ngb-accordion *ngIf="allQuestions.length > 0" [closeOthers]="true" activeIds="static-{{allQuestions[0].id}}" type="info"
+               class="p-5">
   <ngb-panel *ngFor="let question of allQuestions; let idx = index"  id="static-{{question.id}}" title="{{question.questionText}}">
     <ng-template ngbPanelContent style="background: var(--info)">
       <!-- question data -->
