@@ -13,7 +13,8 @@ export const ERRORS =  {
 export const HEADERS = {
   EDIT_QUESTION: 'Frage bearbeiten',
   DELETE_QUESTION: 'Frage löschen',
-  ADD_QUESTION: 'Frage hinzufügen'
+  ADD_QUESTION: 'Frage hinzufügen',
+  MANAGE_QUESTIONS: 'Fragen verwalten'
 }
 
 export const ATTRIBUTE_NAMES = {

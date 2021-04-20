@@ -13,7 +13,8 @@ export const ERRORS =  {
 export const HEADERS = {
   EDIT_QUESTION: 'Edit Question',
   DELETE_QUESTION: 'Delete Question',
-  ADD_QUESTION: 'Add Question'
+  ADD_QUESTION: 'Add Question',
+  MANAGE_QUESTIONS: 'Manage Questions'
 }
 
 export const ATTRIBUTE_NAMES = {
