@@ -36,7 +36,7 @@ export class ManageQuestionsComponent implements OnInit {
    */
   ngOnInit(): void {
     this.questionService.getAllQuestions()
-      .subscribe((allQuestions: QuestionInRawFormat[]) => {
+      .subscribe(allQuestions => {
         console.log(allQuestions);
         for(let q of allQuestions) {
           this.allQuestions.push(q);

@@ -21,14 +21,16 @@ export class QuestionService {
 
   /**
    * Adds the given question to the backend.
-   * Returns an Observable for this request.
+   * Returns an Observable for this request which contains the created question.
    * <br/>
    * Needs the Admin Token from the backend console to work.
    *
    * @param question the question to add
    * @param adminToken the Admin Token from the backend console
+   *
+   * @return an Observable for the created question
    */
-  addQuestion(question: QuestionInRawFormat, adminToken: string) {
+  addQuestion(question: QuestionInRawFormat, adminToken: string): Observable<QuestionInRawFormat> {
 
     // prepare request
     const url = URL.QUESTION_ENDPOINT;
@@ -45,13 +47,12 @@ export class QuestionService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': adminToken                 // admin token from backend console
-      }),
-      responseType: 'arraybuffer' as 'arraybuffer'  // necessary for processing the response correctly
+        'Authorization': adminToken    // admin token from backend console
+      })
     }
 
     // do request and return Observable
-    return this.httpClient.post(url, body, httpOptions);
+    return this.httpClient.post<QuestionInRawFormat>(url, body, httpOptions);
   }
 
   /*======================================*
@@ -60,14 +61,19 @@ export class QuestionService {
 
   /**
    * Requests all questions from the server and returns an Observable for this request.
+   *
+   * @return an Observable for all questions
    */
-  public getAllQuestions(): Observable<any> {
-    return this.httpClient.get(URL.QUESTION_ENDPOINT);
+  public getAllQuestions(): Observable<QuestionInRawFormat[]> {
+    return this.httpClient.get<QuestionInRawFormat[]>(URL.QUESTION_ENDPOINT);
   }
 
   /**
-   * Requests the question with the given id from the server and returns an Observable for the result object.
-   * @param questionId
+   * Requests the question with the given id from the server and returns an Observable for the fetched question.
+   *
+   * @param questionId the question to fetch
+   *
+   * @return an Observable of the fetched question
    */
   public getQuestionInRawFormat(questionId: number): Observable<QuestionInRawFormat> {
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}`;
@@ -80,14 +86,16 @@ export class QuestionService {
 
   /**
    * Saves the given question at the backend.
-   * Returns an Observable for this request.
+   * Returns an Observable for the success message.
    * <br/>
    * Needs the Admin Token from the backend console to work.
    *
    * @param question the updated question
    * @param adminToken the Admin Token from the backend console
+   *
+   * @return an Observable for the success message
    */
-  public saveUpdatedQuestion(question: QuestionInRawFormat, adminToken: string): Observable<any> {
+  public saveUpdatedQuestion(question: QuestionInRawFormat, adminToken: string): Observable<string> {
 
     // prepare request
     const url = `${URL.QUESTION_ENDPOINT}/${question.id}`;
@@ -104,9 +112,9 @@ export class QuestionService {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': adminToken                 // admin token from backend console
+        'Authorization': adminToken       // admin token from backend console
       }),
-      responseType: 'arraybuffer' as 'arraybuffer'  // necessary for processing the response correctly
+      responseType: 'text' as const       // necessary for processing the response correctly
     }
 
     // do request and return Observable
@@ -119,23 +127,25 @@ export class QuestionService {
 
   /**
    * Deletes the question given by its id.
-   * Returns an Observable for this request.
+   * Returns an Observable for the success message.
    * <br/>
    * Needs the Admin Token from the backend console to work.
    *
    * @param questionId the id of the question to be deleted
    * @param adminToken the Admin Token from the backend console
+   *
+   * @return an Observable for the success message
    */
-  public deleteQuestion(questionId: number, adminToken: string): Observable<any> {
+  public deleteQuestion(questionId: number, adminToken: string): Observable<string> {
 
     // prepare request
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}`;
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': adminToken                 // admin token from backend console
+        'Authorization': adminToken  // admin token from backend console
       }),
-      responseType: 'arraybuffer' as 'arraybuffer'  // necessary for processing the response correctly
+      responseType: 'text' as const  // necessary for processing the response correctly
     }
 
     // do request and return Observable

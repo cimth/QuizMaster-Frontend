@@ -4,7 +4,6 @@ import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {LocalizationService} from '../../../service/localization/localization.service';
 import {QuestionService} from '../../../service/question/question.service';
-import {ResponseDecoderService} from '../../../service/response-decoder/response-decoder.service';
 
 @Component({
   selector: 'app-add-question',
@@ -31,8 +30,7 @@ export class AddQuestionComponent implements OnInit {
    *======================================*/
 
   constructor(public loc: LocalizationService,
-              private questionService: QuestionService,
-              private responseDecoderService: ResponseDecoderService) { }
+              private questionService: QuestionService) { }
 
   ngOnInit() {
     this.newQuestion = {
@@ -83,17 +81,14 @@ export class AddQuestionComponent implements OnInit {
     // reset error message
     this.errorMessage = undefined;
 
-    console.log(this.newQuestion);
+    console.log('Add: ', this.newQuestion);
 
     // add question
     this.questionService.addQuestion(this.newQuestion, this.adminToken)
-      .subscribe(response => {
+      .subscribe(createdQuestion => {
         // add id of new question to new question object
-        const resultString = this.responseDecoderService.decodeArrayBufferResponseToString(response);
-        console.log(resultString);
-
-        const backendQuestion: QuestionInRawFormat = JSON.parse(resultString);
-        this.newQuestion.id = backendQuestion.id;
+        console.log('Response: ', createdQuestion);
+        this.newQuestion.id = createdQuestion.id;
 
         // show success message
         alert(this.loc.localize(MESSAGE_ID.SUCCESS.QUESTION_CREATED));
@@ -102,10 +97,8 @@ export class AddQuestionComponent implements OnInit {
         this.modalRef.close(this.newQuestion);
 
       }, err => {
-        console.log(err);
-        const errorDetails = this.responseDecoderService.decodeArrayBufferResponseToString(err.error);
-        console.log("Error while adding the Question: ", errorDetails);
-        this.errorMessage = errorDetails;
+        console.log('Error while adding the Question: ', err);
+        this.errorMessage = err.error;
       });
   }
 

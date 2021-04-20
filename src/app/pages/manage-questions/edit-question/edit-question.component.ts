@@ -4,7 +4,6 @@ import {LocalizationService} from '../../../service/localization/localization.se
 import {QuestionInRawFormat} from '../../../model/question';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {QuestionService} from '../../../service/question/question.service';
-import {ResponseDecoderService} from '../../../service/response-decoder/response-decoder.service';
 
 @Component({
   selector: 'app-edit-question',
@@ -37,8 +36,7 @@ export class EditQuestionComponent implements OnInit {
    *======================================*/
 
   constructor(public loc: LocalizationService,
-              private questionService: QuestionService,
-              private responseDecoderService: ResponseDecoderService) { }
+              private questionService: QuestionService) { }
 
   ngOnInit(): void {
     this.editedQuestion = {
@@ -103,20 +101,17 @@ export class EditQuestionComponent implements OnInit {
     // reset error message
     this.errorMessage = undefined;
 
-    console.log(this.editedQuestion);
+    console.log('Edit: ', this.editedQuestion);
 
     // update question
     this.questionService.saveUpdatedQuestion(this.editedQuestion, this.adminToken)
       .subscribe(response => {
-        const resultString = this.responseDecoderService.decodeArrayBufferResponseToString(response);
-        console.log(resultString);
-        alert(resultString);
+        console.log('Response: ', response);
+        alert(response);
         this.modalRef.close(this.editedQuestion);
       }, err => {
-        console.log(err);
-        const errorDetails = this.responseDecoderService.decodeArrayBufferResponseToString(err.error);
-        console.log("Error while saving the Question: ", errorDetails);
-        this.errorMessage = errorDetails;
+        console.log('Error while saving the Question: ', err);
+        this.errorMessage = err.error;
       });
   }
 }

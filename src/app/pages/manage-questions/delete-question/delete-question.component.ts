@@ -4,7 +4,6 @@ import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {LocalizationService} from '../../../service/localization/localization.service';
 import {QuestionService} from '../../../service/question/question.service';
-import {ResponseDecoderService} from '../../../service/response-decoder/response-decoder.service';
 
 @Component({
   selector: 'app-delete-question',
@@ -31,8 +30,7 @@ export class DeleteQuestionComponent {
    *======================================*/
 
   constructor(public loc: LocalizationService,
-              private questionService: QuestionService,
-              private responseDecoderService: ResponseDecoderService) { }
+              private questionService: QuestionService) { }
 
   /*======================================*
    * VALIDATION FOR COMPONENT
@@ -65,18 +63,17 @@ export class DeleteQuestionComponent {
     // reset error message
     this.errorMessage = undefined;
 
+    console.log('Delete: ', this.question);
+
     // update question
     this.questionService.deleteQuestion(this.question.id, this.adminToken)
       .subscribe(response => {
-        const resultString = this.responseDecoderService.decodeArrayBufferResponseToString(response);
-        console.log(resultString);
-        alert(resultString);
+        console.log('Response: ', response);
+        alert(response);
         this.modalRef.close(true);
       }, err => {
-        console.log(err);
-        const errorDetails = this.responseDecoderService.decodeArrayBufferResponseToString(err.error);
-        console.log("Error while deleting the Question: ", errorDetails);
-        this.errorMessage = errorDetails;
+        console.log('Error while deleting the Question: ', err);
+        this.errorMessage = err.error;
       });
   }
 
