@@ -19,6 +19,7 @@ export const HEADERS = {
   MANAGE_QUESTIONS: 'Fragen verwalten',
 
   // predefined quizzes
+  DELETE_QUIZ: 'Quiz-Runde löschen',
   MANAGE_PREDEFINED_QUIZZES: 'Vorgegebene Quiz-Runden verwalten'
 }
 
@@ -55,7 +56,8 @@ export const ACTION_LABELS = {
 }
 
 export const CONFIRMATION = {
-  DELETE_QUESTION: 'Soll die Frage wirklich gelöscht werden?'
+  DELETE_QUESTION: 'Soll die Frage wirklich gelöscht werden?',
+  DELETE_QUIZ: 'Soll die Quiz-Runde wirklich gelöscht werden?'
 }
 
 export const SUCCESS = {

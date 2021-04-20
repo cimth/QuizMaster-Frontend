@@ -19,6 +19,7 @@ export const HEADERS = {
   MANAGE_QUESTIONS: 'Manage Questions',
 
   // predefined quizzes
+  DELETE_QUIZ: 'Delete predefined Quiz',
   MANAGE_PREDEFINED_QUIZZES: 'Manage predefined Quizzes'
 }
 
@@ -55,7 +56,8 @@ export const ACTION_LABELS = {
 }
 
 export const CONFIRMATION = {
-  DELETE_QUESTION: 'Do you really wish to delete the Question?'
+  DELETE_QUESTION: 'Do you really wish to delete the Question?',
+  DELETE_QUIZ: 'Do you really wish to delete the predefined Quiz?'
 }
 
 export const SUCCESS = {

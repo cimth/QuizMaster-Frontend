@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {URL} from '../../constants/web-requests';
 import {PredefinedQuiz} from '../../model/quiz';
@@ -36,5 +36,36 @@ export class QuizService {
   public getQuestionIdsOfPredefinedQuiz(quizId: number): Observable<any> {
     const url = `${URL.QUIZ_ENDPOINT}/${quizId}`;
     return this.httpClient.get(url);
+  }
+
+  /*======================================*
+   * DELETE PREDEFINED QUIZ
+   *======================================*/
+
+  /**
+   * Deletes the predefined quiz given by its id.
+   * Returns an Observable for the success message.
+   * <br/>
+   * Needs the Admin Token from the backend console to work.
+   *
+   * @param quizId the id of the predefined quiz to be deleted
+   * @param adminToken the Admin Token from the backend console
+   *
+   * @return an Observable for the success message
+   */
+  public deletePredefinedQuiz(quizId: number, adminToken: string) {
+
+    // prepare request
+    const url = `${URL.QUIZ_ENDPOINT}/${quizId}`;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': adminToken  // admin token from backend console
+      }),
+      responseType: 'text' as const  // necessary for processing the response correctly
+    }
+
+    // do request and return Observable
+    return this.httpClient.delete(url, httpOptions);
   }
 }

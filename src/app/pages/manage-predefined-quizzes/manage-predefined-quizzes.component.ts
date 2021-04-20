@@ -5,6 +5,7 @@ import {LocalizationService} from '../../service/localization/localization.servi
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {QuizService} from '../../service/quiz/quiz.service';
 import {QuestionService} from '../../service/question/question.service';
+import {DeletePredefinedQuizComponent} from './delete-predefined-quiz/delete-predefined-quiz.component';
 
 @Component({
   selector: 'app-manage-predefined-quizzes',
@@ -83,6 +84,41 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
 
     // return the fully resolved quiz
     return resolvedQuiz;
+  }
+
+  /*======================================*
+   * DELETE QUIZ
+   *======================================*/
+
+  /**
+   * Opens a modal for confirming that the predefined quiz with the given ID should be deleted. Inside the dialog
+   * the user can also provide the Admin Token needed for this action.
+   * If the quiz is deleted, the UI will be updated too.
+   *
+   * @param quizId the ID of the predefined quiz
+   * @param arrayIndex the array index of the quiz where the array is 'allQuizzes'
+   */
+  deleteQuiz(quizId: number, arrayIndex: number) {
+
+    // open modal for confirming the delete operation
+    const options = {
+      size: 'lg',
+      centered: true,
+      scrollable: true,
+      keyboard: false
+    }
+    const modal = this.modalService.open(DeletePredefinedQuizComponent, options);
+    modal.componentInstance.quiz = this.allQuizzes[arrayIndex];
+    modal.componentInstance.modalRef = modal;
+
+    // update UI if the quiz was deleted
+    modal.result.then(deleted => {
+      if (deleted === true) {
+        this.allQuizzes.splice(arrayIndex, 1);
+      }
+    }, err => {
+      console.log("Closed confirmation dialog without deleting the quiz.");
+    });
   }
 
 
