@@ -7,14 +7,19 @@ export const BUTTONS = {
 
 export const ERRORS =  {
   NOT_EMPTY_ALL: 'Die angezeigten Eingabefelder dürfen nicht leer sein.',
-  ADMIN_TOKEN: 'Das Admin-Token fehlt.'
+  ADMIN_TOKEN: 'Das Admin-Token fehlt.',
+  QUIZ_NOT_PLAYABLE: 'Um das Quiz zu spielen, muss das Quiz zwischen 10 und 30 Fragen enthalten!'
 }
 
 export const HEADERS = {
+  // questions
   EDIT_QUESTION: 'Frage bearbeiten',
   DELETE_QUESTION: 'Frage löschen',
   ADD_QUESTION: 'Frage hinzufügen',
-  MANAGE_QUESTIONS: 'Fragen verwalten'
+  MANAGE_QUESTIONS: 'Fragen verwalten',
+
+  // predefined quizzes
+  MANAGE_PREDEFINED_QUIZZES: 'Vorgegebene Quiz-Runden verwalten'
 }
 
 export const ATTRIBUTE_NAMES = {
@@ -27,7 +32,12 @@ export const ATTRIBUTE_NAMES = {
   WRONG_ANSWER_1: 'Falsche Antwort 1',
   WRONG_ANSWER_2: 'Falsche Antwort 2',
   WRONG_ANSWER_3: 'Falsche Antwort 3',
-  ADMIN_TOKEN: 'Admin Token'
+  ADMIN_TOKEN: 'Admin Token',
+
+  // predefined quizzes
+  QUIZ_NAME: 'Quiz-Name',
+  QUESTION_COUNT: 'Anzahl der Fragen',
+  QUESTIONS: 'Fragen'
 }
 
 export const ACTION_LABELS = {
@@ -40,7 +50,8 @@ export const ACTION_LABELS = {
   HIDE_ANSWERS: 'Antworten ausblenden',
   EDIT_ANSWERS: 'Antworten bearbeiten',
   NO_EDIT_ANSWERS: 'Antworten nicht bearbeiten',
-  ADD_QUESTION: 'Frage hinzufügen'
+  ADD_QUESTION: 'Frage hinzufügen',
+  ADD_PREDEFINED_QUIZ: 'Vorgegebene Quiz-Runde hinzufügen'
 }
 
 export const CONFIRMATION = {

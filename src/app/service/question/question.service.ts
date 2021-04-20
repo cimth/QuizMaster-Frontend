@@ -65,6 +65,15 @@ export class QuestionService {
     return this.httpClient.get(URL.QUESTION_ENDPOINT);
   }
 
+  /**
+   * Requests the question with the given id from the server and returns an Observable for the result object.
+   * @param questionId
+   */
+  public getQuestionInRawFormat(questionId: number): Observable<QuestionInRawFormat> {
+    const url = `${URL.QUESTION_ENDPOINT}/${questionId}`;
+    return this.httpClient.get<QuestionInRawFormat>(url);
+  }
+
   /*======================================*
    * UPDATE QUESTION
    *======================================*/

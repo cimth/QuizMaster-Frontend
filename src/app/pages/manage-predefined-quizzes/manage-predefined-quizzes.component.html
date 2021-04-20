@@ -1,0 +1,76 @@
+<h1 class="h1 text-center mb-4">{{loc.localize(MESSAGE_ID.HEADERS.MANAGE_PREDEFINED_QUIZZES)}}</h1>
+
+<button class="btn btn-block btn-info" >
+  {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_PREDEFINED_QUIZ)}}
+</button>
+
+<ngb-accordion *ngIf="allQuizzes.length > 0" [closeOthers]="true" activeIds="static-{{allQuizzes[0].quizId}}" type="info"
+               class="p-5">
+  <ngb-panel *ngFor="let quiz of allQuizzes; let idx = index" id="static-{{quiz.quizId}}" title="{{quiz.quizName}}">
+    <ng-template ngbPanelContent style="background: var(--info)">
+      <!-- quiz data -->
+      <table class="table table-borderless">
+        <!-- configure column size -->
+        <thead>
+        <tr>
+          <td style="width: 25%"></td>
+          <td style="width: 75%"></td>
+        </tr>
+        </thead>
+        <!-- quiz ID -->
+        <tr>
+          <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ID)}}</th>
+          <td>{{quiz.quizId}}</td>
+        </tr>
+        <!-- quiz name -->
+        <tr>
+          <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUIZ_NAME)}}</th>
+          <td>{{quiz.quizName}}</td>
+        </tr>
+        <!-- question count -->
+        <tr>
+          <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
+          <!-- playable, only show (valid) question count -->
+          <td *ngIf="quiz.playable">{{quiz.questionCount}}</td>
+          <!-- not playable, show (invalid) question count and info message -->
+          <td *ngIf="!quiz.playable">
+            <p>{{quiz.questionCount}}</p>
+            <p *ngIf="!quiz.playable" class="color-red">
+              {{loc.localize(MESSAGE_ID.ERRORS.QUIZ_NOT_PLAYABLE)}}
+            </p>
+          </td>
+        </tr>
+        <!-- resolved questions -->
+        <tr *ngFor="let resolvedQuestion of quiz.resolvedQuestions; let qArrIdx = index">
+          <!-- only show header in front of first question -->
+          <th *ngIf="qArrIdx == 0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
+          <th *ngIf="qArrIdx != 0"></th>
+          <!-- actual question -->
+          <td>{{resolvedQuestion.questionText}}</td>
+        </tr>
+      </table>
+      <!-- horizontal line -->
+      <hr />
+      <!-- actions -->
+      <table class="table table-borderless">
+        <tr>
+          <th colspan="2">{{loc.localize(MESSAGE_ID.ACTION_LABELS.ACTIONS)}}</th>
+        </tr>
+        <tr>
+          <!-- edit -->
+          <td style="width: 33.33%">
+            <button class="btn btn-block btn-info" >
+              {{loc.localize(MESSAGE_ID.ACTION_LABELS.EDIT)}}
+            </button>
+          </td>
+          <!-- delete -->
+          <td style="width: 33.33%">
+            <button class="btn btn-block btn-info" >
+              {{loc.localize(MESSAGE_ID.ACTION_LABELS.DELETE)}}
+            </button>
+          </td>
+        </tr>
+      </table>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

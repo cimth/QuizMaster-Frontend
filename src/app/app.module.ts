@@ -12,6 +12,7 @@ import {EditQuestionComponent} from './pages/manage-questions/edit-question/edit
 import {FormsModule} from '@angular/forms';
 import {DeleteQuestionComponent} from './pages/manage-questions/delete-question/delete-question.component';
 import {AddQuestionComponent} from './pages/manage-questions/add-question/add-question.component';
+import {ManagePredefinedQuizzesComponent} from './pages/manage-predefined-quizzes/manage-predefined-quizzes.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {AddQuestionComponent} from './pages/manage-questions/add-question/add-qu
     ManageQuestionsComponent,
     EditQuestionComponent,
     DeleteQuestionComponent,
-    AddQuestionComponent
+    AddQuestionComponent,
+    ManagePredefinedQuizzesComponent
   ],
   imports: [
     BrowserModule,
