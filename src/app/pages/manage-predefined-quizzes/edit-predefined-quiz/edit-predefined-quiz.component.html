@@ -11,9 +11,8 @@
   <!-- configure column size -->
   <thead>
   <tr>
-    <td style="width: 30%"></td>
-    <td style="width: 60%"></td>
-    <td style="width: 10%"></td>
+    <td style="width: 25%"></td>
+    <td style="width: 75%"></td>
   </tr>
   </thead>
   <!-- quiz ID -->
@@ -24,7 +23,7 @@
   <!-- quiz name -->
   <tr>
     <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUIZ_NAME)}}</th>
-    <td colspan="2" class="px-2">
+    <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="editedQuiz.quizName"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
@@ -32,24 +31,49 @@
   <!-- question count -->
   <tr>
     <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
-    <td colspan="2">{{editedQuiz.questionCount}}</td>
+    <td>{{editedQuiz.questionCount}}</td>
   </tr>
-  <!-- resolved questions -->
-  <tr *ngFor="let resolvedQuestion of editedQuiz.resolvedQuestions; let qArrIdx = index">
-    <!-- only show header in front of first question -->
-    <th *ngIf="qArrIdx == 0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
-    <th *ngIf="qArrIdx != 0"></th>
-    <!-- actual question -->
-    <td>{{resolvedQuestion.questionText}}</td>
-    <!-- remove button -->
-    <td>
-      <button class="btn btn-block btn-info rounded my-0 mx-1 font-weight-bold" (click)="removeQuestion(qArrIdx)">&times;</button>
+  <!-- used questions -->
+  <tr>
+    <th colspan="2">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.USED_QUESTIONS)}}</th>
+  </tr>
+  <tr *ngFor="let question of editedQuiz.resolvedQuestions; let idxResolvedQuestions = index">
+    <!-- remove and sort buttons -->
+    <td class="text-center">
+      <div class="btn-group">
+        <!-- swap with predecessor question -->
+        <button [disabled]="idxResolvedQuestions == 0"
+                class="btn btn-info rounded my-0 mx-1 font-weight-bold"
+                (click)="swapQuestionWithPredecessor(idxResolvedQuestions)">&#8593;</button>
+        <!-- remove -->
+        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button"
+                (click)="removeQuestion(idxResolvedQuestions)">&times;</button>
+        <!-- swap with successor question -->
+        <button [disabled]="idxResolvedQuestions == (editedQuiz.questionCount - 1)"
+                class="btn btn-info rounded my-0 mx-1 font-weight-bold"
+                (click)="swapQuestionWithSuccessor(idxResolvedQuestions)">&#8595;</button>
+      </div>
     </td>
+    <!-- question text -->
+    <td>{{question.questionText}}</td>
+  </tr>
+  <!-- unused questions -->
+  <tr>
+    <th colspan="2">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.UNUSED_QUESTIONS)}}</th>
+  </tr>
+  <tr *ngFor="let question of unusedQuestions; let idxUnusedQuestions = index">
+    <!-- add button -->
+    <td class="text-center">
+      <button class="btn btn-info rounded my-0 mx-1 font-weight-bold add-button"
+              (click)="addQuestion(idxUnusedQuestions)">+</button>
+    </td>
+    <!-- question text -->
+    <td>{{question.questionText}}</td>
   </tr>
   <!-- admin token -->
   <tr>
     <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ADMIN_TOKEN)}}</th>
-    <td colspan="2" class="px-2">
+    <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="adminToken"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>

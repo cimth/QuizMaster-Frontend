@@ -152,7 +152,4 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       console.log("Closed confirmation dialog without deleting the quiz.");
     });
   }
-
-
-
 }

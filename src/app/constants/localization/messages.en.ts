@@ -2,12 +2,13 @@ export const BUTTONS = {
   // start
   PLAY_QUIZ: 'Play a Quiz',
   MANAGE_PREDEFINED_QUIZZES: 'Manage predefined Quizzes',
-  MANAGE_QUESTIONS: 'Manage questions'
+  MANAGE_QUESTIONS: 'Manage Questions'
 }
 
 export const ERRORS =  {
   NOT_EMPTY_ALL: 'The shown input fields must not be empty.',
-  ADMIN_TOKEN: 'The Admin Token is missing.'
+  ADMIN_TOKEN: 'The Admin Token is missing.',
+  NO_ADDED_QUESTION: 'There has to be added at least one Question to apply a change.'
 }
 
 export const HEADERS = {
@@ -38,7 +39,11 @@ export const ATTRIBUTE_NAMES = {
   // predefined quizzes
   QUIZ_NAME: 'Quiz Name',
   QUESTION_COUNT: 'Question Count',
-  QUESTIONS: 'Questions'
+  QUESTION_COUNT_BEFORE: 'Question Count (before changes)',
+  QUESTION_COUNT_AFTER: 'Question Count (after changes)',
+  QUESTIONS: 'Questions',
+  USED_QUESTIONS: 'Added Questions',
+  UNUSED_QUESTIONS: 'Unused Questions'
 }
 
 export const ACTION_LABELS = {
@@ -53,7 +58,8 @@ export const ACTION_LABELS = {
   NO_EDIT_ANSWERS: 'Don\'t edit Answers',
   ADD_QUESTION: 'Add Question',
   ADD_PREDEFINED_QUIZ: 'Add predefined Quiz',
-  REMOVE: 'Remove'
+  REMOVE: 'Remove',
+  ADD_QUESTIONS: 'Add Questions'
 }
 
 export const CONFIRMATION = {

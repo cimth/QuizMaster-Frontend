@@ -5,6 +5,7 @@ import {PredefinedQuizWithResolvedQuestions} from '../../../model/quiz';
 import {LocalizationService} from '../../../service/localization/localization.service';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {QuestionService} from '../../../service/question/question.service';
+import {QuestionInRawFormat} from '../../../model/question';
 
 @Component({
   selector: 'app-edit-predefined-quiz',
@@ -25,8 +26,8 @@ export class EditPredefinedQuizComponent implements OnInit {
   public editedQuiz: PredefinedQuizWithResolvedQuestions;
   public savingEnabled: boolean = false;
   public errorMessage: string;
-  public removeQuestionError: number;
   public adminToken: string = '';
+  public unusedQuestions: QuestionInRawFormat[];
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
@@ -37,12 +38,37 @@ export class EditPredefinedQuizComponent implements OnInit {
               private questionService: QuestionService) { }
 
   ngOnInit(): void {
+    // copy original quiz data into edited quiz
     this.editedQuiz = {
       quizId: this.originalQuiz.quizId,
       quizName: this.originalQuiz.quizName,
       questionCount: this.originalQuiz.questionCount,
       resolvedQuestions: this.originalQuiz.resolvedQuestions.slice()   // copy array with slice()
     }
+
+    // init unused questions
+    this.questionService.getAllQuestions()
+      .subscribe(allQuestions => {
+
+        // fill array of unused questions
+        this.unusedQuestions = allQuestions.filter(q => {
+
+          // remove all questions that are already used in the quiz
+          for (let usedQuestion of this.originalQuiz.resolvedQuestions) {
+            if (q.id == usedQuestion.id) {
+              return false;
+            }
+          }
+
+          // question is unused, so it should stay in the array
+          return true;
+        });
+
+        // sort questions by id
+        this.unusedQuestions.sort((q1, q2) => {
+          return q1.id - q2.id;
+        })
+      });
   }
 
   /*======================================*
@@ -67,7 +93,7 @@ export class EditPredefinedQuizComponent implements OnInit {
   }
 
   /*======================================*
-   * ACTIONS FOR COMPONENT
+   * SAVING
    *======================================*/
 
   /**
@@ -92,13 +118,65 @@ export class EditPredefinedQuizComponent implements OnInit {
       });
   }
 
+  /*======================================*
+   * CHANGE USED AND UNUSED QUESTIONS
+   *======================================*/
+
+  /**
+   * Adds the question to the edited quiz array and adjusts the related values.
+   *
+   * @param idxUnusedQuestions the index of the question inside the array 'this.unusedQuestions'
+   */
+  addQuestion(idxUnusedQuestions: number) {
+    // add to used questions
+    this.editedQuiz.resolvedQuestions.push(this.unusedQuestions[idxUnusedQuestions]);
+    this.editedQuiz.questionCount++;
+
+    // remove from unused questions
+    this.unusedQuestions.splice(idxUnusedQuestions, 1);
+  }
+
   /**
    * Removes the question from the edited quiz array and adjusts the related values.
+   * Sorts the unused questions by id.
    *
-   * @param qArrIdx the index of the question inside the array 'this.editedQuiz.resolvedQuestions'
+   * @param idxResolvedQuestions the index of the question inside the array 'this.editedQuiz.resolvedQuestions'
    */
-  removeQuestion(qArrIdx: number) {
-    this.editedQuiz.resolvedQuestions.splice(qArrIdx, 1);
+  removeQuestion(idxResolvedQuestions: number) {
+    // add to unused questions
+    this.unusedQuestions.push(this.editedQuiz.resolvedQuestions[idxResolvedQuestions]);
+
+    // sort unused questions by question id
+    this.unusedQuestions.sort((q1, q2) => {
+      return q1.id - q2.id;
+    });
+
+    // remove from used questions
+    this.editedQuiz.resolvedQuestions.splice(idxResolvedQuestions, 1);
     this.editedQuiz.questionCount--;
+  }
+
+  /**
+   * Swaps the question at the given position inside the resolved questions array with the previous question inside
+   * this array.
+   *
+   * @param idxResolvedQuestions the index of the question to swap with the previous question
+   */
+  swapQuestionWithPredecessor(idxResolvedQuestions: number) {
+    const questionToSwap = this.editedQuiz.resolvedQuestions[idxResolvedQuestions-1];
+    this.editedQuiz.resolvedQuestions[idxResolvedQuestions-1] = this.editedQuiz.resolvedQuestions[idxResolvedQuestions];
+    this.editedQuiz.resolvedQuestions[idxResolvedQuestions] = questionToSwap;
+  }
+
+  /**
+   * Swaps the question at the given position inside the resolved questions array with the next question inside
+   * this array.
+   *
+   * @param idxResolvedQuestions the index of the question to swap with the next question
+   */
+  swapQuestionWithSuccessor(idxResolvedQuestions: number) {
+    const questionToSwap = this.editedQuiz.resolvedQuestions[idxResolvedQuestions+1];
+    this.editedQuiz.resolvedQuestions[idxResolvedQuestions+1] = this.editedQuiz.resolvedQuestions[idxResolvedQuestions];
+    this.editedQuiz.resolvedQuestions[idxResolvedQuestions] = questionToSwap;
   }
 }

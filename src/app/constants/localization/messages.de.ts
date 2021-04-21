@@ -7,7 +7,8 @@ export const BUTTONS = {
 
 export const ERRORS =  {
   NOT_EMPTY_ALL: 'Die angezeigten Eingabefelder dürfen nicht leer sein.',
-  ADMIN_TOKEN: 'Das Admin-Token fehlt.'
+  ADMIN_TOKEN: 'Das Admin-Token fehlt.',
+  NO_ADDED_QUESTION: 'Es muss mindestens eine Frage hinzugefügt werden, um eine Änderung vorzunehmen.'
 }
 
 export const HEADERS = {
@@ -38,7 +39,11 @@ export const ATTRIBUTE_NAMES = {
   // predefined quizzes
   QUIZ_NAME: 'Quiz-Name',
   QUESTION_COUNT: 'Anzahl der Fragen',
-  QUESTIONS: 'Fragen'
+  QUESTION_COUNT_BEFORE: 'Anzahl der Fragen (vor Änderung)',
+  QUESTION_COUNT_AFTER: 'Anzahl der Fragen (nach Änderung)',
+  QUESTIONS: 'Fragen',
+  USED_QUESTIONS: 'Verwendete Fragen',
+  UNUSED_QUESTIONS: 'Nicht verwendete Fragen'
 }
 
 export const ACTION_LABELS = {
@@ -53,7 +58,8 @@ export const ACTION_LABELS = {
   NO_EDIT_ANSWERS: 'Antworten nicht bearbeiten',
   ADD_QUESTION: 'Frage hinzufügen',
   ADD_PREDEFINED_QUIZ: 'Quiz hinzufügen',
-  REMOVE: 'Entfernen'
+  REMOVE: 'Entfernen',
+  ADD_QUESTIONS: 'Fragen hinzufügen'
 }
 
 export const CONFIRMATION = {

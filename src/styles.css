@@ -8,6 +8,16 @@
   color: red;
 }
 
+.remove-button {
+  background: var(--danger);
+  font-size: 1.3em;
+}
+
+.add-button {
+  background: var(--green);
+  font-size: 1.3em;
+}
+
 /*
  * outer elements
  */
