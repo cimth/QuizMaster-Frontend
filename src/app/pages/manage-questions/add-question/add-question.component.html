@@ -73,11 +73,11 @@
 <!-- actions -->
 <div class="btn-group">
   <!-- cancel -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()">
+  <button class="btn btn-block btn-info rounded my-0 mx-1" (click)="modalRef.dismiss()">
     {{loc.localize(MESSAGE_ID.ACTION_LABELS.CANCEL)}}
   </button>
   <!-- save -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="addQuestion()" [disabled]="!addingEnabled">
+  <button class="btn btn-block btn-info rounded my-0 mx-1" (click)="addQuestion()" [disabled]="!addingEnabled">
     {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_QUESTION)}}
   </button>
 </div>

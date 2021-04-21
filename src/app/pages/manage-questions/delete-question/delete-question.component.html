@@ -6,7 +6,7 @@
   </button>
 </div>
 
-<table class="table table-borderless">
+<table class="table table-borderless modal-table">
   <!-- confirmation text -->
   <tr>
     <td colspan="2">
@@ -16,7 +16,7 @@
   <!-- admin token -->
   <tr>
     <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ADMIN_TOKEN)}}</th>
-    <td>
+    <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="adminToken"
              (ngModelChange)="enableOrDisableDeleteButtonAccordingToInput()" />
     </td>
@@ -24,12 +24,12 @@
 </table>
 
 <!-- error message -->
-<div *ngIf="errorMessage" class="text-center color-red">
+<div *ngIf="errorMessage" class="text-center color-red modal-error">
   <p>{{errorMessage}}</p>
 </div>
 
 <!-- actions -->
-<div class="btn-group">
+<div class="btn-group modal-buttons">
   <!-- cancel -->
   <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()">
     {{loc.localize(MESSAGE_ID.ACTION_LABELS.CANCEL)}}

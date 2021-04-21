@@ -7,12 +7,12 @@
 </div>
 
 <!-- quiz data -->
-<table class="table table-borderless p-1 w-95 align-self-center modal-table">
+<table class="table table-borderless modal-table">
   <!-- configure column size -->
   <thead>
   <tr>
-    <td style="width: 25%"></td>
-    <td style="width: 65%"></td>
+    <td style="width: 30%"></td>
+    <td style="width: 60%"></td>
     <td style="width: 10%"></td>
   </tr>
   </thead>
@@ -24,7 +24,7 @@
   <!-- quiz name -->
   <tr>
     <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUIZ_NAME)}}</th>
-    <td colspan="2" class="px-1">
+    <td colspan="2" class="px-2">
       <input class="w-100 p-2" [(ngModel)]="editedQuiz.quizName"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
@@ -43,13 +43,13 @@
     <td>{{resolvedQuestion.questionText}}</td>
     <!-- remove button -->
     <td>
-      <button class="btn btn-block btn-info rounded my-0 mx-2 font-weight-bold" (click)="removeQuestion(qArrIdx)">&times;</button>
+      <button class="btn btn-block btn-info rounded my-0 mx-1 font-weight-bold" (click)="removeQuestion(qArrIdx)">&times;</button>
     </td>
   </tr>
   <!-- admin token -->
   <tr>
     <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ADMIN_TOKEN)}}</th>
-    <td colspan="2" class="px-1">
+    <td colspan="2" class="px-2">
       <input class="w-100 p-2" [(ngModel)]="adminToken"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
@@ -62,7 +62,7 @@
 </div>
 
 <!-- actions -->
-<div class="btn-group">
+<div class="btn-group modal-buttons">
   <!-- cancel -->
   <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()">
     {{loc.localize(MESSAGE_ID.ACTION_LABELS.CANCEL)}}

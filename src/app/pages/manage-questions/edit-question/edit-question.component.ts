@@ -8,11 +8,7 @@ import {QuestionService} from '../../../service/question/question.service';
 @Component({
   selector: 'app-edit-question',
   templateUrl: './edit-question.component.html',
-  styleUrls: ['./edit-question.component.css'],
-  // needed for nicer UI
-  host: {
-    '[class.modal-content]': 'true'
-  }
+  styleUrls: ['./edit-question.component.css']
 })
 export class EditQuestionComponent implements OnInit {
 

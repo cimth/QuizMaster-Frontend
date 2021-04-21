@@ -53,18 +53,11 @@ html, body {
   overflow-y: auto !important;
 }
 
-.modal-table {
+.modal-table, .modal-error, .modal-buttons {
   width: 95%;
+  align-self: center;
 }
 
 .modal-table td, .modal-table th {
   vertical-align: middle;
-}
-
-.modal-table th {
-  padding-left: 0;
-}
-
-.modal-error {
-  width: 95%;
 }
