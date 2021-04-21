@@ -52,3 +52,19 @@ html, body {
 .component-host-scrollable {
   overflow-y: auto !important;
 }
+
+.modal-table {
+  width: 95%;
+}
+
+.modal-table td, .modal-table th {
+  vertical-align: middle;
+}
+
+.modal-table th {
+  padding-left: 0;
+}
+
+.modal-error {
+  width: 95%;
+}

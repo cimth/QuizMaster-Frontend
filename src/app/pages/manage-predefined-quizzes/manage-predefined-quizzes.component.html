@@ -30,15 +30,7 @@
         <!-- question count -->
         <tr>
           <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
-          <!-- playable, only show (valid) question count -->
-          <td *ngIf="quiz.playable">{{quiz.questionCount}}</td>
-          <!-- not playable, show (invalid) question count and info message -->
-          <td *ngIf="!quiz.playable">
-            <p>{{quiz.questionCount}}</p>
-            <p *ngIf="!quiz.playable" class="color-red">
-              {{loc.localize(MESSAGE_ID.ERRORS.QUIZ_NOT_PLAYABLE)}}
-            </p>
-          </td>
+          <td >{{quiz.questionCount}}</td>
         </tr>
         <!-- resolved questions -->
         <tr *ngFor="let resolvedQuestion of quiz.resolvedQuestions; let qArrIdx = index">
@@ -59,7 +51,7 @@
         <tr>
           <!-- edit -->
           <td style="width: 33.33%">
-            <button class="btn btn-block btn-info" >
+            <button class="btn btn-block btn-info" (click)="editQuiz(quiz.quizId, idx)">
               {{loc.localize(MESSAGE_ID.ACTION_LABELS.EDIT)}}
             </button>
           </td>

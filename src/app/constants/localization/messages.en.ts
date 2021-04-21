@@ -7,8 +7,7 @@ export const BUTTONS = {
 
 export const ERRORS =  {
   NOT_EMPTY_ALL: 'The shown input fields must not be empty.',
-  ADMIN_TOKEN: 'The Admin Token is missing.',
-  QUIZ_NOT_PLAYABLE: 'To play this quiz, the quiz has to contain 10 to 30 questions!'
+  ADMIN_TOKEN: 'The Admin Token is missing.'
 }
 
 export const HEADERS = {
@@ -19,7 +18,8 @@ export const HEADERS = {
   MANAGE_QUESTIONS: 'Manage Questions',
 
   // predefined quizzes
-  DELETE_QUIZ: 'Delete predefined Quiz',
+  EDIT_QUIZ: 'Edit Quiz',
+  DELETE_QUIZ: 'Delete Quiz',
   MANAGE_PREDEFINED_QUIZZES: 'Manage predefined Quizzes'
 }
 
@@ -52,7 +52,8 @@ export const ACTION_LABELS = {
   EDIT_ANSWERS: 'Edit Answers',
   NO_EDIT_ANSWERS: 'Don\'t edit Answers',
   ADD_QUESTION: 'Add Question',
-  ADD_PREDEFINED_QUIZ: 'Add predefined Quiz'
+  ADD_PREDEFINED_QUIZ: 'Add predefined Quiz',
+  REMOVE: 'Remove'
 }
 
 export const CONFIRMATION = {

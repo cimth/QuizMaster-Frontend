@@ -1,0 +1,77 @@
+<!-- title and close button -->
+<div class="modal-header">
+  <h4>{{loc.localize(MESSAGE_ID.HEADERS.EDIT_QUIZ)}}</h4>
+  <button type="button" class="close">
+    <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
+  </button>
+</div>
+
+<!-- quiz data -->
+<table class="table table-borderless p-1 w-95 align-self-center modal-table">
+  <!-- configure column size -->
+  <thead>
+  <tr>
+    <td style="width: 25%"></td>
+    <td style="width: 65%"></td>
+    <td style="width: 10%"></td>
+  </tr>
+  </thead>
+  <!-- quiz ID -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ID)}}</th>
+    <td>{{editedQuiz.quizId}}</td>
+  </tr>
+  <!-- quiz name -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUIZ_NAME)}}</th>
+    <td colspan="2" class="px-1">
+      <input class="w-100 p-2" [(ngModel)]="editedQuiz.quizName"
+             (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
+    </td>
+  </tr>
+  <!-- question count -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
+    <td colspan="2">{{editedQuiz.questionCount}}</td>
+  </tr>
+  <!-- resolved questions -->
+  <tr *ngFor="let resolvedQuestion of editedQuiz.resolvedQuestions; let qArrIdx = index">
+    <!-- only show header in front of first question -->
+    <th *ngIf="qArrIdx == 0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
+    <th *ngIf="qArrIdx != 0"></th>
+    <!-- actual question -->
+    <td>{{resolvedQuestion.questionText}}</td>
+    <!-- remove button -->
+    <td>
+      <button class="btn btn-block btn-info rounded my-0 mx-2 font-weight-bold" (click)="removeQuestion(qArrIdx)">&times;</button>
+    </td>
+  </tr>
+  <!-- admin token -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ADMIN_TOKEN)}}</th>
+    <td colspan="2" class="px-1">
+      <input class="w-100 p-2" [(ngModel)]="adminToken"
+             (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
+    </td>
+  </tr>
+</table>
+
+<!-- error message -->
+<div *ngIf="errorMessage" class="text-center color-red modal-error">
+  <p>{{errorMessage}}</p>
+</div>
+
+<!-- actions -->
+<div class="btn-group">
+  <!-- cancel -->
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()">
+    {{loc.localize(MESSAGE_ID.ACTION_LABELS.CANCEL)}}
+  </button>
+  <!-- save -->
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="saveQuiz()" [disabled]="!savingEnabled">
+    {{loc.localize(MESSAGE_ID.ACTION_LABELS.SAVE)}}
+  </button>
+</div>
+
+<!-- div with explicit space for workaround margin when scrollable -->
+<div>&nbsp;</div>

@@ -6,6 +6,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {QuizService} from '../../service/quiz/quiz.service';
 import {QuestionService} from '../../service/question/question.service';
 import {DeletePredefinedQuizComponent} from './delete-predefined-quiz/delete-predefined-quiz.component';
+import {EditPredefinedQuizComponent} from './edit-predefined-quiz/edit-predefined-quiz.component';
 
 @Component({
   selector: 'app-manage-predefined-quizzes',
@@ -66,7 +67,6 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       quizId: quiz.quizId,
       quizName: quiz.quizName,
       questionCount: quiz.questionCount,
-      playable: quiz.playable,
       resolvedQuestions: []
     }
 
@@ -84,6 +84,38 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
 
     // return the fully resolved quiz
     return resolvedQuiz;
+  }
+
+  /*======================================*
+   * UPDATE QUIZ
+   *======================================*/
+
+  /**
+   * Opens a modal for editing the predefined quiz with the given ID and the given array index.
+   * If the quiz is updated, the UI will be updated too.
+   *
+   * @param quizId the ID of the quiz
+   * @param arrayIndex the array index of the quiz where the array is 'allQuizzes'
+   */
+  editQuiz(quizId: number, arrayIndex: number) {
+
+    // open modal for editing
+    const options = {
+      size: 'lg',
+      centered: true,
+      scrollable: true,
+      keyboard: false
+    }
+    const modal = this.modalService.open(EditPredefinedQuizComponent, options);
+    modal.componentInstance.originalQuiz = this.allQuizzes[arrayIndex];
+    modal.componentInstance.modalRef = modal;
+
+    // update UI with edited quiz data if the quiz was changed
+    modal.result.then(editedQuiz => {
+      this.allQuizzes[arrayIndex] = editedQuiz;
+    }, err => {
+      console.log("Closed editing dialog without saving any changes.");
+    });
   }
 
   /*======================================*
