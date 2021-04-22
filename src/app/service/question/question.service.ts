@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {URL} from '../../constants/web-requests';
-import {QuestionInRawFormat} from '../../model/question';
+import {QuestionInPlayFormat, QuestionInRawFormat} from '../../model/question';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -78,6 +78,18 @@ export class QuestionService {
   public getQuestionInRawFormat(questionId: number): Observable<QuestionInRawFormat> {
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}`;
     return this.httpClient.get<QuestionInRawFormat>(url);
+  }
+
+  /**
+   * Requests the question with the given id from the server and returns an Observable for the fetched question.
+   *
+   * @param questionId the question to fetch
+   *
+   * @return an Observable of the fetched question
+   */
+  public getQuestionInPlayFormat(questionId: number): Observable<QuestionInPlayFormat> {
+    const url = `${URL.QUESTION_ENDPOINT}/${questionId}/playFormat`;
+    return this.httpClient.get<QuestionInPlayFormat>(url);
   }
 
   /*======================================*

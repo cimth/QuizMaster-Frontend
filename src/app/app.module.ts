@@ -19,6 +19,7 @@ import {AddPredefinedQuizComponent} from './pages/manage-predefined-quizzes/add-
 import {SelectQuizFormatComponent} from './pages/select-quiz-format/select-quiz-format.component';
 import {SelectPredefinedQuizComponent} from './pages/select-quiz-format/select-predefined-quiz/select-predefined-quiz.component';
 import {SelectRandomQuizComponent} from './pages/select-quiz-format/select-random-quiz/select-random-quiz.component';
+import {PlayQuizComponent} from './pages/play-quiz/play-quiz.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {SelectRandomQuizComponent} from './pages/select-quiz-format/select-rando
     AddPredefinedQuizComponent,
     SelectQuizFormatComponent,
     SelectPredefinedQuizComponent,
-    SelectRandomQuizComponent
+    SelectRandomQuizComponent,
+    PlayQuizComponent
   ],
   imports: [
     BrowserModule,

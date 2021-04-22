@@ -71,3 +71,32 @@ html, body {
 .modal-table td, .modal-table th {
   vertical-align: middle;
 }
+
+/*
+ * alignment
+ */
+
+.vertical-align-middle {
+  vertical-align: middle;
+}
+
+/*
+ * width
+ */
+.w-90 {
+  width: 90%;
+}
+
+/*
+ * play quiz
+ */
+
+.answerbtn-correct, .answerbtn-correct:disabled {
+  background-color: var(--green);
+  opacity: 100%;
+}
+
+.answerbtn-wrong, .answerbtn-wrong:disabled {
+  background-color: var(--danger);
+  opacity: 100%;
+}
