@@ -1,33 +1,32 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
-import {PredefinedQuizWithResolvedQuestions} from '../../../model/quiz';
 import {LocalizationService} from '../../../service/localization/localization.service';
+import {PredefinedQuizWithResolvedQuestions} from '../../../model/quiz';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {QuestionInRawFormat} from '../../../model/question';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {QuestionService} from '../../../service/question/question.service';
-import {QuestionInRawFormat} from '../../../model/question';
+import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 
 @Component({
-  selector: 'app-edit-predefined-quiz',
-  templateUrl: './edit-predefined-quiz.component.html',
-  styleUrls: ['./edit-predefined-quiz.component.css']
+  selector: 'app-add-predefined-quiz',
+  templateUrl: './add-predefined-quiz.component.html',
+  styleUrls: ['./add-predefined-quiz.component.css']
 })
-export class EditPredefinedQuizComponent implements OnInit {
+export class AddPredefinedQuizComponent implements OnInit {
 
   /*======================================*
-   * FIELDS
-   *======================================*/
+  * FIELDS
+  *======================================*/
 
   public MESSAGE_ID = MESSAGE_ID;
 
-  @Input() public originalQuiz: PredefinedQuizWithResolvedQuestions;
   @Input() public modalRef: NgbModalRef;
 
-  public editedQuiz: PredefinedQuizWithResolvedQuestions;
+  public newQuiz: PredefinedQuizWithResolvedQuestions;
   public savingEnabled: boolean = false;
   public errorMessage: string;
   public adminToken: string = '';
-  public unusedQuestions: QuestionInRawFormat[];
+  public unusedQuestions: QuestionInRawFormat[] = [];
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
@@ -38,12 +37,13 @@ export class EditPredefinedQuizComponent implements OnInit {
               private questionService: QuestionService) { }
 
   ngOnInit(): void {
-    // copy original quiz data into edited quiz
-    this.editedQuiz = {
-      quizId: this.originalQuiz.quizId,
-      quizName: this.originalQuiz.quizName,
-      questionCount: this.originalQuiz.questionCount,
-      resolvedQuestions: this.originalQuiz.resolvedQuestions.slice()   // copy array with slice()
+
+    // init new quiz
+    this.newQuiz = {
+      quizId: undefined,
+      quizName: '',
+      questionCount: 0,
+      resolvedQuestions: []
     }
 
     // init unused questions
@@ -54,7 +54,7 @@ export class EditPredefinedQuizComponent implements OnInit {
         this.unusedQuestions = allQuestions.filter(q => {
 
           // remove all questions that are already used in the quiz
-          for (let usedQuestion of this.originalQuiz.resolvedQuestions) {
+          for (let usedQuestion of this.newQuiz.resolvedQuestions) {
             if (q.id == usedQuestion.id) {
               return false;
             }
@@ -76,13 +76,13 @@ export class EditPredefinedQuizComponent implements OnInit {
    *======================================*/
 
   /**
-   * Only enable the button for saving the updated quiz if the necessary fields are filled.
+   * Only enable the button for saving the created quiz if the necessary fields are filled.
    * Show an error message if there is any field not filled after any input update.
    */
   enableOrDisableSaveButtonAccordingToInput() {
     // only enable saving if all fields are filled
     this.savingEnabled = this.adminToken.trim().length > 0
-                            && this.editedQuiz.quizName.trim().length > 0;
+                            && this.newQuiz.quizName.trim().length > 0;
 
     // show error for empty fields if necessary
     if (!this.savingEnabled) {
@@ -97,21 +97,38 @@ export class EditPredefinedQuizComponent implements OnInit {
    *======================================*/
 
   /**
-   * Saves the edited quiz at the backend.
+   * Saves the new quiz at the backend.
    * If an error occurs, the error message will be displayed in the component.
    */
   saveQuiz(): void {
     // reset error message
     this.errorMessage = undefined;
 
-    console.log('Edit: ', this.editedQuiz);
+    console.log('Add: ', this.newQuiz);
 
-    // update question
-    this.quizService.saveUpdatedQuiz(this.editedQuiz, this.adminToken)
-      .subscribe(response => {
-        console.log('Response: ', response);
-        alert(response);
-        this.modalRef.close(this.editedQuiz);
+    // create (empty) quiz and update it for adding the selected questions to it
+    this.quizService.addQuiz(this.newQuiz.quizName, this.adminToken)
+      .subscribe(createdQuiz => {
+
+        // add id of new question to new question object
+        console.log('Response: ', createdQuiz);
+        this.newQuiz.quizId = createdQuiz.quizId;
+
+        // add questions to the created quiz (separate update quiz)
+        this.quizService.saveUpdatedQuiz(this.newQuiz, this.adminToken)
+          .subscribe(successMessage => {
+
+            // show success message
+            console.log('Response: ', successMessage);
+            alert(this.loc.localize(MESSAGE_ID.SUCCESS.QUIZ_CREATED));
+
+            // close modal and return new quiz with added id
+            this.modalRef.close(this.newQuiz);
+
+          }, err => {
+            console.log('Error while updating the created Quiz: ', err);
+          });
+
       }, err => {
         console.log('Error while saving the Quiz: ', err);
         this.errorMessage = err.error;
@@ -129,22 +146,22 @@ export class EditPredefinedQuizComponent implements OnInit {
    */
   addQuestion(idxUnusedQuestions: number) {
     // add to used questions
-    this.editedQuiz.resolvedQuestions.push(this.unusedQuestions[idxUnusedQuestions]);
-    this.editedQuiz.questionCount++;
+    this.newQuiz.resolvedQuestions.push(this.unusedQuestions[idxUnusedQuestions]);
+    this.newQuiz.questionCount++;
 
     // remove from unused questions
     this.unusedQuestions.splice(idxUnusedQuestions, 1);
   }
 
   /**
-   * Removes the question from the edited quiz array and adjusts the related values.
+   * Removes the question from the quiz array and adjusts the related values.
    * Sorts the unused questions by id.
    *
-   * @param idxResolvedQuestions the index of the question inside the array 'this.editedQuiz.resolvedQuestions'
+   * @param idxResolvedQuestions the index of the question inside the array 'this.newQuiz.resolvedQuestions'
    */
   removeQuestion(idxResolvedQuestions: number) {
     // add to unused questions
-    this.unusedQuestions.push(this.editedQuiz.resolvedQuestions[idxResolvedQuestions]);
+    this.unusedQuestions.push(this.newQuiz.resolvedQuestions[idxResolvedQuestions]);
 
     // sort unused questions by question id
     this.unusedQuestions.sort((q1, q2) => {
@@ -152,8 +169,8 @@ export class EditPredefinedQuizComponent implements OnInit {
     });
 
     // remove from used questions
-    this.editedQuiz.resolvedQuestions.splice(idxResolvedQuestions, 1);
-    this.editedQuiz.questionCount--;
+    this.newQuiz.resolvedQuestions.splice(idxResolvedQuestions, 1);
+    this.newQuiz.questionCount--;
   }
 
   /**
@@ -163,9 +180,9 @@ export class EditPredefinedQuizComponent implements OnInit {
    * @param idxResolvedQuestions the index of the question to swap with the previous question
    */
   swapQuestionWithPredecessor(idxResolvedQuestions: number) {
-    const questionToSwap = this.editedQuiz.resolvedQuestions[idxResolvedQuestions-1];
-    this.editedQuiz.resolvedQuestions[idxResolvedQuestions-1] = this.editedQuiz.resolvedQuestions[idxResolvedQuestions];
-    this.editedQuiz.resolvedQuestions[idxResolvedQuestions] = questionToSwap;
+    const questionToSwap = this.newQuiz.resolvedQuestions[idxResolvedQuestions-1];
+    this.newQuiz.resolvedQuestions[idxResolvedQuestions-1] = this.newQuiz.resolvedQuestions[idxResolvedQuestions];
+    this.newQuiz.resolvedQuestions[idxResolvedQuestions] = questionToSwap;
   }
 
   /**
@@ -175,8 +192,9 @@ export class EditPredefinedQuizComponent implements OnInit {
    * @param idxResolvedQuestions the index of the question to swap with the next question
    */
   swapQuestionWithSuccessor(idxResolvedQuestions: number) {
-    const questionToSwap = this.editedQuiz.resolvedQuestions[idxResolvedQuestions+1];
-    this.editedQuiz.resolvedQuestions[idxResolvedQuestions+1] = this.editedQuiz.resolvedQuestions[idxResolvedQuestions];
-    this.editedQuiz.resolvedQuestions[idxResolvedQuestions] = questionToSwap;
+    const questionToSwap = this.newQuiz.resolvedQuestions[idxResolvedQuestions+1];
+    this.newQuiz.resolvedQuestions[idxResolvedQuestions+1] = this.newQuiz.resolvedQuestions[idxResolvedQuestions];
+    this.newQuiz.resolvedQuestions[idxResolvedQuestions] = questionToSwap;
   }
+
 }

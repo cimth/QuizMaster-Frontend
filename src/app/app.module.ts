@@ -15,6 +15,7 @@ import {AddQuestionComponent} from './pages/manage-questions/add-question/add-qu
 import {ManagePredefinedQuizzesComponent} from './pages/manage-predefined-quizzes/manage-predefined-quizzes.component';
 import {DeletePredefinedQuizComponent} from './pages/manage-predefined-quizzes/delete-predefined-quiz/delete-predefined-quiz.component';
 import {EditPredefinedQuizComponent} from './pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component';
+import {AddPredefinedQuizComponent} from './pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {EditPredefinedQuizComponent} from './pages/manage-predefined-quizzes/edi
     AddQuestionComponent,
     ManagePredefinedQuizzesComponent,
     DeletePredefinedQuizComponent,
-    EditPredefinedQuizComponent
+    EditPredefinedQuizComponent,
+    AddPredefinedQuizComponent
   ],
   imports: [
     BrowserModule,

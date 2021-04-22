@@ -15,33 +15,28 @@
     <td style="width: 75%"></td>
   </tr>
   </thead>
-  <!-- quiz ID -->
-  <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ID)}}</th>
-    <td>{{editedQuiz.quizId}}</td>
-  </tr>
   <!-- quiz name -->
   <tr>
     <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUIZ_NAME)}}</th>
     <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="editedQuiz.quizName"
+      <input class="w-100 p-2" [(ngModel)]="newQuiz.quizName"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
   </tr>
   <!-- question count -->
   <tr>
     <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
-    <td>{{editedQuiz.questionCount}}</td>
+    <td>{{newQuiz.questionCount}}</td>
   </tr>
   <!-- used questions -->
   <tr>
     <th colspan="2">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.USED_QUESTIONS)}}</th>
   </tr>
-  <tr *ngIf="editedQuiz.resolvedQuestions.length == 0" class="text-center">
+  <tr *ngIf="newQuiz.resolvedQuestions.length == 0" class="text-center">
     <!-- currently no used question -->
     <td colspan="2">{{loc.localize(MESSAGE_ID.INFO.NO_USED_QUESTIONS)}}</td>
   </tr>
-  <tr *ngFor="let question of editedQuiz.resolvedQuestions; let idxResolvedQuestions = index">
+  <tr *ngFor="let question of newQuiz.resolvedQuestions; let idxResolvedQuestions = index">
     <!-- remove and sort buttons -->
     <td class="text-center">
       <div class="btn-group">
@@ -53,7 +48,7 @@
         <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button"
                 (click)="removeQuestion(idxResolvedQuestions)">&times;</button>
         <!-- swap with successor question -->
-        <button [disabled]="idxResolvedQuestions == (editedQuiz.questionCount - 1)"
+        <button [disabled]="idxResolvedQuestions == (newQuiz.questionCount - 1)"
                 class="btn btn-info rounded my-0 mx-1 font-weight-bold"
                 (click)="swapQuestionWithSuccessor(idxResolvedQuestions)">&#8595;</button>
       </div>

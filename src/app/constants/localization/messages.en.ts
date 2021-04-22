@@ -68,5 +68,11 @@ export const CONFIRMATION = {
 }
 
 export const SUCCESS = {
-  QUESTION_CREATED: 'The Question was created successfully!'
+  QUESTION_CREATED: 'The Question was created successfully!',
+  QUIZ_CREATED: 'The Quiz was created successfully!'
+}
+
+export const INFO = {
+  NO_USED_QUESTIONS: 'Currently no questions are assigned to this Quiz.',
+  NO_UNUSED_QUESTIONS: 'Currently all existing questions are already assigned to this Quiz.'
 }

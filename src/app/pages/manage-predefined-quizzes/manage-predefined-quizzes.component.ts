@@ -7,6 +7,7 @@ import {QuizService} from '../../service/quiz/quiz.service';
 import {QuestionService} from '../../service/question/question.service';
 import {DeletePredefinedQuizComponent} from './delete-predefined-quiz/delete-predefined-quiz.component';
 import {EditPredefinedQuizComponent} from './edit-predefined-quiz/edit-predefined-quiz.component';
+import {AddPredefinedQuizComponent} from './add-predefined-quiz/add-predefined-quiz.component';
 
 @Component({
   selector: 'app-manage-predefined-quizzes',
@@ -84,6 +85,34 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
 
     // return the fully resolved quiz
     return resolvedQuiz;
+  }
+
+  /*======================================*
+   * CREATE QUESTION
+   *======================================*/
+
+  /**
+   * Opens a modal for adding a predefined quiz.
+   * If the quiz is added, the UI will be updated too.
+   */
+  addQuiz() {
+
+    // open modal for creating a new question
+    const options = {
+      size: 'lg',
+      centered: true,
+      scrollable: true,
+      keyboard: false
+    }
+    const modal = this.modalService.open(AddPredefinedQuizComponent, options);
+    modal.componentInstance.modalRef = modal;
+
+    // update UI with edited question data if the question was changed
+    modal.result.then(addedQuiz => {
+      this.allQuizzes.push(addedQuiz);
+    }, err => {
+      console.log("Closed creation dialog without creating a quiz.");
+    });
   }
 
   /*======================================*
