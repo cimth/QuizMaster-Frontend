@@ -2,7 +2,11 @@ export const BUTTONS = {
   // start
   PLAY_QUIZ: 'Play a Quiz',
   MANAGE_PREDEFINED_QUIZZES: 'Manage predefined Quizzes',
-  MANAGE_QUESTIONS: 'Manage Questions'
+  MANAGE_QUESTIONS: 'Manage Questions',
+
+  // quiz format
+  RANDOM_QUIZ: 'Random Quiz',
+  PREDEFINED_QUIZ: 'Predefined Quiz'
 }
 
 export const ERRORS =  {
@@ -21,7 +25,13 @@ export const HEADERS = {
   // predefined quizzes
   EDIT_QUIZ: 'Edit Quiz',
   DELETE_QUIZ: 'Delete Quiz',
-  MANAGE_PREDEFINED_QUIZZES: 'Manage predefined Quizzes'
+  MANAGE_PREDEFINED_QUIZZES: 'Manage predefined Quizzes',
+
+  // menus
+  SELECT_QUIZ_FORMAT: 'Quiz-Format auswählen',
+
+  // select quiz
+  SELECT_PREDEFINED_QUIZ: 'Select predefined Quiz'
 }
 
 export const ATTRIBUTE_NAMES = {
@@ -60,7 +70,8 @@ export const ACTION_LABELS = {
   ADD_PREDEFINED_QUIZ: 'Add predefined Quiz',
   REMOVE: 'Remove',
   ADD_QUESTIONS: 'Add Questions',
-  BACK_TO_START: 'Back to the main menu'
+  BACK_TO_START: 'Back to the main menu',
+  PLAY: 'Play'
 }
 
 export const CONFIRMATION = {
@@ -75,5 +86,6 @@ export const SUCCESS = {
 
 export const INFO = {
   NO_USED_QUESTIONS: 'Currently no questions are assigned to this Quiz.',
-  NO_UNUSED_QUESTIONS: 'Currently all existing questions are already assigned to this Quiz.'
+  NO_UNUSED_QUESTIONS: 'Currently all existing questions are already assigned to this Quiz.',
+  NO_PREDEFINED_QUIZ: 'Currently no predefined Quizzes are existing.'
 }

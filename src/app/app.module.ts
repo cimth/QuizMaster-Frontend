@@ -16,6 +16,9 @@ import {ManagePredefinedQuizzesComponent} from './pages/manage-predefined-quizze
 import {DeletePredefinedQuizComponent} from './pages/manage-predefined-quizzes/delete-predefined-quiz/delete-predefined-quiz.component';
 import {EditPredefinedQuizComponent} from './pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component';
 import {AddPredefinedQuizComponent} from './pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component';
+import {SelectQuizFormatComponent} from './pages/select-quiz-format/select-quiz-format.component';
+import {SelectPredefinedQuizComponent} from './pages/select-quiz-format/select-predefined-quiz/select-predefined-quiz.component';
+import {SelectRandomQuizComponent} from './pages/select-quiz-format/select-random-quiz/select-random-quiz.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import {AddPredefinedQuizComponent} from './pages/manage-predefined-quizzes/add-
     ManagePredefinedQuizzesComponent,
     DeletePredefinedQuizComponent,
     EditPredefinedQuizComponent,
-    AddPredefinedQuizComponent
+    AddPredefinedQuizComponent,
+    SelectQuizFormatComponent,
+    SelectPredefinedQuizComponent,
+    SelectRandomQuizComponent
   ],
   imports: [
     BrowserModule,

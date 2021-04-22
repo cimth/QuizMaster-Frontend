@@ -1,0 +1,38 @@
+<!-- title and close button -->
+<div class="modal-header">
+  <h4>{{loc.localize(MESSAGE_ID.HEADERS.SELECT_PREDEFINED_QUIZ)}}</h4>
+  <button type="button" class="close">
+    <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
+  </button>
+</div>
+
+<!-- list of playable predefined quizzes -->
+<table class="table table-borderless modal-table text-center">
+  <!-- configure column size -->
+  <thead>
+  <tr>
+    <td style="width: 70%"></td>
+    <td style="width: 30%"></td>
+  </tr>
+  </thead>
+  <!-- info if there currently is no predefined quiz -->
+  <tr *ngIf="allPlayableQuizzes.length == 0" class="text-center">
+    <td colspan="2">{{loc.localize(MESSAGE_ID.INFO.NO_PREDEFINED_QUIZ)}}</td>
+  </tr>
+  <!-- list of predefined quizzes -->
+  <tr *ngFor="let quiz of allPlayableQuizzes">
+    <!-- question text -->
+    <td>
+      {{quiz.quizName}}
+      <p class="font-italic mb-0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}: {{quiz.questionCount}}</p>
+    </td>
+    <!-- play button -->
+    <td class="text-center">
+      <button class="btn btn-block btn-info rounded my-0 mx-1"
+              (click)="playQuiz(quiz)">{{loc.localize(MESSAGE_ID.ACTION_LABELS.PLAY)}}</button>
+    </td>
+  </tr>
+</table>
+
+<!-- div with explicit space for workaround margin when scrollable -->
+<div>&nbsp;</div>
