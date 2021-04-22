@@ -59,7 +59,8 @@ export const ACTION_LABELS = {
   ADD_QUESTION: 'Add Question',
   ADD_PREDEFINED_QUIZ: 'Add predefined Quiz',
   REMOVE: 'Remove',
-  ADD_QUESTIONS: 'Add Questions'
+  ADD_QUESTIONS: 'Add Questions',
+  BACK_TO_START: 'Back to the main menu'
 }
 
 export const CONFIRMATION = {

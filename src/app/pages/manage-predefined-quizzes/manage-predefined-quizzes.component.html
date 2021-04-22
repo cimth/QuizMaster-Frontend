@@ -1,9 +1,15 @@
+<!-- back button -->
+<button class="btn btn-info mb-5" routerLink="/start">&#8592; {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}</button>
+
+<!-- header -->
 <h1 class="h1 text-center mb-4">{{loc.localize(MESSAGE_ID.HEADERS.MANAGE_PREDEFINED_QUIZZES)}}</h1>
 
+<!-- add quiz -->
 <button class="btn btn-block btn-info" (click)="addQuiz()" >
   {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_PREDEFINED_QUIZ)}}
 </button>
 
+<!-- quizzes -->
 <ngb-accordion *ngIf="allQuizzes.length > 0" [closeOthers]="true" activeIds="static-{{allQuizzes[0].quizId}}" type="info"
                class="p-5">
   <ngb-panel *ngFor="let quiz of allQuizzes; let idx = index" id="static-{{quiz.quizId}}" title="{{quiz.quizName}}">
