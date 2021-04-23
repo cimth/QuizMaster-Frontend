@@ -15,13 +15,18 @@
       </button>
 
       <!-- no quizzes -->
-      <h5 *ngIf="allQuizzes.length == 0" class="text-center p-5">
+      <h5 *ngIf="!isLoading && allQuizzes.length == 0" class="text-center p-5">
         {{loc.localize(MESSAGE_ID.INFO.NO_PREDEFINED_QUIZ)}}
       </h5>
 
+      <!-- loading spinner -->
+      <div *ngIf="isLoading" class="text-center m-5">
+        <div class="spinner-border text-info" role="status"></div>
+      </div>
+
       <!-- quizzes -->
       <ngb-accordion *ngIf="allQuizzes.length > 0" [closeOthers]="true" activeIds="static-{{allQuizzes[0].quizId}}" type="info"
-                     class="p-5">
+                     class="p-5" [hidden]="isLoading">
         <ngb-panel *ngFor="let quiz of allQuizzes; let idx = index" id="static-{{quiz.quizId}}" title="{{quiz.quizName}}">
           <ng-template ngbPanelContent style="background: var(--info)">
             <!-- quiz data -->
@@ -48,13 +53,23 @@
                 <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
                 <td >{{quiz.questionCount}}</td>
               </tr>
+              <!-- loading spinner while fetching and rendering questions -->
+              <tr *ngIf="questionsRendered.get(quiz.quizId) !== true">
+                <th >{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
+                <td>
+                  <div class="spinner-border spinner-border-sm text-info" role="status"></div>
+                </td>
+              </tr>
               <!-- resolved questions -->
-              <tr *ngFor="let resolvedQuestion of quiz.resolvedQuestions; let qArrIdx = index">
+              <tr id="questions-{{quiz.quizId}}" *ngFor="let resolvedQuestion of quiz.resolvedQuestions; let qArrIdx = index"
+                  [hidden]="!questionsRendered.get(quiz.quizId)" >
                 <!-- only show header in front of first question -->
                 <th *ngIf="qArrIdx == 0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
                 <th *ngIf="qArrIdx != 0"></th>
                 <!-- actual question -->
                 <td>{{resolvedQuestion.questionText}}</td>
+                <!-- set rendering flag on last index -->
+                {{qArrIdx == (quiz.resolvedQuestions.length - 1) ? markQuestionsAsRendered(quiz.quizId) : '' }}
               </tr>
             </table>
             <!-- horizontal line -->

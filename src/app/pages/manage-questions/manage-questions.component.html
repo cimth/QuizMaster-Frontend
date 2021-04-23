@@ -15,13 +15,18 @@
       </button>
 
       <!-- no questions -->
-      <h5 *ngIf="allQuestions.length == 0" class="text-center p-5">
+      <h5 *ngIf="!isLoading && allQuestions.length == 0" class="text-center p-5">
         {{loc.localize(MESSAGE_ID.INFO.NO_QUESTIONS)}}
       </h5>
 
+      <!-- loading spinner -->
+      <div *ngIf="isLoading" class="text-center m-5">
+        <div class="spinner-border text-info" role="status"></div>
+      </div>
+
       <!-- questions -->
       <ngb-accordion *ngIf="allQuestions.length > 0" [closeOthers]="true" activeIds="static-{{allQuestions[0].id}}" type="info"
-                     class="p-5">
+                     class="p-5" [hidden]="isLoading">
         <ngb-panel *ngFor="let question of allQuestions; let idx = index"  id="static-{{question.id}}" title="{{question.questionText}}">
           <ng-template ngbPanelContent style="background: var(--info)">
             <!-- question data -->

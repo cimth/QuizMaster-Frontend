@@ -22,6 +22,7 @@ export class ManageQuestionsComponent implements OnInit {
   public MESSAGE_ID = MESSAGE_ID;
   public allQuestions: QuestionInRawFormat[] = [];
   public showAnswersIds: number[] = [];
+  public isLoading: boolean = true;
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
@@ -41,6 +42,12 @@ export class ManageQuestionsComponent implements OnInit {
         for(let q of allQuestions) {
           this.allQuestions.push(q);
         }
+
+        // mark questions as loaded
+        // => use timeout to avoid to short (and thus confusing) loading spinner
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1500);
       });
   }
 

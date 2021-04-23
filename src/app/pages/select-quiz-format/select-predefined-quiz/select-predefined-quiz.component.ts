@@ -21,6 +21,7 @@ export class SelectPredefinedQuizComponent implements OnInit {
   @Input() public modalRef: NgbModalRef;
 
   public allPlayableQuizzes: PredefinedQuiz[] = [];
+  public isLoading: boolean = true;
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
@@ -42,6 +43,12 @@ export class SelectPredefinedQuizComponent implements OnInit {
         this.allPlayableQuizzes.sort((q1, q2) => {
           return q1.quizId - q2.quizId;
         });
+
+        // mark quizzes as loaded
+        // => use timeout to avoid to short (and thus confusing) loading spinner
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1500);
       })
   }
 

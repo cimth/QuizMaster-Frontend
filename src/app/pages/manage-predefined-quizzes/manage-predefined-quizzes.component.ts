@@ -22,6 +22,8 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
 
   public MESSAGE_ID = MESSAGE_ID;
   public allQuizzes: PredefinedQuizWithResolvedQuestions[] = [];
+  public isLoading: boolean = true;
+  public questionsRendered: Map<number, boolean> = new Map<number, boolean>();
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
@@ -47,6 +49,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
         for (let quiz of allQuizzes) {
           const resolvedQuiz = await this.createPredefinedQuizWithResolvedQuestions(quiz);
           quizArray.push(resolvedQuiz);
+          this.questionsRendered.set(quiz.quizId, false);
         }
       });
 
@@ -83,8 +86,29 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
         }
       });
 
+    // mark quizzes as loaded
+    // => use timeout to avoid to short (and thus confusing) loading spinner
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1500);
+
     // return the fully resolved quiz
     return resolvedQuiz;
+  }
+
+  /**
+   * Sets the entry for the rendered questions as true for the given quiz id.
+   * This means all questions are rendered which is important for showing them and hiding the related loading spinner.
+   *
+   * @param quizId the id of the quiz for which the questions are rendered
+   */
+  markQuestionsAsRendered(quizId: number) {
+    // use timeout for two reasons:
+    // 1) spinner does not disappear to fast what could confuse the user
+    // 2) avoid ExpressionChangedAfterItHasBeenCheckedError
+    setTimeout(() => {
+      this.questionsRendered.set(quizId, true);
+    }, 1500);
   }
 
   /*======================================*

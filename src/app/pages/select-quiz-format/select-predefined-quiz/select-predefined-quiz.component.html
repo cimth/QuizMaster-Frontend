@@ -15,12 +15,23 @@
     <td style="width: 30%"></td>
   </tr>
   </thead>
+
   <!-- info if there currently is no predefined quiz -->
-  <tr *ngIf="allPlayableQuizzes.length == 0" class="text-center">
+  <tr *ngIf="!isLoading && allPlayableQuizzes.length == 0" class="text-center">
     <td colspan="2">{{loc.localize(MESSAGE_ID.INFO.NO_PREDEFINED_QUIZ)}}</td>
   </tr>
+
+  <!-- loading spinner -->
+  <tr *ngIf="isLoading">
+    <td colspan="2">
+      <div class="text-center m5">
+        <div class="spinner-border text-info" role="status"></div>
+      </div>
+    </td>
+  </tr>
+
   <!-- list of predefined quizzes -->
-  <tr *ngFor="let quiz of allPlayableQuizzes">
+  <tr *ngFor="let quiz of allPlayableQuizzes" [hidden]="isLoading">
     <!-- question text -->
     <td>
       {{quiz.quizName}}
