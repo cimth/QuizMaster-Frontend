@@ -16,22 +16,16 @@ export const ERRORS =  {
 }
 
 export const HEADERS = {
-  // questions
   EDIT_QUESTION: 'Frage bearbeiten',
   DELETE_QUESTION: 'Frage löschen',
   ADD_QUESTION: 'Frage hinzufügen',
   MANAGE_QUESTIONS: 'Fragen verwalten',
-
-  // predefined quizzes
   EDIT_QUIZ: 'Quiz bearbeiten',
   DELETE_QUIZ: 'Quiz löschen',
   MANAGE_PREDEFINED_QUIZZES: 'Vorgegebene Quiz-Runden verwalten',
-
-  // menus
   SELECT_QUIZ_FORMAT: 'Quiz-Format auswählen',
-
-  // select quiz
-  SELECT_PREDEFINED_QUIZ: 'Vorgegebenes Quiz auswählen'
+  SELECT_PREDEFINED_QUIZ: 'Vorgegebenes Quiz auswählen',
+  FINISHED: 'Geschafft!'
 }
 
 export const ATTRIBUTE_NAMES = {

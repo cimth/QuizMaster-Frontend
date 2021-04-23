@@ -5,6 +5,7 @@ import {ManageQuestionsComponent} from './pages/manage-questions/manage-question
 import {ManagePredefinedQuizzesComponent} from './pages/manage-predefined-quizzes/manage-predefined-quizzes.component';
 import {SelectQuizFormatComponent} from './pages/select-quiz-format/select-quiz-format.component';
 import {PlayQuizComponent} from './pages/play-quiz/play-quiz.component';
+import {FinishQuizComponent} from './pages/play-quiz/finish-quiz/finish-quiz.component';
 
 const routes: Routes = [
   { path: 'start', component: StartComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'manage-questions', component: ManageQuestionsComponent },
   { path: 'manage-predefined-quizzes', component: ManagePredefinedQuizzesComponent },
   { path: 'play-quiz', component: PlayQuizComponent },
+  { path: 'finish-quiz', component: FinishQuizComponent },
   { path: '**', redirectTo: 'start', pathMatch: 'full' }
 ];
 

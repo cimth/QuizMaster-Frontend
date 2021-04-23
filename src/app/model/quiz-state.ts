@@ -95,12 +95,13 @@ export class QuizState {
   public clearData() {
     this.localStorageService.removeKeys([
       QUIZ_STATE.QUESTION_IDS, QUIZ_STATE.CURRENT_INDEX, QUIZ_STATE.CORRECT_ANSWERS, QUIZ_STATE.WRONG_ANSWERS,
-      QUIZ_STATE.SELECTED_ANSWER
+      QUIZ_STATE.CURRENT_QUESTION, QUIZ_STATE.SELECTED_ANSWER
     ]);
     this._questionIds = undefined;
     this._currentIndex = undefined;
     this._correctAnswers = undefined;
     this._wrongAnswers = undefined;
+    this._currentQuestion = undefined;
     this._selectedAnswer = undefined;
   }
 

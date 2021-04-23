@@ -4,6 +4,7 @@ import {PlayQuizService} from '../../service/play-quiz/play-quiz.service';
 import {QuestionService} from '../../service/question/question.service';
 import {LocalizationService} from '../../service/localization/localization.service';
 import {MESSAGE_ID} from '../../constants/localization/message-id';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-play-quiz',
@@ -31,7 +32,8 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
   constructor(public loc: LocalizationService,
               public playQuizService: PlayQuizService,
               private questionService: QuestionService,
-              private changeDetectorRef: ChangeDetectorRef) { }
+              private changeDetectorRef: ChangeDetectorRef,
+              private router: Router) { }
 
   ngOnInit(): void {
     // reset rendering variable because on start the answer buttons are not yet rendered
@@ -191,6 +193,6 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
    * Navigates to the 'finish quiz' page.
    */
   finishQuiz() {
-    // go to end page
+    this.router.navigateByUrl('/finish-quiz')
   }
 }

@@ -101,7 +101,7 @@ export class PlayQuizService {
    * Clears the quiz state.
    * @private
    */
-  private clearQuizState() {
+  public clearQuizState() {
     this.quizState.clearData();
   }
 
