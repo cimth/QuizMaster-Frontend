@@ -71,7 +71,9 @@ export const ACTION_LABELS = {
   REMOVE: 'Remove',
   ADD_QUESTIONS: 'Add Questions',
   BACK_TO_START: 'Back to the main menu',
-  PLAY: 'Play'
+  PLAY: 'Play',
+  NEXT_QUESTION: 'Next Question',
+  FINISH_QUIZ: 'Finish Quiz'
 }
 
 export const CONFIRMATION = {
@@ -87,5 +89,8 @@ export const SUCCESS = {
 export const INFO = {
   NO_USED_QUESTIONS: 'Currently no questions are assigned to this Quiz.',
   NO_UNUSED_QUESTIONS: 'Currently all existing questions are already assigned to this Quiz.',
-  NO_PREDEFINED_QUIZ: 'Currently no predefined Quizzes are existing.'
+  NO_PREDEFINED_QUIZ: 'Currently no predefined Quizzes are existing.',
+  QUESTION: 'Question',
+  CORRECT_ANSWERS: 'Correct Answers',
+  WRONG_ANSWERS: 'Wrong Answers'
 }

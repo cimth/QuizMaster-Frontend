@@ -71,7 +71,9 @@ export const ACTION_LABELS = {
   REMOVE: 'Entfernen',
   ADD_QUESTIONS: 'Fragen hinzufügen',
   BACK_TO_START: 'Zurück zum Hauptmenü',
-  PLAY: 'Spielen'
+  PLAY: 'Spielen',
+  NEXT_QUESTION: 'Zur nächsten Frage',
+  FINISH_QUIZ: 'Quiz beenden'
 }
 
 export const CONFIRMATION = {
@@ -87,5 +89,8 @@ export const SUCCESS = {
 export const INFO = {
   NO_USED_QUESTIONS: 'Aktuell sind diesem Quiz keine Fragen zugeordnet.',
   NO_UNUSED_QUESTIONS: 'Aktuell sind diesem Quiz bereits alle existierenden Fragen zugeordnet.',
-  NO_PREDEFINED_QUIZ: 'Aktuell gibt es keine vorgegebenen Quiz-Runden.'
+  NO_PREDEFINED_QUIZ: 'Aktuell gibt es keine vorgegebenen Quiz-Runden.',
+  QUESTION: 'Frage',
+  CORRECT_ANSWERS: 'Richtige Antworten',
+  WRONG_ANSWERS: 'Falsche Antworten'
 }

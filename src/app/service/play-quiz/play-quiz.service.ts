@@ -15,7 +15,6 @@ export class PlayQuizService {
    * FIELDS
    *======================================*/
 
-  // do not use variables with '_' prefix but only setters for correct local storage usage
   private _quizState: QuizState;
 
   /*======================================*
@@ -45,7 +44,7 @@ export class PlayQuizService {
 
     this.quizService.getQuestionIdsOfPredefinedQuiz(quiz.quizId)
       .subscribe(questionIds => {
-        this.initQuizState(questionIds);
+        this.initQuizState(quiz.quizName, questionIds);
         this.router.navigateByUrl('/play-quiz');
       });
   }
@@ -53,14 +52,45 @@ export class PlayQuizService {
   /**
    * Initializes the quiz state with the given question ids to start a quiz.
    *
+   * @param quizName the name of the quiz to be played
    * @param questionIds the question ids of the quiz to be played
    * @private
    */
-  private initQuizState(questionIds: number[]) {
+  private initQuizState(quizName: string, questionIds: number[]) {
+    this.quizState.quizName = quizName;
     this.quizState.questionIds = questionIds;
     this.quizState.currentIndex = 0;
     this.quizState.wrongAnswers = 0;
     this.quizState.correctAnswers = 0;
+    this.quizState.clearCurrentQuestion();
+    this.quizState.clearSelectedAnswer();
+  }
+
+  /*======================================*
+   * UPDATE QUIZ STATE
+   *======================================*/
+
+  /**
+   * Updates the quiz state to provide the next question.
+   * Therefore clears values from the previous question and updates the index to point to the next question.
+   */
+  public updateForNextQuestion() {
+    this.quizState.currentIndex++;
+    this.quizState.clearCurrentQuestion();
+    this.quizState.clearSelectedAnswer();
+  }
+
+  /**
+   * Increments the count of correct or wrong answers according to the correctness of the given answer.
+   *
+   * @param correctAnswer true if answered correctly, else false
+   */
+  public updateAnswerCount(correctAnswer: boolean) {
+    if (correctAnswer) {
+      this.quizState.correctAnswers++;
+    } else {
+      this.quizState.wrongAnswers++;
+    }
   }
 
   /*======================================*
