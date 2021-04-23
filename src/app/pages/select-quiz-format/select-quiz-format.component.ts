@@ -31,6 +31,10 @@ export class SelectQuizFormatComponent {
    * RANDOM QUIZ
    *======================================*/
 
+  /**
+   * Opens a modal for selecting a question count for a random quiz to play.
+   * If the question count is selected, the quiz is started afterwards.
+   */
   selectRandomQuiz(): void {
 
     // open modal for selecting a predefined quiz
@@ -55,6 +59,10 @@ export class SelectQuizFormatComponent {
    * PREDEFINED QUIZ
    *======================================*/
 
+  /**
+   * Opens a modal for selecting a predefined quiz to play.
+   * If a quiz is selected, it is started afterwards.
+   */
   selectPredefinedQuiz(): void {
 
     // open modal for selecting a predefined quiz

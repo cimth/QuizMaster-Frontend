@@ -8,14 +8,26 @@
   color: red;
 }
 
-.remove-button {
+/*
+ * special buttons
+ */
+
+.remove-button, .remove-button:focus, .remove-button:disabled {
   background: var(--danger);
   font-size: 1.3em;
 }
 
-.add-button {
-  background: var(--green);
+.remove-button:hover:enabled {
+  background-color: #aa2330;
+}
+
+.add-button, .add-button:focus, .add-button:disabled {
+  background: var(--success);
   font-size: 1.3em;
+}
+
+.add-button:hover:enabled {
+  background-color: #0b7220;
 }
 
 /*

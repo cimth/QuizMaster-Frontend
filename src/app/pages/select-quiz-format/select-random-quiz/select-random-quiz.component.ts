@@ -1,15 +1,15 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LocalizationService} from '../../../service/localization/localization.service';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {PlayQuizService} from '../../../service/play-quiz/play-quiz.service';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
+import {QuestionService} from '../../../service/question/question.service';
 
 @Component({
   selector: 'app-select-random-quiz',
   templateUrl: './select-random-quiz.component.html',
   styleUrls: ['./select-random-quiz.component.css']
 })
-export class SelectRandomQuizComponent {
+export class SelectRandomQuizComponent implements OnInit {
 
   /*======================================*
    * FIELDS
@@ -19,16 +19,37 @@ export class SelectRandomQuizComponent {
 
   @Input() public modalRef: NgbModalRef;
 
-  public questionCount: number = 10;
-  private MIN_QUESTION_COUNT = 1;
-  private MAX_QUESTION_COUNT = 30;
+  public totalQuestions: number = 0;
+  public questionCount: number = 15;
+
+  public MIN_QUESTION_COUNT = 1;
+  public MAX_QUESTION_COUNT = 30;
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
   constructor(public loc: LocalizationService,
-              private playQuizService: PlayQuizService) { }
+              private questionService: QuestionService) { }
+
+  ngOnInit() {
+    // init total question count and adjust max questions if necessary
+    this.questionService.getAllQuestions()
+      .subscribe(allQuestions => {
+        // total question count
+        this.totalQuestions = allQuestions.length;
+
+        // adjust max questions if less than current maximum
+        if (this.MAX_QUESTION_COUNT > this.totalQuestions) {
+          this.MAX_QUESTION_COUNT = this.totalQuestions;
+        }
+
+        // adjust initial question count if less thant current question count
+        if (this.questionCount > this.totalQuestions) {
+          this.questionCount = Math.floor(this.totalQuestions / 2);
+        }
+      })
+  }
 
   /*======================================*
    * ACTION FOR SELECTION

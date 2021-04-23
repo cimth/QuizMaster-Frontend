@@ -24,6 +24,7 @@ export const HEADERS = {
   DELETE_QUIZ: 'Delete Quiz',
   MANAGE_PREDEFINED_QUIZZES: 'Manage predefined Quizzes',
   SELECT_QUIZ_FORMAT: 'Quiz-Format auswählen',
+  SELECT_RANDOM_QUIZ: 'Create a random Quiz',
   SELECT_PREDEFINED_QUIZ: 'Select predefined Quiz',
   FINISHED: 'Finished!'
 }
@@ -86,5 +87,7 @@ export const INFO = {
   NO_PREDEFINED_QUIZ: 'Currently no predefined Quizzes are existing.',
   QUESTION: 'Question',
   CORRECT_ANSWERS: 'Correct Answers',
-  WRONG_ANSWERS: 'Wrong Answers'
+  WRONG_ANSWERS: 'Wrong Answers',
+  RANDOM_QUIZ_NAME: 'Random Quiz',
+  NO_RANDOM_QUIZ_SINCE_NO_QUESTIONS: 'Currently you have not created any questions. Thus, you cannot play a random Quiz.'
 }

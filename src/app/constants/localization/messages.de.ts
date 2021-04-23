@@ -24,6 +24,7 @@ export const HEADERS = {
   DELETE_QUIZ: 'Quiz löschen',
   MANAGE_PREDEFINED_QUIZZES: 'Vorgegebene Quiz-Runden verwalten',
   SELECT_QUIZ_FORMAT: 'Quiz-Format auswählen',
+  SELECT_RANDOM_QUIZ: 'Zufälliges Quiz erstellen',
   SELECT_PREDEFINED_QUIZ: 'Vorgegebenes Quiz auswählen',
   FINISHED: 'Geschafft!'
 }
@@ -86,5 +87,7 @@ export const INFO = {
   NO_PREDEFINED_QUIZ: 'Aktuell gibt es keine vorgegebenen Quiz-Runden.',
   QUESTION: 'Frage',
   CORRECT_ANSWERS: 'Richtige Antworten',
-  WRONG_ANSWERS: 'Falsche Antworten'
+  WRONG_ANSWERS: 'Falsche Antworten',
+  RANDOM_QUIZ_NAME: 'Zufälliges Quiz',
+  NO_RANDOM_QUIZ_SINCE_NO_QUESTIONS: 'Aktuell wurden noch keine Fragen erstellt. Deshalb kann kein Quiz gespielt werden.'
 }

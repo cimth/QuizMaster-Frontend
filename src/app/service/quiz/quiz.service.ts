@@ -54,6 +54,28 @@ export class QuizService {
    *======================================*/
 
   /**
+   * Requests a random quiz with the given question count from the server and returns an Observable for this request.
+   * The optional array of already used question can be used for trying to avoid questions inside this quiz that were
+   * already been asked in a previous quiz game in this session.
+   *
+   * @param questionCount the question count for the random quiz
+   * @param alreadyUsedQuestions optional array of question ids that were already used in this session
+   */
+  public getRandomQuiz(questionCount: number, alreadyUsedQuestions: number[] = []): Observable<number[]> {
+
+    // prepare request
+    const url = `${URL.QUIZ_ENDPOINT}/random`;
+
+    const body = {
+      questionCount: questionCount,
+      alreadyUsedQuestions: alreadyUsedQuestions
+    }
+
+    // do request and return Observable
+    return this.httpClient.post<number[]>(url, body);
+  }
+
+  /**
    * Requests all predefined quizzes from the server and returns an Observable for this request.
    */
   public getAllPredefinedQuizzes(): Observable<PredefinedQuiz[]> {

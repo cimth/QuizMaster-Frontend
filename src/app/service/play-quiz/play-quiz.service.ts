@@ -5,6 +5,8 @@ import {QuestionService} from '../question/question.service';
 import {Router} from '@angular/router';
 import {LocalStorageService} from '../local-storage/local-storage.service';
 import {QuizState} from '../../model/quiz-state';
+import {LocalizationService} from '../localization/localization.service';
+import {MESSAGE_ID} from '../../constants/localization/message-id';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +17,16 @@ export class PlayQuizService {
    * FIELDS
    *======================================*/
 
+  private MESSAGE_ID = MESSAGE_ID;
+
   private _quizState: QuizState;
 
   /*======================================*
    * CONSTRUCTOR
    *======================================*/
 
-  constructor(private quizService: QuizService,
+  constructor(private loc: LocalizationService,
+              private quizService: QuizService,
               private questionService: QuestionService,
               private router: Router,
               private localStorageService: LocalStorageService) { }
@@ -30,8 +35,21 @@ export class PlayQuizService {
    * START QUIZ
    *======================================*/
 
+  /**
+   * Starts a random quiz by initializing the quiz state and navigating to the 'play quiz' page.
+   *
+   * @param questionCount the question count for the random quiz
+   */
   public startRandomQuiz(questionCount: number) {
     console.log(`Start random quiz with ${questionCount} questions`);
+
+    const randomQuizName = this.loc.localize(MESSAGE_ID.INFO.RANDOM_QUIZ_NAME);
+
+    this.quizService.getRandomQuiz(questionCount)
+      .subscribe(questionIds => {
+        this.initQuizState(randomQuizName, questionIds);
+        this.router.navigateByUrl('/play-quiz');
+      });
   }
 
   /**

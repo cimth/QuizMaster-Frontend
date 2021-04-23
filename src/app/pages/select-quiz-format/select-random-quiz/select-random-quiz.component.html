@@ -1,13 +1,18 @@
 <!-- title and close button -->
 <div class="modal-header">
-  <h4>{{loc.localize(MESSAGE_ID.HEADERS.SELECT_PREDEFINED_QUIZ)}}</h4>
+  <h4>{{loc.localize(MESSAGE_ID.HEADERS.SELECT_RANDOM_QUIZ)}}</h4>
   <button type="button" class="close">
     <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
   </button>
 </div>
 
+<!-- info about no questions -->
+<p *ngIf="totalQuestions == 0" class="text-center p-3">
+  {{loc.localize(MESSAGE_ID.INFO.NO_RANDOM_QUIZ_SINCE_NO_QUESTIONS)}}
+</p>
+
 <!-- list of playable predefined quizzes -->
-<table class="table table-borderless modal-table text-center">
+<table *ngIf="totalQuestions > 0" class="table table-borderless modal-table text-center">
   <!-- configure column size -->
   <thead>
   <tr>
@@ -20,10 +25,10 @@
     <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
     <td class="px-2">
       <div class="btn-group text-center">
-        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button"
+        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button" [disabled]="questionCount == MIN_QUESTION_COUNT"
                 (click)="decreaseQuestionCount()">&#8722;</button>
         <input class="px-2 text-center" [(ngModel)]="questionCount" readonly />
-        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold add-button"
+        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold add-button" [disabled]="questionCount == MAX_QUESTION_COUNT"
                 (click)="increaseQuestionCount()">+</button>
       </div>
     </td>
