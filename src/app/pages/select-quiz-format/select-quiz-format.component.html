@@ -1,26 +1,32 @@
 <!-- back button -->
 <button class="btn btn-info mb-5" routerLink="/start">&#8592; {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}</button>
 
-<!-- header -->
-<h1 class="h1 text-center mb-4">{{loc.localize(MESSAGE_ID.HEADERS.SELECT_QUIZ_FORMAT)}}</h1>
+<!-- vertical centered container -->
+<div class="container h-75">
+  <div class="row h-100">
+    <div class="col my-auto">
 
-<!-- buttons -->
-<div class="container">
-  <!-- random quiz -->
-  <div class="row m-3">
-    <div class="col-12">
-      <button class="btn btn-block btn-info" (click)="selectRandomQuiz()">
-        {{loc.localize(MESSAGE_ID.BUTTONS.RANDOM_QUIZ)}}
-      </button>
-    </div>
-  </div>
-  <!-- predefined quiz -->
-  <div class="row m-3">
-    <div class="col-12">
-      <button class="btn btn-block btn-info" (click)="selectPredefinedQuiz()">
-        {{loc.localize(MESSAGE_ID.BUTTONS.PREDEFINED_QUIZ)}}
-      </button>
+      <!-- header -->
+      <h1 class="h1 text-center">{{loc.localize(MESSAGE_ID.HEADERS.SELECT_QUIZ_FORMAT)}}</h1>
+
+      <!-- random quiz -->
+      <div class="row m-3">
+        <div class="col-12">
+          <button class="btn btn-block btn-info" (click)="selectRandomQuiz()">
+            {{loc.localize(MESSAGE_ID.BUTTONS.RANDOM_QUIZ)}}
+          </button>
+        </div>
+      </div>
+
+      <!-- predefined quiz -->
+      <div class="row m-3">
+        <div class="col-12">
+          <button class="btn btn-block btn-info" (click)="selectPredefinedQuiz()">
+            {{loc.localize(MESSAGE_ID.BUTTONS.PREDEFINED_QUIZ)}}
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-

@@ -1,29 +1,39 @@
-<h1 class="h1 text-center mb-4">QuizMaster</h1>
+<!-- vertical centered container -->
+<div class="container h-100">
+  <div class="row h-100">
+    <div class="col my-auto">
 
-<div class="container">
-  <!-- play quiz -->
-  <div class="row m-3">
-    <div class="col-12">
-      <button class="btn btn-block btn-info" routerLink="/select-quiz-format">
-        {{loc.localize(MESSAGE_ID.BUTTONS.PLAY_QUIZ)}}
-      </button>
-    </div>
-  </div>
-  <!-- manage predefined quizzes -->
-  <div class="row m-3">
-    <div class="col-12">
-      <button class="btn btn-block btn-info" routerLink="/manage-predefined-quizzes">
-        {{loc.localize(MESSAGE_ID.BUTTONS.MANAGE_PREDEFINED_QUIZZES)}}
-      </button>
-    </div>
-  </div>
-  <!-- manage questions -->
-  <div class="row m-3">
-    <div class="col-12">
-      <button class="btn btn-block btn-info" routerLink="/manage-questions">
-        {{loc.localize(MESSAGE_ID.BUTTONS.MANAGE_QUESTIONS)}}
-      </button>
+      <!-- header -->
+      <h1 class="h1 text-center mb-4">QuizMaster</h1>
+
+      <!-- buttons -->
+      <div class="container">
+        <!-- play quiz -->
+        <div class="row m-3">
+          <div class="col-12">
+            <button class="btn btn-block btn-info" routerLink="/select-quiz-format">
+              {{loc.localize(MESSAGE_ID.BUTTONS.PLAY_QUIZ)}}
+            </button>
+          </div>
+        </div>
+        <!-- manage predefined quizzes -->
+        <div class="row m-3">
+          <div class="col-12">
+            <button class="btn btn-block btn-info" routerLink="/manage-predefined-quizzes">
+              {{loc.localize(MESSAGE_ID.BUTTONS.MANAGE_PREDEFINED_QUIZZES)}}
+            </button>
+          </div>
+        </div>
+        <!-- manage questions -->
+        <div class="row m-3">
+          <div class="col-12">
+            <button class="btn btn-block btn-info" routerLink="/manage-questions">
+              {{loc.localize(MESSAGE_ID.BUTTONS.MANAGE_QUESTIONS)}}
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-
