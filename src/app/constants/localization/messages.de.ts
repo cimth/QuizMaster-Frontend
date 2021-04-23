@@ -89,5 +89,6 @@ export const INFO = {
   CORRECT_ANSWERS: 'Richtige Antworten',
   WRONG_ANSWERS: 'Falsche Antworten',
   RANDOM_QUIZ_NAME: 'Zufälliges Quiz',
-  NO_RANDOM_QUIZ_SINCE_NO_QUESTIONS: 'Aktuell wurden noch keine Fragen erstellt. Deshalb kann kein Quiz gespielt werden.'
+  NO_RANDOM_QUIZ_SINCE_NO_QUESTIONS: 'Aktuell wurden noch keine Fragen erstellt. Deshalb kann kein Quiz gespielt werden.',
+  NO_QUESTIONS: 'Aktuell gibt es keine Fragen.'
 }

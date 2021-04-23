@@ -14,6 +14,11 @@
         {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_PREDEFINED_QUIZ)}}
       </button>
 
+      <!-- no quizzes -->
+      <h5 *ngIf="allQuizzes.length == 0" class="text-center p-5">
+        {{loc.localize(MESSAGE_ID.INFO.NO_PREDEFINED_QUIZ)}}
+      </h5>
+
       <!-- quizzes -->
       <ngb-accordion *ngIf="allQuizzes.length > 0" [closeOthers]="true" activeIds="static-{{allQuizzes[0].quizId}}" type="info"
                      class="p-5">
