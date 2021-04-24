@@ -22,8 +22,10 @@ export class SelectRandomQuizComponent implements OnInit {
   public totalQuestions: number = 0;
   public questionCount: number = 15;
 
-  public MIN_QUESTION_COUNT = 1;
-  public MAX_QUESTION_COUNT = 30;
+  public MIN_QUESTION_COUNT: number = 1;
+  public MAX_QUESTION_COUNT: number = 30;
+
+  public errorMessage: string = undefined;
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
@@ -47,6 +49,14 @@ export class SelectRandomQuizComponent implements OnInit {
         // adjust initial question count if less thant current question count
         if (this.questionCount > this.totalQuestions) {
           this.questionCount = Math.floor(this.totalQuestions / 2);
+        }
+      }, err => {
+        // show error message
+        console.log('Error while fetching questions: ', err);
+        if (err.status != 0) {
+          this.errorMessage = err.error;
+        } else {
+          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
         }
       })
   }

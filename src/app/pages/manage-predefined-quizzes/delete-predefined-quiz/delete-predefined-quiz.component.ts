@@ -72,8 +72,13 @@ export class DeletePredefinedQuizComponent {
         alert(response);
         this.modalRef.close(true);
       }, err => {
+        // show error message
         console.log('Error while deleting the predefined Quiz: ', err);
-        this.errorMessage = err.error;
+        if (err.status != 0) {
+          this.errorMessage = err.error;
+        } else {
+          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+        }
       });
   }
 

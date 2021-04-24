@@ -8,6 +8,7 @@ import {QuestionService} from '../../service/question/question.service';
 import {DeletePredefinedQuizComponent} from './delete-predefined-quiz/delete-predefined-quiz.component';
 import {EditPredefinedQuizComponent} from './edit-predefined-quiz/edit-predefined-quiz.component';
 import {AddPredefinedQuizComponent} from './add-predefined-quiz/add-predefined-quiz.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-manage-predefined-quizzes',
@@ -32,7 +33,8 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
   constructor(public loc: LocalizationService,
               private quizService: QuizService,
               private questionService: QuestionService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private router: Router) { }
 
   /**
    * Fetches all predefined quizzes to be shown in the component.
@@ -50,6 +52,14 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
           const resolvedQuiz = await this.createPredefinedQuizWithResolvedQuestions(quiz);
           quizArray.push(resolvedQuiz);
           this.questionsRendered.set(quiz.quizId, false);
+        }
+      }, err => {
+        // go to backend-not-reachable page when connection fails
+        console.log('Error while fetching predefined Quizzes: ', err)
+        if (err.status == 0) {
+          setTimeout(() => {
+            this.router.navigateByUrl('/backend-not-reachable');
+          }, 1500);
         }
       });
 
@@ -77,12 +87,30 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
     // get all related quiz ids and resolve questions for them
     await this.quizService.getQuestionIdsOfPredefinedQuiz(quiz.quizId)
       .subscribe(async questionIds => {
+
         // resolve questions
         for (let questionId of questionIds) {
           await this.questionService.getQuestionInRawFormat(questionId)
             .subscribe(question => {
               resolvedQuiz.resolvedQuestions.push(question);
-            })
+            }, err => {
+              // go to backend-not-reachable page when connection fails
+              console.log('Error while fetching predefined Quizzes: ', err)
+              if (err.status == 0) {
+                setTimeout(() => {
+                  this.router.navigateByUrl('/backend-not-reachable');
+                }, 1500);
+              }
+            });
+        }
+
+      }, err => {
+        // go to backend-not-reachable page when connection fails
+        console.log('Error while resolving questions: ', err)
+        if (err.status == 0) {
+          setTimeout(() => {
+            this.router.navigateByUrl('/backend-not-reachable');
+          }, 1500);
         }
       });
 

@@ -21,6 +21,7 @@ import {SelectPredefinedQuizComponent} from './pages/select-quiz-format/select-p
 import {SelectRandomQuizComponent} from './pages/select-quiz-format/select-random-quiz/select-random-quiz.component';
 import {PlayQuizComponent} from './pages/play-quiz/play-quiz.component';
 import {FinishQuizComponent} from './pages/play-quiz/finish-quiz/finish-quiz.component';
+import {BackendNotReachableComponent} from './pages/backend-not-reachable/backend-not-reachable.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {FinishQuizComponent} from './pages/play-quiz/finish-quiz/finish-quiz.com
     SelectPredefinedQuizComponent,
     SelectRandomQuizComponent,
     PlayQuizComponent,
-    FinishQuizComponent
+    FinishQuizComponent,
+    BackendNotReachableComponent
   ],
   imports: [
     BrowserModule,

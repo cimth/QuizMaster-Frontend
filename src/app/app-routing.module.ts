@@ -6,6 +6,7 @@ import {ManagePredefinedQuizzesComponent} from './pages/manage-predefined-quizze
 import {SelectQuizFormatComponent} from './pages/select-quiz-format/select-quiz-format.component';
 import {PlayQuizComponent} from './pages/play-quiz/play-quiz.component';
 import {FinishQuizComponent} from './pages/play-quiz/finish-quiz/finish-quiz.component';
+import {BackendNotReachableComponent} from './pages/backend-not-reachable/backend-not-reachable.component';
 
 const routes: Routes = [
   { path: 'start', component: StartComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'manage-predefined-quizzes', component: ManagePredefinedQuizzesComponent },
   { path: 'play-quiz', component: PlayQuizComponent },
   { path: 'finish-quiz', component: FinishQuizComponent },
+  { path: 'backend-not-reachable', component: BackendNotReachableComponent },
   { path: '**', redirectTo: 'start', pathMatch: 'full' }
 ];
 

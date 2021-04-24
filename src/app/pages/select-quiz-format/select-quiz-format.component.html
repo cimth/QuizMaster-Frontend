@@ -7,10 +7,17 @@
     <div class="col my-auto">
 
       <!-- header -->
-      <h1 class="h1 text-center">{{loc.localize(MESSAGE_ID.HEADERS.SELECT_QUIZ_FORMAT)}}</h1>
+      <h1 *ngIf="!isQuizStarting" class="h1 text-center">{{loc.localize(MESSAGE_ID.HEADERS.SELECT_QUIZ_FORMAT)}}</h1>
+
+      <h1 *ngIf="isQuizStarting" class="h1 text-center">{{loc.localize(MESSAGE_ID.HEADERS.STARTING_QUIZ)}}</h1>
+
+      <!-- loading spinner while quiz is starting -->
+      <div *ngIf="isQuizStarting" class="text-center m-5">
+        <div class="spinner-border text-info" role="status"></div>
+      </div>
 
       <!-- random quiz -->
-      <div class="row m-3">
+      <div *ngIf="!isQuizStarting" class="row m-3">
         <div class="col-12">
           <button class="btn btn-block btn-info" (click)="selectRandomQuiz()">
             {{loc.localize(MESSAGE_ID.BUTTONS.RANDOM_QUIZ)}}
@@ -19,7 +26,7 @@
       </div>
 
       <!-- predefined quiz -->
-      <div class="row m-3">
+      <div *ngIf="!isQuizStarting" class="row m-3">
         <div class="col-12">
           <button class="btn btn-block btn-info" (click)="selectPredefinedQuiz()">
             {{loc.localize(MESSAGE_ID.BUTTONS.PREDEFINED_QUIZ)}}

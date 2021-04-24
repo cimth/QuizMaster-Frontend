@@ -22,6 +22,7 @@ export class SelectPredefinedQuizComponent implements OnInit {
 
   public allPlayableQuizzes: PredefinedQuiz[] = [];
   public isLoading: boolean = true;
+  public errorMessage: string = undefined;
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
@@ -49,7 +50,15 @@ export class SelectPredefinedQuizComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
         }, 1500);
-      })
+      }, err => {
+        // show error message
+        console.log('Error while fetching the predefined Quizzes: ', err);
+        if (err.status != 0) {
+          this.errorMessage = err.error;
+        } else {
+          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+        }
+      });
   }
 
   /*======================================*

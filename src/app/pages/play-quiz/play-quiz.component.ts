@@ -24,6 +24,7 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
   public isLastQuestion: boolean;
 
   public answerButtonsRendered: boolean;
+  public isLoadingNextQuestion: boolean;
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
@@ -38,6 +39,9 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     // reset rendering variable because on start the answer buttons are not yet rendered
     this.answerButtonsRendered = false;
+
+    // loading started
+    this.isLoadingNextQuestion = true;
 
     // load the current question from local storage if existing or else fetch it from the backend
     this.loadCurrentQuestion();
@@ -91,6 +95,15 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
         .subscribe(question => {
           this.question = question;
           this.playQuizService.quizState.currentQuestion = question;
+          this.isLoadingNextQuestion = false;
+        }, err => {
+          // go to backend-not-reachable page when connection fails
+          console.log('Error while resolving questions: ', err)
+          if (err.status == 0) {
+            setTimeout(() => {
+              this.router.navigateByUrl('/backend-not-reachable');
+            }, 1500);
+          }
         });
     }
   }
@@ -108,6 +121,7 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
     // restore question if existing
     if (currentQuestion) {
       this.question = currentQuestion;
+      this.isLoadingNextQuestion = false;
     }
 
     // return true if question was restored, else false
@@ -178,6 +192,9 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
    * Updates the quiz state, resets the component and loads the next question.
    */
   nextQuestion() {
+    // loading started
+    this.isLoadingNextQuestion = true;
+
     // update quiz state
     this.playQuizService.updateForNextQuestion();
 

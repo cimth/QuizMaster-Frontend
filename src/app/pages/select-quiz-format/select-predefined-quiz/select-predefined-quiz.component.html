@@ -22,10 +22,19 @@
   </tr>
 
   <!-- loading spinner -->
-  <tr *ngIf="isLoading">
+  <tr *ngIf="isLoading && !errorMessage">
     <td colspan="2">
-      <div class="text-center m5">
+      <div class="text-center">
         <div class="spinner-border text-info" role="status"></div>
+      </div>
+    </td>
+  </tr>
+
+  <!-- error message -->
+  <tr *ngIf="errorMessage">
+    <td colspan="2">
+      <div class="text-center">
+        <p class="color-red">{{errorMessage}}</p>
       </div>
     </td>
   </tr>

@@ -68,6 +68,14 @@ export class EditPredefinedQuizComponent implements OnInit {
         this.unusedQuestions.sort((q1, q2) => {
           return q1.id - q2.id;
         })
+      }, err => {
+        // show error message
+        console.log('Error while fetching the unused questions: ', err);
+        if (err.status != 0) {
+          this.errorMessage = err.error;
+        } else {
+          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+        }
       });
   }
 
@@ -113,8 +121,13 @@ export class EditPredefinedQuizComponent implements OnInit {
         alert(response);
         this.modalRef.close(this.editedQuiz);
       }, err => {
+        // show error message
         console.log('Error while saving the Quiz: ', err);
-        this.errorMessage = err.error;
+        if (err.status != 0) {
+          this.errorMessage = err.error;
+        } else {
+          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+        }
       });
   }
 

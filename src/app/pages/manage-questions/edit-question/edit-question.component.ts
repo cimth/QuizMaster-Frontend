@@ -106,8 +106,13 @@ export class EditQuestionComponent implements OnInit {
         alert(response);
         this.modalRef.close(this.editedQuestion);
       }, err => {
+        // show error message
         console.log('Error while saving the Question: ', err);
-        this.errorMessage = err.error;
+        if (err.status != 0) {
+          this.errorMessage = err.error;
+        } else {
+          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+        }
       });
   }
 }

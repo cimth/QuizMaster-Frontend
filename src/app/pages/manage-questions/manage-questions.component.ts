@@ -7,6 +7,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {EditQuestionComponent} from './edit-question/edit-question.component';
 import {DeleteQuestionComponent} from './delete-question/delete-question.component';
 import {AddQuestionComponent} from './add-question/add-question.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-manage-questions',
@@ -30,7 +31,8 @@ export class ManageQuestionsComponent implements OnInit {
 
   constructor(public loc: LocalizationService,
               private questionService: QuestionService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private router: Router) { }
 
   /**
    * Fetches all questions to be shown in the component.
@@ -48,6 +50,14 @@ export class ManageQuestionsComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
         }, 1500);
+      }, err => {
+        // go to backend-not-reachable page when connection fails
+        console.log('Error while fetching predefined Quizzes: ', err)
+        if (err.status == 0) {
+          setTimeout(() => {
+            this.router.navigateByUrl('/backend-not-reachable');
+          }, 1500);
+        }
       });
   }
 

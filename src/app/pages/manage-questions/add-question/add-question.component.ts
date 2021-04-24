@@ -97,8 +97,13 @@ export class AddQuestionComponent implements OnInit {
         this.modalRef.close(this.newQuestion);
 
       }, err => {
+        // show error message
         console.log('Error while adding the Question: ', err);
-        this.errorMessage = err.error;
+        if (err.status != 0) {
+          this.errorMessage = err.error;
+        } else {
+          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+        }
       });
   }
 

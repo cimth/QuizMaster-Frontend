@@ -6,6 +6,7 @@ import {QuestionInRawFormat} from '../../../model/question';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {QuestionService} from '../../../service/question/question.service';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-predefined-quiz',
@@ -34,7 +35,8 @@ export class AddPredefinedQuizComponent implements OnInit {
 
   constructor(public loc: LocalizationService,
               private quizService: QuizService,
-              private questionService: QuestionService) { }
+              private questionService: QuestionService,
+              private router: Router) { }
 
   ngOnInit(): void {
 
@@ -68,6 +70,15 @@ export class AddPredefinedQuizComponent implements OnInit {
         this.unusedQuestions.sort((q1, q2) => {
           return q1.id - q2.id;
         })
+      }, err => {
+        // go to backend-not-reachable page when connection fails
+        console.log('Error while fetching unused questions: ', err)
+        if (err.status == 0) {
+          this.modalRef.dismiss();
+          setTimeout(() => {
+            this.router.navigateByUrl('/backend-not-reachable');
+          }, 1500);
+        }
       });
   }
 
@@ -126,12 +137,23 @@ export class AddPredefinedQuizComponent implements OnInit {
             this.modalRef.close(this.newQuiz);
 
           }, err => {
-            console.log('Error while updating the created Quiz: ', err);
+            // show error message
+            console.log('Error while saving the questions of the Quiz: ', err)
+            if (err.status != 0) {
+              this.errorMessage = err.error;
+            } else {
+              this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+            }
           });
 
       }, err => {
-        console.log('Error while saving the Quiz: ', err);
-        this.errorMessage = err.error;
+        // show error message
+        console.log('Error while saving the Quiz: ', err)
+        if (err.status != 0) {
+          this.errorMessage = err.error;
+        } else {
+          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+        }
       });
   }
 

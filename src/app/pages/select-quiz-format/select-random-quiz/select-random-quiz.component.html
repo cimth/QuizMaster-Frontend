@@ -7,9 +7,14 @@
 </div>
 
 <!-- info about no questions -->
-<p *ngIf="totalQuestions == 0" class="text-center p-3">
+<p *ngIf="totalQuestions == 0 && !errorMessage" class="text-center p-3">
   {{loc.localize(MESSAGE_ID.INFO.NO_RANDOM_QUIZ_SINCE_NO_QUESTIONS)}}
 </p>
+
+<!-- error message -->
+<div *ngIf="errorMessage" class="text-center m-5">
+  <p class="color-red">{{errorMessage}}</p>
+</div>
 
 <!-- list of playable predefined quizzes -->
 <table *ngIf="totalQuestions > 0" class="table table-borderless modal-table text-center">

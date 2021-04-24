@@ -12,7 +12,8 @@ export const BUTTONS = {
 export const ERRORS =  {
   NOT_EMPTY_ALL: 'Die angezeigten Eingabefelder dürfen nicht leer sein.',
   ADMIN_TOKEN: 'Das Admin-Token fehlt.',
-  NO_ADDED_QUESTION: 'Es muss mindestens eine Frage hinzugefügt werden, um eine Änderung vorzunehmen.'
+  NO_ADDED_QUESTION: 'Es muss mindestens eine Frage hinzugefügt werden, um eine Änderung vorzunehmen.',
+  BACKEND_NOT_REACHABLE: 'Der Server ist momentan nicht erreichbar.'
 }
 
 export const HEADERS = {
@@ -20,13 +21,16 @@ export const HEADERS = {
   DELETE_QUESTION: 'Frage löschen',
   ADD_QUESTION: 'Frage hinzufügen',
   MANAGE_QUESTIONS: 'Fragen verwalten',
+  ADD_QUIZ: 'Quiz hinzufügen',
   EDIT_QUIZ: 'Quiz bearbeiten',
   DELETE_QUIZ: 'Quiz löschen',
   MANAGE_PREDEFINED_QUIZZES: 'Vorgegebene Quiz-Runden verwalten',
   SELECT_QUIZ_FORMAT: 'Quiz-Format auswählen',
   SELECT_RANDOM_QUIZ: 'Zufälliges Quiz erstellen',
   SELECT_PREDEFINED_QUIZ: 'Vorgegebenes Quiz auswählen',
-  FINISHED: 'Geschafft!'
+  FINISHED: 'Geschafft!',
+  ERROR: 'Fehler!',
+  STARTING_QUIZ: 'Quiz wird gestartet'
 }
 
 export const ATTRIBUTE_NAMES = {

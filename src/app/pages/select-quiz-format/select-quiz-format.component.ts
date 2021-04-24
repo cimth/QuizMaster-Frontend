@@ -19,6 +19,8 @@ export class SelectQuizFormatComponent {
 
   public MESSAGE_ID = MESSAGE_ID;
 
+  public isQuizStarting: boolean = false;
+
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
@@ -49,6 +51,7 @@ export class SelectQuizFormatComponent {
 
     // start quiz if a predefined quiz was selected
     modal.result.then(quizToPlay => {
+      this.isQuizStarting = true;
       this.playQuizService.startRandomQuiz(quizToPlay);
     }, err => {
       console.log("Closed selection dialog without starting a quiz.");
@@ -77,6 +80,7 @@ export class SelectQuizFormatComponent {
 
     // start quiz if a predefined quiz was selected
     modal.result.then(quizToPlay => {
+      this.isQuizStarting = true;
       this.playQuizService.startPredefinedQuiz(quizToPlay);
     }, err => {
       console.log("Closed selection dialog without starting a quiz.");
