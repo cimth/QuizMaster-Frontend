@@ -1,1 +1,114 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*
+ * colors
+ */
+
+.color-red {
+  color: red;
+}
+
+/*
+ * special buttons
+ */
+
+.remove-button, .remove-button:focus, .remove-button:disabled {
+  background: var(--danger);
+  font-size: 1.3em;
+}
+
+.remove-button:hover:enabled {
+  background-color: #aa2330;
+}
+
+.add-button, .add-button:focus, .add-button:disabled {
+  background: var(--success);
+  font-size: 1.3em;
+}
+
+.add-button:hover:enabled {
+  background-color: #0b7220;
+}
+
+/*
+ * outer elements
+ */
+
+:root {
+  --info-hover: #138496;
+}
+
+html, body {
+  background: ghostwhite;
+}
+
+/*
+ * remove button focus outlines
+ */
+
+.btn:focus {
+  box-shadow: none;
+}
+
+/*
+ * accordion buttons
+ */
+
+.bg-info > button {
+  color: white;
+}
+
+.bg-info > button:hover {
+  color: white;
+  font-weight: bold;
+  text-decoration-line: underline;
+}
+
+/*
+ * modals
+ */
+.modal-content {
+  padding: 1em;
+}
+
+.component-host-scrollable {
+  overflow-y: auto !important;
+}
+
+.modal-table, .modal-error, .modal-buttons {
+  width: 95%;
+  align-self: center;
+}
+
+.modal-table td, .modal-table th {
+  vertical-align: middle;
+}
+
+/*
+ * alignment
+ */
+
+.vertical-align-middle {
+  vertical-align: middle;
+}
+
+/*
+ * width
+ */
+.w-90 {
+  width: 90%;
+}
+
+/*
+ * play quiz
+ */
+
+.answerbtn-correct, .answerbtn-correct:disabled {
+  background-color: var(--green);
+  opacity: 100%;
+}
+
+.answerbtn-wrong, .answerbtn-wrong:disabled {
+  background-color: var(--danger);
+  opacity: 100%;
+}

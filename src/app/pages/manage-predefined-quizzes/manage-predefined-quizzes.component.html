@@ -1,0 +1,103 @@
+<!-- back button -->
+<button class="btn btn-info mb-5" routerLink="/start">&#8592; {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}</button>
+
+<!-- vertical centered container -->
+<div class="container h-75">
+  <div class="row h-100">
+    <div class="col my-auto">
+
+      <!-- header -->
+      <h1 class="h1 text-center mb-4">{{loc.localize(MESSAGE_ID.HEADERS.MANAGE_PREDEFINED_QUIZZES)}}</h1>
+
+      <!-- add quiz -->
+      <button class="btn btn-block btn-info" (click)="addQuiz()" >
+        {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_PREDEFINED_QUIZ)}}
+      </button>
+
+      <!-- no quizzes -->
+      <h5 *ngIf="!isLoading && allQuizzes.length == 0" class="text-center p-5">
+        {{loc.localize(MESSAGE_ID.INFO.NO_PREDEFINED_QUIZ)}}
+      </h5>
+
+      <!-- loading spinner -->
+      <div *ngIf="isLoading" class="text-center m-5">
+        <div class="spinner-border text-info" role="status"></div>
+      </div>
+
+      <!-- quizzes -->
+      <ngb-accordion *ngIf="allQuizzes.length > 0" [closeOthers]="true" activeIds="static-{{allQuizzes[0].quizId}}" type="info"
+                     class="p-5" [hidden]="isLoading">
+        <ngb-panel *ngFor="let quiz of allQuizzes; let idx = index" id="static-{{quiz.quizId}}" title="{{quiz.quizName}}">
+          <ng-template ngbPanelContent style="background: var(--info)">
+            <!-- quiz data -->
+            <table class="table table-borderless">
+              <!-- configure column size -->
+              <thead>
+              <tr>
+                <td style="width: 25%"></td>
+                <td style="width: 75%"></td>
+              </tr>
+              </thead>
+              <!-- quiz ID -->
+              <tr>
+                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ID)}}</th>
+                <td>{{quiz.quizId}}</td>
+              </tr>
+              <!-- quiz name -->
+              <tr>
+                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUIZ_NAME)}}</th>
+                <td>{{quiz.quizName}}</td>
+              </tr>
+              <!-- question count -->
+              <tr>
+                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
+                <td >{{quiz.questionCount}}</td>
+              </tr>
+              <!-- loading spinner while fetching and rendering questions -->
+              <tr *ngIf="questionsRendered.get(quiz.quizId) !== true">
+                <th >{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
+                <td>
+                  <div class="spinner-border spinner-border-sm text-info" role="status"></div>
+                </td>
+              </tr>
+              <!-- resolved questions -->
+              <tr id="questions-{{quiz.quizId}}" *ngFor="let resolvedQuestion of quiz.resolvedQuestions; let qArrIdx = index"
+                  [hidden]="!questionsRendered.get(quiz.quizId)" >
+                <!-- only show header in front of first question -->
+                <th *ngIf="qArrIdx == 0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
+                <th *ngIf="qArrIdx != 0"></th>
+                <!-- actual question -->
+                <td>{{resolvedQuestion.questionText}}</td>
+                <!-- set rendering flag on last index -->
+                {{qArrIdx == (quiz.resolvedQuestions.length - 1) ? markQuestionsAsRendered(quiz.quizId) : '' }}
+              </tr>
+            </table>
+            <!-- horizontal line -->
+            <hr />
+            <!-- actions -->
+            <table class="table table-borderless">
+              <tr>
+                <th colspan="2">{{loc.localize(MESSAGE_ID.ACTION_LABELS.ACTIONS)}}</th>
+              </tr>
+              <tr>
+                <!-- edit -->
+                <td style="width: 33.33%">
+                  <button class="btn btn-block btn-info" (click)="editQuiz(quiz.quizId, idx)">
+                    {{loc.localize(MESSAGE_ID.ACTION_LABELS.EDIT)}}
+                  </button>
+                </td>
+                <!-- delete -->
+                <td style="width: 33.33%">
+                  <button class="btn btn-block btn-info" (click)="deleteQuiz(quiz.quizId, idx)" >
+                    {{loc.localize(MESSAGE_ID.ACTION_LABELS.DELETE)}}
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+
+    </div>
+  </div>
+</div>

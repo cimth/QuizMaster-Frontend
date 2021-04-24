@@ -1,0 +1,66 @@
+<!-- back button -->
+<button class="btn btn-info mb-3" routerLink="/start">&#8592; {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}</button>
+
+<div class="container text-center">
+
+  <!-- quiz state -->
+  <div class ="row">
+    <div class="col">
+      <h4>{{playQuizService.quizState.quizName}}</h4>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col">
+      {{loc.localize(MESSAGE_ID.INFO.QUESTION)}} {{playQuizService.quizState.currentIndex + 1}} / {{playQuizService.quizState.questionIds.length}}
+    </div>
+    <div class="col">
+      {{loc.localize(MESSAGE_ID.INFO.CORRECT_ANSWERS)}}: {{playQuizService.quizState.correctAnswers}}
+    </div>
+    <div class="col">
+      {{loc.localize(MESSAGE_ID.INFO.WRONG_ANSWERS)}}: {{playQuizService.quizState.wrongAnswers}}
+    </div>
+  </div>
+  <hr />
+
+  <!-- loading spinner -->
+  <div *ngIf="isLoadingNextQuestion" class="text-center m-5">
+    <div class="spinner-border text-info" role="status"></div>
+  </div>
+
+  <!-- question and navigation -->
+  <div *ngIf="!isLoadingNextQuestion">
+
+    <!-- next question after answering -->
+    <div class="row my-4 mx-2" *ngIf="isAnswerSelected && !isLastQuestion" (click)="nextQuestion()">
+      <button class="btn btn-block btn-warning rounded p-3">
+        {{loc.localize(MESSAGE_ID.ACTION_LABELS.NEXT_QUESTION)}}
+      </button>
+    </div>
+
+    <!-- go to end page when the last question is answered -->
+    <div class="row my-4 mx-2" *ngIf="isAnswerSelected && isLastQuestion" (click)="finishQuiz()">
+      <button class="btn btn-block btn-warning rounded p-3">
+        {{loc.localize(MESSAGE_ID.ACTION_LABELS.FINISH_QUIZ)}}
+      </button>
+    </div>
+
+    <!-- question -->
+    <div class="row">
+      <div class="col">
+        <h2 class="p-3">{{question.questionText}}</h2>
+      </div>
+    </div>
+
+    <!-- answers -->
+    <div *ngFor="let answer of question.possibleAnswers;" class="row my-4 mx-2">
+      <button id="answerbtn-{{answer.answerLetter}}" class="btn btn-block btn-info rounded p-3" [disabled]="isAnswerSelected"
+              (click)="checkAnswer(answer.answerLetter, false)">
+        <span class="font-weight-bold d-inline-block h-100 vertical-align-middle mr-3">{{answer.answerLetter}}: </span>
+        <span class="d-inline-block w-90">{{answer.answerText}}</span>
+      </button>
+    </div>
+
+  </div>
+
+</div>

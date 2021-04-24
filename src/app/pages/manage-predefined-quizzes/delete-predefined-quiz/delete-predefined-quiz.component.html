@@ -1,0 +1,44 @@
+<!-- title and close button -->
+<div class="modal-header">
+  <h4>{{loc.localize(MESSAGE_ID.HEADERS.DELETE_QUIZ)}}</h4>
+  <button type="button" class="close">
+    <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
+  </button>
+</div>
+
+<table class="table table-borderless">
+  <!-- confirmation text -->
+  <tr>
+    <td colspan="2">
+      {{loc.localize(MESSAGE_ID.CONFIRMATION.DELETE_QUIZ)}}
+    </td>
+  </tr>
+  <!-- admin token -->
+  <tr>
+    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ADMIN_TOKEN)}}</th>
+    <td>
+      <input class="w-100 p-2" [(ngModel)]="adminToken"
+             (ngModelChange)="enableOrDisableDeleteButtonAccordingToInput()" />
+    </td>
+  </tr>
+</table>
+
+<!-- error message -->
+<div *ngIf="errorMessage" class="text-center color-red">
+  <p>{{errorMessage}}</p>
+</div>
+
+<!-- actions -->
+<div class="btn-group">
+  <!-- cancel -->
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()">
+    {{loc.localize(MESSAGE_ID.ACTION_LABELS.CANCEL)}}
+  </button>
+  <!-- delete -->
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="deleteQuiz()" [disabled]="!deletingEnabled" >
+    {{loc.localize(MESSAGE_ID.ACTION_LABELS.DELETE)}}
+  </button>
+</div>
+
+<!-- div with explicit space for workaround margin when scrollable -->
+<div>&nbsp;</div>

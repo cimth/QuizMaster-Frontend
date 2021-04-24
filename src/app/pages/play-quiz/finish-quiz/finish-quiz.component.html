@@ -1,0 +1,38 @@
+<div class="container text-center">
+  <!-- finish info -->
+  <div class ="row mb-5">
+    <div class="col">
+      <h2 class="mb-5">{{loc.localize(MESSAGE_ID.HEADERS.FINISHED)}}</h2>
+    </div>
+  </div>
+
+  <!-- quiz name -->
+  <div class ="row">
+    <div class="col">
+      <h4>{{playQuizService.quizState.quizName}}</h4>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- answer statistics -->
+  <div class="row">
+    <div class="col">
+      <span>{{loc.localize(MESSAGE_ID.INFO.CORRECT_ANSWERS)}}: </span>
+      <span class="font-weight-bold">{{playQuizService.quizState.correctAnswers}}</span>
+    </div>
+    <div class="col">
+      <span>{{loc.localize(MESSAGE_ID.INFO.WRONG_ANSWERS)}}: </span>
+      <span class="font-weight-bold">{{playQuizService.quizState.wrongAnswers}}</span>
+    </div>
+  </div>
+
+  <hr class="mb-5" />
+
+  <!-- go to menu -->
+  <div class="row my-4 mx-2" (click)="clearQuizStateAndGoToMenu()">
+    <button class="btn btn-block btn-info rounded p-3 m-3">
+      {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}
+    </button>
+  </div>
+</div>
