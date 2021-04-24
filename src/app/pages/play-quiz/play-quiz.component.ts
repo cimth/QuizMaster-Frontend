@@ -37,6 +37,12 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
               private router: Router) { }
 
   ngOnInit(): void {
+    // if no quiz state is existing, go select-quiz-format page
+    if (this.playQuizService.quizState.questionIds === undefined) {
+      this.router.navigateByUrl('/select-quiz-format');
+      return;
+    }
+
     // reset rendering variable because on start the answer buttons are not yet rendered
     this.answerButtonsRendered = false;
 
