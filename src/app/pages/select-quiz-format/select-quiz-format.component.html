@@ -16,6 +16,15 @@
         <div class="spinner-border text-info" role="status"></div>
       </div>
 
+      <!-- continue quiz -->
+      <div *ngIf="!isQuizStarting && playQuizService.quizState.questionIds !== undefined" class="row m-3">
+        <div class="col-12">
+          <button class="btn btn-block btn-info" (click)="continueQuiz()">
+            {{loc.localize(MESSAGE_ID.BUTTONS.CONTINUE_QUIZ)}}
+          </button>
+        </div>
+      </div>
+
       <!-- random quiz -->
       <div *ngIf="!isQuizStarting" class="row m-3">
         <div class="col-12">

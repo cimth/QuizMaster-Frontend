@@ -6,7 +6,8 @@ export const BUTTONS = {
 
   // quiz format
   RANDOM_QUIZ: 'Random Quiz',
-  PREDEFINED_QUIZ: 'Predefined Quiz'
+  PREDEFINED_QUIZ: 'Predefined Quiz',
+  CONTINUE_QUIZ: 'Continue previous started Quiz'
 }
 
 export const ERRORS =  {

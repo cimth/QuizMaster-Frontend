@@ -5,6 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SelectPredefinedQuizComponent} from './select-predefined-quiz/select-predefined-quiz.component';
 import {PlayQuizService} from '../../service/play-quiz/play-quiz.service';
 import {SelectRandomQuizComponent} from './select-random-quiz/select-random-quiz.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-select-quiz-format',
@@ -26,8 +27,20 @@ export class SelectQuizFormatComponent {
    *======================================*/
 
   constructor(public loc: LocalizationService,
+              public playQuizService: PlayQuizService,
               private modalService: NgbModal,
-              private playQuizService: PlayQuizService) { }
+              private router: Router) { }
+
+  /*======================================*
+   * STARTED QUIZ
+   *======================================*/
+
+  /**
+   * Redirects to the play-quiz page where the previous started quiz can be continued.
+   */
+  continueQuiz(): void {
+    this.router.navigateByUrl('/play-quiz');
+  }
 
   /*======================================*
    * RANDOM QUIZ
