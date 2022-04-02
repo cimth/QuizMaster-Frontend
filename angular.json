@@ -56,6 +56,14 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
             }
           }
         },
@@ -67,6 +75,9 @@
           "configurations": {
             "production": {
               "browserTarget": "QuizMaster:build:production"
+            },
+            "local": {
+              "browserTarget": "QuizMaster:build:local"
             }
           }
         },
@@ -115,6 +126,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "QuizMaster:serve:production"
+            },
+            "local": {
+              "devServerTarget": "QuizMaster:serve:local"
             }
           }
         }
