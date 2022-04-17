@@ -1,0 +1,14 @@
+services:
+  run:
+    container_name: quizmaster-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      USER: docker
+      BACKEND_URL: http://localhost:8080
+      ANGULAR_ENVIRONMENT: local
+    ports:
+      - "4200:4200"
+    volumes:
+      - ..:/home/docker/project
