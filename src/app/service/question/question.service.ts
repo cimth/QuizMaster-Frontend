@@ -126,11 +126,11 @@ export class QuestionService {
       headers: new HttpHeaders({
         'Authorization': adminToken       // admin token from backend console
       }),
-      responseType: 'text' as const       // necessary for processing the response correctly
+      responseType: 'text' as 'json'  // necessary for processing the response correctly
     }
 
     // do request and return Observable
-    return this.httpClient.put(url, body, httpOptions);
+    return this.httpClient.put<string>(url, body, httpOptions);
   }
 
   /*======================================*
@@ -157,10 +157,10 @@ export class QuestionService {
       headers: new HttpHeaders({
         'Authorization': adminToken  // admin token from backend console
       }),
-      responseType: 'text' as const  // necessary for processing the response correctly
+      responseType: 'text' as 'json'  // necessary for processing the response correctly
     }
 
     // do request and return Observable
-    return this.httpClient.delete(url, httpOptions);
+    return this.httpClient.delete<string>(url, httpOptions);
   }
 }
