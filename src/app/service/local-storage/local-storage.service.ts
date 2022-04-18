@@ -40,7 +40,7 @@ export class LocalStorageService {
    * @param keys the keys of the entries to be removed
    */
   public removeKeys(keys: string[]) {
-    for (let key of keys) {
+    for (const key of keys) {
       window.localStorage.removeItem(key);
     }
   }

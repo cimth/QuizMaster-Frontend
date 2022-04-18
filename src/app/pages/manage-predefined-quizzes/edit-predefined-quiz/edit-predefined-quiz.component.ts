@@ -54,7 +54,7 @@ export class EditPredefinedQuizComponent implements OnInit {
         this.unusedQuestions = allQuestions.filter(q => {
 
           // remove all questions that are already used in the quiz
-          for (let usedQuestion of this.originalQuiz.resolvedQuestions) {
+          for (const usedQuestion of this.originalQuiz.resolvedQuestions) {
             if (q.id == usedQuestion.id) {
               return false;
             }

@@ -48,8 +48,8 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
     await this.quizService.getAllPredefinedQuizzes()
       .subscribe(async allQuizzes => {
         console.log(allQuizzes);
-        for (let quiz of allQuizzes) {
-          const resolvedQuiz = await this.createPredefinedQuizWithResolvedQuestions(quiz);
+        for (const quiz of allQuizzes) {
+          const resolvedQuiz = this.createPredefinedQuizWithResolvedQuestions(quiz);
           quizArray.push(resolvedQuiz);
           this.questionsRendered.set(quiz.quizId, false);
         }
@@ -77,7 +77,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
   private async createPredefinedQuizWithResolvedQuestions(quiz: PredefinedQuiz): Promise<PredefinedQuizWithResolvedQuestions> {
 
     // init resolved quiz, use empty array for resolved questions to push new resolved questions into it
-    let resolvedQuiz: PredefinedQuizWithResolvedQuestions = {
+    const resolvedQuiz: PredefinedQuizWithResolvedQuestions = {
       quizId: quiz.quizId,
       quizName: quiz.quizName,
       questionCount: quiz.questionCount,
@@ -89,7 +89,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       .subscribe(async questionIds => {
 
         // resolve questions
-        for (let questionId of questionIds) {
+        for (const questionId of questionIds) {
           await this.questionService.getQuestionInRawFormat(questionId)
             .subscribe(question => {
               resolvedQuiz.resolvedQuestions.push(question);

@@ -41,7 +41,7 @@ export class ManageQuestionsComponent implements OnInit {
     this.questionService.getAllQuestions()
       .subscribe(allQuestions => {
         console.log(allQuestions);
-        for(let q of allQuestions) {
+        for(const q of allQuestions) {
           this.allQuestions.push(q);
         }
 
