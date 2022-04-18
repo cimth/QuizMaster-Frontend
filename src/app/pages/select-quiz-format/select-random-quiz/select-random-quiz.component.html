@@ -7,7 +7,7 @@
 </div>
 
 <!-- info about no questions -->
-<p *ngIf="totalQuestions == 0 && !errorMessage" class="text-center p-3">
+<p *ngIf="totalQuestions === 0 && !errorMessage" class="text-center p-3">
   {{loc.localize(MESSAGE_ID.INFO.NO_RANDOM_QUIZ_SINCE_NO_QUESTIONS)}}
 </p>
 
@@ -30,10 +30,10 @@
     <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
     <td class="px-2">
       <div class="btn-group text-center">
-        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button" [disabled]="questionCount == MIN_QUESTION_COUNT"
+        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button" [disabled]="questionCount === MIN_QUESTION_COUNT"
                 (click)="decreaseQuestionCount()">&#8722;</button>
         <input class="px-2 text-center" [(ngModel)]="questionCount" readonly />
-        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold add-button" [disabled]="questionCount == MAX_QUESTION_COUNT"
+        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold add-button" [disabled]="questionCount === MAX_QUESTION_COUNT"
                 (click)="increaseQuestionCount()">+</button>
       </div>
     </td>

@@ -17,7 +17,7 @@
   </thead>
 
   <!-- info if there currently is no predefined quiz -->
-  <tr *ngIf="!isLoading && allPlayableQuizzes.length == 0" class="text-center">
+  <tr *ngIf="!isLoading && allPlayableQuizzes.length === 0" class="text-center">
     <td colspan="2">{{loc.localize(MESSAGE_ID.INFO.NO_PREDEFINED_QUIZ)}}</td>
   </tr>
 

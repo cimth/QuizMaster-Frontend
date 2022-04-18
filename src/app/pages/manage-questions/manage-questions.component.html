@@ -15,7 +15,7 @@
       </button>
 
       <!-- no questions -->
-      <h5 *ngIf="!isLoading && allQuestions.length == 0" class="text-center p-5">
+      <h5 *ngIf="!isLoading && allQuestions.length === 0" class="text-center p-5">
         {{loc.localize(MESSAGE_ID.INFO.NO_QUESTIONS)}}
       </h5>
 

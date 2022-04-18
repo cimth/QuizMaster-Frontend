@@ -37,7 +37,7 @@
   <tr>
     <th colspan="2">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.USED_QUESTIONS)}}</th>
   </tr>
-  <tr *ngIf="editedQuiz.resolvedQuestions.length == 0" class="text-center">
+  <tr *ngIf="editedQuiz.resolvedQuestions.length === 0" class="text-center">
     <!-- currently no used question -->
     <td colspan="2">{{loc.localize(MESSAGE_ID.INFO.NO_USED_QUESTIONS)}}</td>
   </tr>
@@ -46,14 +46,14 @@
     <td class="text-center">
       <div class="btn-group">
         <!-- swap with predecessor question -->
-        <button [disabled]="idxResolvedQuestions == 0"
+        <button [disabled]="idxResolvedQuestions === 0"
                 class="btn btn-info rounded my-0 mx-1 font-weight-bold"
                 (click)="swapQuestionWithPredecessor(idxResolvedQuestions)">&#8593;</button>
         <!-- remove -->
         <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button"
                 (click)="removeQuestion(idxResolvedQuestions)">&times;</button>
         <!-- swap with successor question -->
-        <button [disabled]="idxResolvedQuestions == (editedQuiz.questionCount - 1)"
+        <button [disabled]="idxResolvedQuestions === (editedQuiz.questionCount - 1)"
                 class="btn btn-info rounded my-0 mx-1 font-weight-bold"
                 (click)="swapQuestionWithSuccessor(idxResolvedQuestions)">&#8595;</button>
       </div>
@@ -65,7 +65,7 @@
   <tr>
     <th colspan="2">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.UNUSED_QUESTIONS)}}</th>
   </tr>
-  <tr *ngIf="unusedQuestions.length == 0" class="text-center">
+  <tr *ngIf="unusedQuestions.length === 0" class="text-center">
     <!-- currently no unused question -->
     <td colspan="2">{{loc.localize(MESSAGE_ID.INFO.NO_UNUSED_QUESTIONS)}}</td>
   </tr>

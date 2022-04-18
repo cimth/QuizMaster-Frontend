@@ -15,7 +15,7 @@
       </button>
 
       <!-- no quizzes -->
-      <h5 *ngIf="!isLoading && allQuizzes.length == 0" class="text-center p-5">
+      <h5 *ngIf="!isLoading && allQuizzes.length === 0" class="text-center p-5">
         {{loc.localize(MESSAGE_ID.INFO.NO_PREDEFINED_QUIZ)}}
       </h5>
 
@@ -64,12 +64,12 @@
               <tr id="questions-{{quiz.quizId}}" *ngFor="let resolvedQuestion of quiz.resolvedQuestions; let qArrIdx = index"
                   [hidden]="!questionsRendered.get(quiz.quizId)" >
                 <!-- only show header in front of first question -->
-                <th *ngIf="qArrIdx == 0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
-                <th *ngIf="qArrIdx != 0"></th>
+                <th *ngIf="qArrIdx === 0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
+                <th *ngIf="qArrIdx !== 0"></th>
                 <!-- actual question -->
                 <td>{{resolvedQuestion.questionText}}</td>
                 <!-- set rendering flag on last index -->
-                {{qArrIdx == (quiz.resolvedQuestions.length - 1) ? markQuestionsAsRendered(quiz.quizId) : '' }}
+                {{qArrIdx === (quiz.resolvedQuestions.length - 1) ? markQuestionsAsRendered(quiz.quizId) : '' }}
               </tr>
             </table>
             <!-- horizontal line -->
