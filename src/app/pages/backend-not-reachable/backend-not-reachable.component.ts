@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MESSAGE_ID} from '../../constants/localization/message-id';
 import {LocalizationService} from '../../service/localization/localization.service';
 
@@ -7,13 +7,10 @@ import {LocalizationService} from '../../service/localization/localization.servi
   templateUrl: './backend-not-reachable.component.html',
   styleUrls: ['./backend-not-reachable.component.css']
 })
-export class BackendNotReachableComponent implements OnInit {
+export class BackendNotReachableComponent {
 
   public MESSAGE_ID = MESSAGE_ID;
 
   constructor(public loc: LocalizationService) { }
-
-  ngOnInit(): void {
-  }
 
 }
