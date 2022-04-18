@@ -55,7 +55,7 @@ export class ManageQuestionsComponent implements OnInit {
         console.log('Error while fetching predefined Quizzes: ', err)
         if (err.status == 0) {
           setTimeout(() => {
-            this.router.navigateByUrl('/backend-not-reachable');
+            void this.router.navigateByUrl('/backend-not-reachable');
           }, 1500);
         }
       });

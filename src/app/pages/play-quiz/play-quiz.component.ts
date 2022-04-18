@@ -39,7 +39,7 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     // if no quiz state is existing, go select-quiz-format page
     if (this.playQuizService.quizState.questionIds === undefined) {
-      this.router.navigateByUrl('/select-quiz-format');
+      void this.router.navigateByUrl('/select-quiz-format');
       return;
     }
 
@@ -107,7 +107,7 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
           console.log('Error while resolving questions: ', err)
           if (err.status == 0) {
             setTimeout(() => {
-              this.router.navigateByUrl('/backend-not-reachable');
+              void this.router.navigateByUrl('/backend-not-reachable');
             }, 1500);
           }
         });
@@ -216,6 +216,6 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
    * Navigates to the 'finish quiz' page.
    */
   finishQuiz() {
-    this.router.navigateByUrl('/finish-quiz')
+    void this.router.navigateByUrl('/finish-quiz')
   }
 }

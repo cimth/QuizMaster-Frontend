@@ -34,6 +34,6 @@ export class FinishQuizComponent {
    */
   clearQuizStateAndGoToMenu() {
     this.playQuizService.clearQuizState();
-    this.router.navigateByUrl('/start');
+    void this.router.navigateByUrl('/start');
   }
 }

@@ -39,7 +39,7 @@ export class SelectQuizFormatComponent {
    * Redirects to the play-quiz page where the previous started quiz can be continued.
    */
   continueQuiz(): void {
-    this.router.navigateByUrl('/play-quiz');
+    void this.router.navigateByUrl('/play-quiz');
   }
 
   /*======================================*

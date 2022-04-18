@@ -48,13 +48,13 @@ export class PlayQuizService {
     this.quizService.getRandomQuiz(questionCount)
       .subscribe(questionIds => {
         this.initQuizState(randomQuizName, questionIds);
-        this.router.navigateByUrl('/play-quiz');
+        void this.router.navigateByUrl('/play-quiz');
       }, err => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching a random Quiz: ', err)
         if (err.status == 0) {
           setTimeout(() => {
-            this.router.navigateByUrl('/backend-not-reachable');
+            void this.router.navigateByUrl('/backend-not-reachable');
           }, 1500);
         }
       });
@@ -71,13 +71,13 @@ export class PlayQuizService {
     this.quizService.getQuestionIdsOfPredefinedQuiz(quiz.quizId)
       .subscribe(questionIds => {
         this.initQuizState(quiz.quizName, questionIds);
-        this.router.navigateByUrl('/play-quiz');
+        void this.router.navigateByUrl('/play-quiz');
       }, err => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching the selected predefined Quiz: ', err)
         if (err.status == 0) {
           setTimeout(() => {
-            this.router.navigateByUrl('/backend-not-reachable');
+            void this.router.navigateByUrl('/backend-not-reachable');
           }, 1500);
         }
       });

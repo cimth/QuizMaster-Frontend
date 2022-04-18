@@ -76,7 +76,7 @@ export class AddPredefinedQuizComponent implements OnInit {
         if (err.status == 0) {
           this.modalRef.dismiss();
           setTimeout(() => {
-            this.router.navigateByUrl('/backend-not-reachable');
+            void this.router.navigateByUrl('/backend-not-reachable');
           }, 1500);
         }
       });
