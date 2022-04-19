@@ -46,7 +46,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
 
     // fill temporary array with data
     // => question ids need to be resolved, thus load and resolve all data before initializing the display array
-    const quizArray = [];
+    const quizArray: PredefinedQuizWithResolvedQuestions[] = [];
     await this.quizService.getAllPredefinedQuizzes()
       .subscribe(async allQuizzes => {
         console.log(allQuizzes);
@@ -159,7 +159,10 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(AddPredefinedQuizComponent, options);
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as AddPredefinedQuizComponent;
+    modalComponent.modalRef = modal;
 
     // update UI with edited question data if the question was changed
     modal.result.then( (addedQuiz: PredefinedQuizWithResolvedQuestions) => {
@@ -190,8 +193,11 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(EditPredefinedQuizComponent, options);
-    modal.componentInstance.originalQuiz = this.allQuizzes[arrayIndex];
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as EditPredefinedQuizComponent;
+    modalComponent.originalQuiz = this.allQuizzes[arrayIndex];
+    modalComponent.modalRef = modal;
 
     // update UI with edited quiz data if the quiz was changed
     modal.result.then( (editedQuiz: PredefinedQuizWithResolvedQuestions) => {
@@ -223,8 +229,11 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(DeletePredefinedQuizComponent, options);
-    modal.componentInstance.quiz = this.allQuizzes[arrayIndex];
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as DeletePredefinedQuizComponent;
+    modalComponent.quiz = this.allQuizzes[arrayIndex];
+    modalComponent.modalRef = modal;
 
     // update UI if the quiz was deleted
     modal.result.then(deleted => {

@@ -2,9 +2,9 @@ import {Component, Input} from '@angular/core';
 import {LocalizationService} from '../../../service/localization/localization.service';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
-import {PredefinedQuiz} from '../../../model/PredefinedQuiz';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {HttpErrorResponse} from "@angular/common/http";
+import {PredefinedQuizWithResolvedQuestions} from "../../../model/PredefinedQuizWithResolvedQuestions";
 
 @Component({
   selector: 'app-delete-predefined-quiz',
@@ -19,7 +19,7 @@ export class DeletePredefinedQuizComponent {
 
   public MESSAGE_ID = MESSAGE_ID;
 
-  @Input() public quiz: PredefinedQuiz;
+  @Input() public quiz: PredefinedQuizWithResolvedQuestions;
   @Input() public modalRef: NgbModalRef;
 
   public deletingEnabled: boolean = false;

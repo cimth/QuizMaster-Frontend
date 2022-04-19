@@ -107,7 +107,10 @@ export class ManageQuestionsComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(AddQuestionComponent, options);
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as AddQuestionComponent;
+    modalComponent.modalRef = modal;
 
     // update UI with edited question data if the question was changed
     modal.result.then( (addedQuestion: QuestionInRawFormat) => {
@@ -138,8 +141,11 @@ export class ManageQuestionsComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(EditQuestionComponent, options);
-    modal.componentInstance.originalQuestion = this.allQuestions[arrayIndex];
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as EditQuestionComponent;
+    modalComponent.originalQuestion = this.allQuestions[arrayIndex];
+    modalComponent.modalRef = modal;
 
     // update UI with edited question data if the question was changed
     modal.result.then( (editedQuestion: QuestionInRawFormat ) => {
@@ -171,8 +177,11 @@ export class ManageQuestionsComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(DeleteQuestionComponent, options);
-    modal.componentInstance.question = this.allQuestions[arrayIndex];
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as DeleteQuestionComponent;
+    modalComponent.question = this.allQuestions[arrayIndex];
+    modalComponent.modalRef = modal;
 
     // update UI if the question was deleted
     modal.result.then(deleted => {

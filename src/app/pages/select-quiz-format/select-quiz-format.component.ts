@@ -61,7 +61,10 @@ export class SelectQuizFormatComponent {
       keyboard: false
     }
     const modal = this.modalService.open(SelectRandomQuizComponent, options);
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as SelectRandomQuizComponent;
+    modalComponent.modalRef = modal;
 
     // start quiz if a predefined quiz was selected
     modal.result.then( (questionCount: number) => {
@@ -90,7 +93,10 @@ export class SelectQuizFormatComponent {
       keyboard: false
     }
     const modal = this.modalService.open(SelectPredefinedQuizComponent, options);
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as SelectPredefinedQuizComponent;
+    modalComponent.modalRef = modal;
 
     // start quiz if a predefined quiz was selected
     modal.result.then( (quizToPlay: PredefinedQuiz) => {
