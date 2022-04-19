@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MESSAGE_ID} from '../../../constants/localization/message-id';
 import {LocalizationService} from '../../../service/localization/localization.service';
-import {QuestionInRawFormat} from '../../../model/question';
+import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {QuestionService} from '../../../service/question/question.service';
 
@@ -35,14 +35,14 @@ export class EditQuestionComponent implements OnInit {
               private questionService: QuestionService) { }
 
   ngOnInit(): void {
-    this.editedQuestion = {
-      id: this.originalQuestion.id,
-      questionText: this.originalQuestion.questionText,
-      correctAnswer: this.originalQuestion.correctAnswer,
-      wrongAnswer1: this.originalQuestion.wrongAnswer1,
-      wrongAnswer2: this.originalQuestion.wrongAnswer2,
-      wrongAnswer3: this.originalQuestion.wrongAnswer3,
-    }
+    this.editedQuestion = new QuestionInRawFormat(
+      this.originalQuestion.id,
+      this.originalQuestion.questionText,
+      this.originalQuestion.correctAnswer,
+      this.originalQuestion.wrongAnswer1,
+      this.originalQuestion.wrongAnswer2,
+      this.originalQuestion.wrongAnswer3
+    );
   }
 
   /*======================================*

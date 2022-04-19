@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {URL} from '../../constants/web-requests';
-import {QuestionInPlayFormat, QuestionInRawFormat} from '../../model/question';
+import {QuestionInRawFormat} from '../../model/QuestionInRawFormat';
 import {Observable} from 'rxjs';
+import {QuestionInPlayFormat} from "../../model/QuestionInPlayFormat";
 
 @Injectable({
   providedIn: 'root'

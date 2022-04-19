@@ -3,7 +3,7 @@ import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {LocalizationService} from '../../../service/localization/localization.service';
 import {QuizService} from '../../../service/quiz/quiz.service';
-import {PredefinedQuiz} from '../../../model/quiz';
+import {PredefinedQuiz} from '../../../model/PredefinedQuiz';
 
 @Component({
   selector: 'app-select-predefined-quiz',

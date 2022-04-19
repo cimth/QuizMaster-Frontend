@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {QuestionInRawFormat} from '../../../model/question';
+import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {LocalizationService} from '../../../service/localization/localization.service';
@@ -33,14 +33,7 @@ export class AddQuestionComponent implements OnInit {
               private questionService: QuestionService) { }
 
   ngOnInit() {
-    this.newQuestion = {
-      id: undefined,
-      questionText: '',
-      correctAnswer: '',
-      wrongAnswer1: '',
-      wrongAnswer2: '',
-      wrongAnswer3: ''
-    }
+    this.newQuestion = new QuestionInRawFormat(undefined, '', '', '', '', '');
   }
 
   /*======================================*

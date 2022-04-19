@@ -1,5 +1,5 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {QuestionInPlayFormat} from '../../model/question';
+import {QuestionInPlayFormat} from '../../model/QuestionInPlayFormat';
 import {PlayQuizService} from '../../service/play-quiz/play-quiz.service';
 import {QuestionService} from '../../service/question/question.service';
 import {LocalizationService} from '../../service/localization/localization.service';

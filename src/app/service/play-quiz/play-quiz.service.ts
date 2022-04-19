@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {PredefinedQuiz} from '../../model/quiz';
+import {PredefinedQuiz} from '../../model/PredefinedQuiz';
 import {QuizService} from '../quiz/quiz.service';
 import {QuestionService} from '../question/question.service';
 import {Router} from '@angular/router';
 import {LocalStorageService} from '../local-storage/local-storage.service';
-import {QuizState} from '../../model/quiz-state';
+import {QuizState} from '../../model/QuizState';
 import {LocalizationService} from '../localization/localization.service';
 import {MESSAGE_ID} from '../../constants/localization/message-id';
 

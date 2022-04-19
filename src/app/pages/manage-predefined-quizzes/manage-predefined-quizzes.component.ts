@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
-import {PredefinedQuiz, PredefinedQuizWithResolvedQuestions} from '../../model/quiz';
+import {PredefinedQuizWithResolvedQuestions} from '../../model/PredefinedQuizWithResolvedQuestions';
 import {LocalizationService} from '../../service/localization/localization.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {QuizService} from '../../service/quiz/quiz.service';
@@ -9,6 +9,7 @@ import {DeletePredefinedQuizComponent} from './delete-predefined-quiz/delete-pre
 import {EditPredefinedQuizComponent} from './edit-predefined-quiz/edit-predefined-quiz.component';
 import {AddPredefinedQuizComponent} from './add-predefined-quiz/add-predefined-quiz.component';
 import {Router} from '@angular/router';
+import {PredefinedQuiz} from "../../model/PredefinedQuiz";
 
 @Component({
   selector: 'app-manage-predefined-quizzes',
@@ -77,12 +78,12 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
   private async createPredefinedQuizWithResolvedQuestions(quiz: PredefinedQuiz): Promise<PredefinedQuizWithResolvedQuestions> {
 
     // init resolved quiz, use empty array for resolved questions to push new resolved questions into it
-    const resolvedQuiz: PredefinedQuizWithResolvedQuestions = {
-      quizId: quiz.quizId,
-      quizName: quiz.quizName,
-      questionCount: quiz.questionCount,
-      resolvedQuestions: []
-    }
+    const resolvedQuiz = new PredefinedQuizWithResolvedQuestions(
+      quiz.quizId,
+      quiz.quizName,
+      quiz.questionCount,
+      []
+    );
 
     // get all related quiz ids and resolve questions for them
     await this.quizService.getQuestionIdsOfPredefinedQuiz(quiz.quizId)

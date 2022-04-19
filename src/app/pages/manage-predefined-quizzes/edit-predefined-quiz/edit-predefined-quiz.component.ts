@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
-import {PredefinedQuizWithResolvedQuestions} from '../../../model/quiz';
+import {PredefinedQuizWithResolvedQuestions} from '../../../model/PredefinedQuizWithResolvedQuestions';
 import {LocalizationService} from '../../../service/localization/localization.service';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {QuestionService} from '../../../service/question/question.service';
-import {QuestionInRawFormat} from '../../../model/question';
+import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
 
 @Component({
   selector: 'app-edit-predefined-quiz',
@@ -39,12 +39,12 @@ export class EditPredefinedQuizComponent implements OnInit {
 
   ngOnInit(): void {
     // copy original quiz data into edited quiz
-    this.editedQuiz = {
-      quizId: this.originalQuiz.quizId,
-      quizName: this.originalQuiz.quizName,
-      questionCount: this.originalQuiz.questionCount,
-      resolvedQuestions: this.originalQuiz.resolvedQuestions.slice()   // copy array with slice()
-    }
+    this.editedQuiz = new PredefinedQuizWithResolvedQuestions(
+      this.originalQuiz.quizId,
+      this.originalQuiz.quizName,
+      this.originalQuiz.questionCount,
+      this.originalQuiz.resolvedQuestions.slice()   // copy array with slice()
+    );
 
     // init unused questions
     this.questionService.getAllQuestions()

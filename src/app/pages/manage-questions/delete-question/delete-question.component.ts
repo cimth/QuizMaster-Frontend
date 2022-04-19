@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {QuestionInRawFormat} from '../../../model/question';
+import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {LocalizationService} from '../../../service/localization/localization.service';

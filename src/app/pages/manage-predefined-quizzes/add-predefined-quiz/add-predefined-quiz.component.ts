@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LocalizationService} from '../../../service/localization/localization.service';
-import {PredefinedQuizWithResolvedQuestions} from '../../../model/quiz';
+import {PredefinedQuizWithResolvedQuestions} from '../../../model/PredefinedQuizWithResolvedQuestions';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {QuestionInRawFormat} from '../../../model/question';
+import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {QuestionService} from '../../../service/question/question.service';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
@@ -41,12 +41,7 @@ export class AddPredefinedQuizComponent implements OnInit {
   ngOnInit(): void {
 
     // init new quiz
-    this.newQuiz = {
-      quizId: undefined,
-      quizName: '',
-      questionCount: 0,
-      resolvedQuestions: []
-    }
+    this.newQuiz = new PredefinedQuizWithResolvedQuestions(undefined, '', 0, []);
 
     // init unused questions
     this.questionService.getAllQuestions()

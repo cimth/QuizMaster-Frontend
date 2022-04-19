@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {URL} from '../../constants/web-requests';
-import {PredefinedQuiz, PredefinedQuizWithResolvedQuestions} from '../../model/quiz';
+import {PredefinedQuizWithResolvedQuestions} from '../../model/PredefinedQuizWithResolvedQuestions';
+import {PredefinedQuiz} from "../../model/PredefinedQuiz";
 
 @Injectable({
   providedIn: 'root'

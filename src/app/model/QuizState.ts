@@ -1,6 +1,6 @@
 import {LocalStorageService} from '../service/local-storage/local-storage.service';
 import {QUIZ_STATE} from '../constants/local-storage';
-import {QuestionInPlayFormat} from './question';
+import {QuestionInPlayFormat} from "./QuestionInPlayFormat";
 
 export class QuizState {
 

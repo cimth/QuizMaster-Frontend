@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {LocalizationService} from '../../../service/localization/localization.service';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
-import {PredefinedQuiz} from '../../../model/quiz';
+import {PredefinedQuiz} from '../../../model/PredefinedQuiz';
 import {QuizService} from '../../../service/quiz/quiz.service';
 
 @Component({

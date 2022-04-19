@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from '../../service/question/question.service';
-import {QuestionInRawFormat} from '../../model/question';
+import {QuestionInRawFormat} from '../../model/QuestionInRawFormat';
 import {LocalizationService} from '../../service/localization/localization.service';
 import {MESSAGE_ID} from '../../constants/localization/message-id';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
