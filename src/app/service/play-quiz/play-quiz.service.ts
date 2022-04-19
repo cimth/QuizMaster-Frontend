@@ -7,6 +7,7 @@ import {LocalStorageService} from '../local-storage/local-storage.service';
 import {QuizState} from '../../model/QuizState';
 import {LocalizationService} from '../localization/localization.service';
 import {MESSAGE_ID} from '../../constants/localization/message-id';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +50,7 @@ export class PlayQuizService {
       .subscribe(questionIds => {
         this.initQuizState(randomQuizName, questionIds);
         void this.router.navigateByUrl('/play-quiz');
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching a random Quiz: ', err)
         if (err.status == 0) {
@@ -72,7 +73,7 @@ export class PlayQuizService {
       .subscribe(questionIds => {
         this.initQuizState(quiz.quizName, questionIds);
         void this.router.navigateByUrl('/play-quiz');
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching the selected predefined Quiz: ', err)
         if (err.status == 0) {

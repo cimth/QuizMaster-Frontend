@@ -4,6 +4,7 @@ import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {LocalizationService} from '../../../service/localization/localization.service';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {PredefinedQuiz} from '../../../model/PredefinedQuiz';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-select-predefined-quiz',
@@ -50,11 +51,11 @@ export class SelectPredefinedQuizComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
         }, 1500);
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while fetching the predefined Quizzes: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
           this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
         }

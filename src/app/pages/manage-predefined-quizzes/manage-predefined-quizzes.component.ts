@@ -10,6 +10,7 @@ import {EditPredefinedQuizComponent} from './edit-predefined-quiz/edit-predefine
 import {AddPredefinedQuizComponent} from './add-predefined-quiz/add-predefined-quiz.component';
 import {Router} from '@angular/router';
 import {PredefinedQuiz} from "../../model/PredefinedQuiz";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-manage-predefined-quizzes',
@@ -54,7 +55,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
           quizArray.push(resolvedQuiz);
           this.questionsRendered.set(quiz.quizId, false);
         }
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching predefined Quizzes: ', err)
         if (err.status == 0) {
@@ -94,7 +95,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
           await this.questionService.getQuestionInRawFormat(questionId)
             .subscribe(question => {
               resolvedQuiz.resolvedQuestions.push(question);
-            }, err => {
+            }, (err: HttpErrorResponse) => {
               // go to backend-not-reachable page when connection fails
               console.log('Error while fetching predefined Quizzes: ', err)
               if (err.status == 0) {
@@ -105,7 +106,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
             });
         }
 
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while resolving questions: ', err)
         if (err.status == 0) {
@@ -163,7 +164,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
     // update UI with edited question data if the question was changed
     modal.result.then( (addedQuiz: PredefinedQuizWithResolvedQuestions) => {
       this.allQuizzes.push(addedQuiz);
-    }, err => {
+    }, () => {
       console.log("Closed creation dialog without creating a quiz.");
     });
   }
@@ -195,7 +196,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
     // update UI with edited quiz data if the quiz was changed
     modal.result.then( (editedQuiz: PredefinedQuizWithResolvedQuestions) => {
       this.allQuizzes[arrayIndex] = editedQuiz;
-    }, err => {
+    }, () => {
       console.log("Closed editing dialog without saving any changes.");
     });
   }
@@ -230,7 +231,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       if (deleted === true) {
         this.allQuizzes.splice(arrayIndex, 1);
       }
-    }, err => {
+    }, () => {
       console.log("Closed confirmation dialog without deleting the quiz.");
     });
   }

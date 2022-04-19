@@ -7,6 +7,7 @@ import {QuizService} from '../../../service/quiz/quiz.service';
 import {QuestionService} from '../../../service/question/question.service';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-add-predefined-quiz',
@@ -65,7 +66,7 @@ export class AddPredefinedQuizComponent implements OnInit {
         this.unusedQuestions.sort((q1, q2) => {
           return q1.id - q2.id;
         })
-      }, err => {
+      }, (err : HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching unused questions: ', err)
         if (err.status == 0) {
@@ -131,21 +132,21 @@ export class AddPredefinedQuizComponent implements OnInit {
             // close modal and return new quiz with added id
             this.modalRef.close(this.newQuiz);
 
-          }, err => {
+          }, (err: HttpErrorResponse) => {
             // show error message
             console.log('Error while saving the questions of the Quiz: ', err)
             if (err.status != 0) {
-              this.errorMessage = err.error;
+              this.errorMessage = err.error as string;
             } else {
               this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
             }
           });
 
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while saving the Quiz: ', err)
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
           this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
         }

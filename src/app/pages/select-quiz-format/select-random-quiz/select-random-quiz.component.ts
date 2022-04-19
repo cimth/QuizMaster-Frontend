@@ -3,6 +3,7 @@ import {LocalizationService} from '../../../service/localization/localization.se
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {QuestionService} from '../../../service/question/question.service';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-select-random-quiz',
@@ -50,11 +51,11 @@ export class SelectRandomQuizComponent implements OnInit {
         if (this.questionCount > this.totalQuestions) {
           this.questionCount = Math.floor(this.totalQuestions / 2);
         }
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while fetching questions: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
           this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
         }

@@ -4,6 +4,7 @@ import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {PredefinedQuiz} from '../../../model/PredefinedQuiz';
 import {QuizService} from '../../../service/quiz/quiz.service';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-delete-predefined-quiz',
@@ -71,11 +72,11 @@ export class DeletePredefinedQuizComponent {
         console.log('Response: ', response);
         alert(response);
         this.modalRef.close(true);
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while deleting the predefined Quiz: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
           this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
         }

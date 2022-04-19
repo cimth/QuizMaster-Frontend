@@ -67,7 +67,7 @@ export class SelectQuizFormatComponent {
     modal.result.then( (questionCount: number) => {
       this.isQuizStarting = true;
       this.playQuizService.startRandomQuiz(questionCount);
-    }, err => {
+    }, () => {
       console.log("Closed selection dialog without starting a quiz.");
     });
   }
@@ -96,7 +96,7 @@ export class SelectQuizFormatComponent {
     modal.result.then( (quizToPlay: PredefinedQuiz) => {
       this.isQuizStarting = true;
       this.playQuizService.startPredefinedQuiz(quizToPlay);
-    }, err => {
+    }, () => {
       console.log("Closed selection dialog without starting a quiz.");
     });
   }

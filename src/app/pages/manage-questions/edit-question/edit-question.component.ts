@@ -4,6 +4,7 @@ import {LocalizationService} from '../../../service/localization/localization.se
 import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {QuestionService} from '../../../service/question/question.service';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-edit-question',
@@ -105,11 +106,11 @@ export class EditQuestionComponent implements OnInit {
         console.log('Response: ', response);
         alert(response);
         this.modalRef.close(this.editedQuestion);
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while saving the Question: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
           this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
         }

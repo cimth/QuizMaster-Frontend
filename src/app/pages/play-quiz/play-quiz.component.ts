@@ -5,6 +5,7 @@ import {QuestionService} from '../../service/question/question.service';
 import {LocalizationService} from '../../service/localization/localization.service';
 import {MESSAGE_ID} from '../../constants/localization/message-id';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-play-quiz',
@@ -102,7 +103,7 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
           this.question = question;
           this.playQuizService.quizState.currentQuestion = question;
           this.isLoadingNextQuestion = false;
-        }, err => {
+        }, (err: HttpErrorResponse) => {
           // go to backend-not-reachable page when connection fails
           console.log('Error while resolving questions: ', err)
           if (err.status == 0) {

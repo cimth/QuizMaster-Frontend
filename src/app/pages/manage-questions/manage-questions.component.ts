@@ -8,6 +8,7 @@ import {EditQuestionComponent} from './edit-question/edit-question.component';
 import {DeleteQuestionComponent} from './delete-question/delete-question.component';
 import {AddQuestionComponent} from './add-question/add-question.component';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-manage-questions',
@@ -50,7 +51,7 @@ export class ManageQuestionsComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
         }, 1500);
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching predefined Quizzes: ', err)
         if (err.status == 0) {
@@ -111,7 +112,7 @@ export class ManageQuestionsComponent implements OnInit {
     // update UI with edited question data if the question was changed
     modal.result.then( (addedQuestion: QuestionInRawFormat) => {
       this.allQuestions.push(addedQuestion);
-    }, err => {
+    }, () => {
       console.log("Closed creation dialog without creating a question.");
     });
   }
@@ -143,7 +144,7 @@ export class ManageQuestionsComponent implements OnInit {
     // update UI with edited question data if the question was changed
     modal.result.then( (editedQuestion: QuestionInRawFormat ) => {
       this.allQuestions[arrayIndex] = editedQuestion;
-    }, err => {
+    }, () => {
       console.log("Closed editing dialog without saving any changes.");
     });
   }
@@ -178,7 +179,7 @@ export class ManageQuestionsComponent implements OnInit {
       if (deleted === true) {
         this.allQuestions.splice(arrayIndex, 1);
       }
-    }, err => {
+    }, () => {
       console.log("Closed confirmation dialog without deleting the question.");
     });
   }

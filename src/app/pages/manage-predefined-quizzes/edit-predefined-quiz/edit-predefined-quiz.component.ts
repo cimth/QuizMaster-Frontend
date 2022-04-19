@@ -6,6 +6,7 @@ import {LocalizationService} from '../../../service/localization/localization.se
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {QuestionService} from '../../../service/question/question.service';
 import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-edit-predefined-quiz',
@@ -68,11 +69,11 @@ export class EditPredefinedQuizComponent implements OnInit {
         this.unusedQuestions.sort((q1, q2) => {
           return q1.id - q2.id;
         })
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while fetching the unused questions: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
           this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
         }
@@ -120,11 +121,11 @@ export class EditPredefinedQuizComponent implements OnInit {
         console.log('Response: ', response);
         alert(response);
         this.modalRef.close(this.editedQuiz);
-      }, err => {
+      }, (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while saving the Quiz: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
           this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
         }
