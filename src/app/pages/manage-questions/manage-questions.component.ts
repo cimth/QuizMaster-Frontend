@@ -109,7 +109,7 @@ export class ManageQuestionsComponent implements OnInit {
     modal.componentInstance.modalRef = modal;
 
     // update UI with edited question data if the question was changed
-    modal.result.then(addedQuestion => {
+    modal.result.then( (addedQuestion: QuestionInRawFormat) => {
       this.allQuestions.push(addedQuestion);
     }, err => {
       console.log("Closed creation dialog without creating a question.");
@@ -141,7 +141,7 @@ export class ManageQuestionsComponent implements OnInit {
     modal.componentInstance.modalRef = modal;
 
     // update UI with edited question data if the question was changed
-    modal.result.then(editedQuestion => {
+    modal.result.then( (editedQuestion: QuestionInRawFormat ) => {
       this.allQuestions[arrayIndex] = editedQuestion;
     }, err => {
       console.log("Closed editing dialog without saving any changes.");

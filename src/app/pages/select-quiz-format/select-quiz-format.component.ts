@@ -6,6 +6,7 @@ import {SelectPredefinedQuizComponent} from './select-predefined-quiz/select-pre
 import {PlayQuizService} from '../../service/play-quiz/play-quiz.service';
 import {SelectRandomQuizComponent} from './select-random-quiz/select-random-quiz.component';
 import {Router} from '@angular/router';
+import {PredefinedQuiz} from "../../model/PredefinedQuiz";
 
 @Component({
   selector: 'app-select-quiz-format',
@@ -63,9 +64,9 @@ export class SelectQuizFormatComponent {
     modal.componentInstance.modalRef = modal;
 
     // start quiz if a predefined quiz was selected
-    modal.result.then(quizToPlay => {
+    modal.result.then( (questionCount: number) => {
       this.isQuizStarting = true;
-      this.playQuizService.startRandomQuiz(quizToPlay);
+      this.playQuizService.startRandomQuiz(questionCount);
     }, err => {
       console.log("Closed selection dialog without starting a quiz.");
     });
@@ -92,7 +93,7 @@ export class SelectQuizFormatComponent {
     modal.componentInstance.modalRef = modal;
 
     // start quiz if a predefined quiz was selected
-    modal.result.then(quizToPlay => {
+    modal.result.then( (quizToPlay: PredefinedQuiz) => {
       this.isQuizStarting = true;
       this.playQuizService.startPredefinedQuiz(quizToPlay);
     }, err => {

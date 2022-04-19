@@ -161,7 +161,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
     modal.componentInstance.modalRef = modal;
 
     // update UI with edited question data if the question was changed
-    modal.result.then(addedQuiz => {
+    modal.result.then( (addedQuiz: PredefinedQuizWithResolvedQuestions) => {
       this.allQuizzes.push(addedQuiz);
     }, err => {
       console.log("Closed creation dialog without creating a quiz.");
@@ -193,7 +193,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
     modal.componentInstance.modalRef = modal;
 
     // update UI with edited quiz data if the quiz was changed
-    modal.result.then(editedQuiz => {
+    modal.result.then( (editedQuiz: PredefinedQuizWithResolvedQuestions) => {
       this.allQuizzes[arrayIndex] = editedQuiz;
     }, err => {
       console.log("Closed editing dialog without saving any changes.");
