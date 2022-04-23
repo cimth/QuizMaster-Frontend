@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LocalizationService} from '../../../service/localization/localization.service';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {QuestionService} from '../../../service/question/question.service';
 import {HttpErrorResponse} from "@angular/common/http";
 
@@ -15,8 +13,6 @@ export class SelectRandomQuizComponent implements OnInit {
   /*======================================*
    * FIELDS
    *======================================*/
-
-  public MESSAGE_ID = MESSAGE_ID;
 
   @Input() public modalRef: NgbModalRef;
 
@@ -32,8 +28,7 @@ export class SelectRandomQuizComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private questionService: QuestionService) { }
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
     // init total question count and adjust max questions if necessary
@@ -57,7 +52,7 @@ export class SelectRandomQuizComponent implements OnInit {
         if (err.status != 0) {
           this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       })
   }

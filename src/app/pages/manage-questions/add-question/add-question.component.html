@@ -1,6 +1,6 @@
 <!-- title and close button -->
 <div class="modal-header">
-  <h4>{{loc.localize(MESSAGE_ID.HEADERS.ADD_QUESTION)}}</h4>
+  <h4 i18n="@@addQuestion">Add Question</h4>
   <button type="button" class="close">
     <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
   </button>
@@ -17,7 +17,7 @@
   </thead>
   <!-- question text -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_TEXT)}}</th>
+    <th i18n="@@questionText">Question Text</th>
     <td>
       <input class="w-100 p-2" [(ngModel)]="newQuestion.questionText"
              (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
@@ -25,7 +25,7 @@
   </tr>
   <!-- question correct answer -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.CORRECT_ANSWER)}}</th>
+    <th i18n="@@correctAnswer">Correct Answer</th>
     <td>
       <input class="w-100 p-2" [(ngModel)]="newQuestion.correctAnswer"
              (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
@@ -33,7 +33,7 @@
   </tr>
   <!-- wrong answer 1 -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_1)}}</th>
+    <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
     <td>
       <input class="w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer1"
              (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
@@ -41,7 +41,7 @@
   </tr>
   <!-- wrong answer 2 -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_2)}}</th>
+    <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
     <td>
       <input class="w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer2"
              (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
@@ -49,7 +49,7 @@
   </tr>
   <!-- wrong answer 3 -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_3)}}</th>
+    <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
     <td>
       <input class="w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer3"
              (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
@@ -57,7 +57,7 @@
   </tr>
   <!-- admin token -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ADMIN_TOKEN)}}</th>
+    <th i18n="@@adminToken">Admin Token</th>
     <td>
       <input class="w-100 p-2" [(ngModel)]="adminToken"
              (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
@@ -73,12 +73,13 @@
 <!-- actions -->
 <div class="btn-group">
   <!-- cancel -->
-  <button class="btn btn-block btn-info rounded my-0 mx-1" (click)="modalRef.dismiss()">
-    {{loc.localize(MESSAGE_ID.ACTION_LABELS.CANCEL)}}
+  <button class="btn btn-block btn-info rounded my-0 mx-1" (click)="modalRef.dismiss()" i18n="@@cancel">
+    Cancel
   </button>
   <!-- save -->
-  <button class="btn btn-block btn-info rounded my-0 mx-1" (click)="addQuestion()" [disabled]="!addingEnabled">
-    {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_QUESTION)}}
+  <button class="btn btn-block btn-info rounded my-0 mx-1" (click)="addQuestion()" [disabled]="!addingEnabled"
+          i18n="@@save">
+    Save
   </button>
 </div>
 

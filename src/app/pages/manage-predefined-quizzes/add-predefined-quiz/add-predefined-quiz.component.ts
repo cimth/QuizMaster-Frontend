@@ -1,11 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LocalizationService} from '../../../service/localization/localization.service';
 import {PredefinedQuizWithResolvedQuestions} from '../../../model/PredefinedQuizWithResolvedQuestions';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {QuestionService} from '../../../service/question/question.service';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from "@angular/common/http";
 
@@ -20,8 +18,6 @@ export class AddPredefinedQuizComponent implements OnInit {
   * FIELDS
   *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
-
   @Input() public modalRef: NgbModalRef;
 
   public newQuiz: PredefinedQuizWithResolvedQuestions;
@@ -34,8 +30,7 @@ export class AddPredefinedQuizComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private quizService: QuizService,
+  constructor(private quizService: QuizService,
               private questionService: QuestionService,
               private router: Router) { }
 
@@ -93,7 +88,7 @@ export class AddPredefinedQuizComponent implements OnInit {
 
     // show error for empty fields if necessary
     if (!this.savingEnabled) {
-      this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.NOT_EMPTY_ALL);
+      this.errorMessage = $localize `:@@errorEmptyInputFields:The shown input fields must not be empty.`;
     } else {
       this.errorMessage = undefined;
     }
@@ -127,7 +122,8 @@ export class AddPredefinedQuizComponent implements OnInit {
 
             // show success message
             console.log('Response: ', successMessage);
-            alert(this.loc.localize(MESSAGE_ID.SUCCESS.QUIZ_CREATED));
+            const dialogMessage = $localize `:@@successQuizCreated:The Quiz was successfully created!`;
+            alert(dialogMessage);
 
             // close modal and return new quiz with added id
             this.modalRef.close(this.newQuiz);
@@ -138,7 +134,7 @@ export class AddPredefinedQuizComponent implements OnInit {
             if (err.status != 0) {
               this.errorMessage = err.error as string;
             } else {
-              this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+              this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
             }
           });
 
@@ -148,7 +144,7 @@ export class AddPredefinedQuizComponent implements OnInit {
         if (err.status != 0) {
           this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       });
   }

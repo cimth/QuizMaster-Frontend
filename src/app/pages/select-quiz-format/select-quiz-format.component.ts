@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
-import {LocalizationService} from '../../service/localization/localization.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SelectPredefinedQuizComponent} from './select-predefined-quiz/select-predefined-quiz.component';
 import {PlayQuizService} from '../../service/play-quiz/play-quiz.service';
@@ -19,16 +17,13 @@ export class SelectQuizFormatComponent {
    * FIELDS
    *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
-
   public isQuizStarting: boolean = false;
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              public playQuizService: PlayQuizService,
+  constructor(public playQuizService: PlayQuizService,
               private modalService: NgbModal,
               private router: Router) { }
 

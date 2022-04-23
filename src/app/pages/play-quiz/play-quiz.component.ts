@@ -2,8 +2,6 @@ import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/c
 import {QuestionInPlayFormat} from '../../model/QuestionInPlayFormat';
 import {PlayQuizService} from '../../service/play-quiz/play-quiz.service';
 import {QuestionService} from '../../service/question/question.service';
-import {LocalizationService} from '../../service/localization/localization.service';
-import {MESSAGE_ID} from '../../constants/localization/message-id';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from "@angular/common/http";
 
@@ -18,8 +16,6 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
    * FIELDS
    *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
-
   public question: QuestionInPlayFormat;
   public isAnswerSelected: boolean;
   public isLastQuestion: boolean;
@@ -31,8 +27,7 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              public playQuizService: PlayQuizService,
+  constructor(public playQuizService: PlayQuizService,
               private questionService: QuestionService,
               private changeDetectorRef: ChangeDetectorRef,
               private router: Router) { }

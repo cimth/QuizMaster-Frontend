@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {PredefinedQuizWithResolvedQuestions} from '../../../model/PredefinedQuizWithResolvedQuestions';
-import {LocalizationService} from '../../../service/localization/localization.service';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {QuestionService} from '../../../service/question/question.service';
 import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
@@ -19,8 +17,6 @@ export class EditPredefinedQuizComponent implements OnInit {
    * FIELDS
    *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
-
   @Input() public originalQuiz: PredefinedQuizWithResolvedQuestions;
   @Input() public modalRef: NgbModalRef;
 
@@ -34,8 +30,7 @@ export class EditPredefinedQuizComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private quizService: QuizService,
+  constructor(private quizService: QuizService,
               private questionService: QuestionService) { }
 
   ngOnInit(): void {
@@ -75,7 +70,7 @@ export class EditPredefinedQuizComponent implements OnInit {
         if (err.status != 0) {
           this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       });
   }
@@ -95,7 +90,7 @@ export class EditPredefinedQuizComponent implements OnInit {
 
     // show error for empty fields if necessary
     if (!this.savingEnabled) {
-      this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.NOT_EMPTY_ALL);
+      this.errorMessage = $localize `:@@errorEmptyInputFields:The shown input fields must not be empty.`;
     } else {
       this.errorMessage = undefined;
     }
@@ -127,7 +122,7 @@ export class EditPredefinedQuizComponent implements OnInit {
         if (err.status != 0) {
           this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       });
   }

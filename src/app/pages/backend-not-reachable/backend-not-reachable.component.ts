@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {MESSAGE_ID} from '../../constants/localization/message-id';
-import {LocalizationService} from '../../service/localization/localization.service';
 
 @Component({
   selector: 'app-backend-not-reachable',
@@ -8,9 +6,4 @@ import {LocalizationService} from '../../service/localization/localization.servi
   styleUrls: ['./backend-not-reachable.component.css']
 })
 export class BackendNotReachableComponent {
-
-  public MESSAGE_ID = MESSAGE_ID;
-
-  constructor(public loc: LocalizationService) { }
-
 }

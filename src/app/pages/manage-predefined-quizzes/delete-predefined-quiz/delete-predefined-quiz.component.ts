@@ -1,7 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {LocalizationService} from '../../../service/localization/localization.service';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {HttpErrorResponse} from "@angular/common/http";
 import {PredefinedQuizWithResolvedQuestions} from "../../../model/PredefinedQuizWithResolvedQuestions";
@@ -17,8 +15,6 @@ export class DeletePredefinedQuizComponent {
    * FIELDS
    *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
-
   @Input() public quiz: PredefinedQuizWithResolvedQuestions;
   @Input() public modalRef: NgbModalRef;
 
@@ -30,8 +26,7 @@ export class DeletePredefinedQuizComponent {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private quizService: QuizService) { }
+  constructor(private quizService: QuizService) { }
 
   /*======================================*
    * VALIDATION FOR COMPONENT
@@ -45,7 +40,7 @@ export class DeletePredefinedQuizComponent {
     this.deletingEnabled = this.adminToken.trim().length > 0;
 
     if (!this.deletingEnabled) {
-      this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.ADMIN_TOKEN);
+      this.errorMessage = $localize `:@@errorMissingAdminToken:The Admin Token is missing.`;
     } else {
       this.errorMessage = undefined;
     }
@@ -78,7 +73,7 @@ export class DeletePredefinedQuizComponent {
         if (err.status != 0) {
           this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       });
   }

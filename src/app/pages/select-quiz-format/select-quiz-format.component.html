@@ -1,5 +1,8 @@
 <!-- back button -->
-<button class="btn btn-info mb-5" routerLink="/start">&#8592; {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}</button>
+<button class="btn btn-info mb-5" routerLink="/start">
+  <span>&#8592; </span>
+  <ng-container i18n="@@backToStart">Back to the main menu</ng-container>
+</button>
 
 <!-- vertical centered container -->
 <div class="container h-75">
@@ -7,9 +10,13 @@
     <div class="col my-auto">
 
       <!-- header -->
-      <h1 *ngIf="!isQuizStarting" class="h1 text-center">{{loc.localize(MESSAGE_ID.HEADERS.SELECT_QUIZ_FORMAT)}}</h1>
+      <h1 *ngIf="!isQuizStarting" class="h1 text-center" i18n="@@selectQuizFormat">
+        Select Quiz format
+      </h1>
 
-      <h1 *ngIf="isQuizStarting" class="h1 text-center">{{loc.localize(MESSAGE_ID.HEADERS.STARTING_QUIZ)}}</h1>
+      <h1 *ngIf="isQuizStarting" class="h1 text-center" i18n="@@startingQuiz">
+        Quiz is being started
+      </h1>
 
       <!-- loading spinner while quiz is starting -->
       <div *ngIf="isQuizStarting" class="text-center m-5">
@@ -19,8 +26,8 @@
       <!-- continue quiz -->
       <div *ngIf="!isQuizStarting && playQuizService.quizState.questionIds !== undefined" class="row m-3">
         <div class="col-12">
-          <button class="btn btn-block btn-info" (click)="continueQuiz()">
-            {{loc.localize(MESSAGE_ID.BUTTONS.CONTINUE_QUIZ)}}
+          <button class="btn btn-block btn-info" (click)="continueQuiz()" i18n="continueQuiz">
+            Continue previous started Quiz
           </button>
         </div>
       </div>
@@ -28,8 +35,8 @@
       <!-- random quiz -->
       <div *ngIf="!isQuizStarting" class="row m-3">
         <div class="col-12">
-          <button class="btn btn-block btn-info" (click)="selectRandomQuiz()">
-            {{loc.localize(MESSAGE_ID.BUTTONS.RANDOM_QUIZ)}}
+          <button class="btn btn-block btn-info" (click)="selectRandomQuiz()" i18n="@@randomQuiz">
+            Random Quiz
           </button>
         </div>
       </div>
@@ -37,8 +44,8 @@
       <!-- predefined quiz -->
       <div *ngIf="!isQuizStarting" class="row m-3">
         <div class="col-12">
-          <button class="btn btn-block btn-info" (click)="selectPredefinedQuiz()">
-            {{loc.localize(MESSAGE_ID.BUTTONS.PREDEFINED_QUIZ)}}
+          <button class="btn btn-block btn-info" (click)="selectPredefinedQuiz()" i18n="@@predefinedQuiz">
+            Predefined Quiz
           </button>
         </div>
       </div>

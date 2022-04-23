@@ -1,6 +1,6 @@
 <!-- title and close button -->
 <div class="modal-header">
-  <h4>{{loc.localize(MESSAGE_ID.HEADERS.DELETE_QUIZ)}}</h4>
+  <h4 i18n="@@deleteQuiz">Delete Quiz</h4>
   <button type="button" class="close">
     <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
   </button>
@@ -9,13 +9,13 @@
 <table class="table table-borderless">
   <!-- confirmation text -->
   <tr>
-    <td colspan="2">
-      {{loc.localize(MESSAGE_ID.CONFIRMATION.DELETE_QUIZ)}}
+    <td colspan="2" i18n="@@confirmationRequestDeleteQuiz">
+      Do you really wish to delete the Quiz?
     </td>
   </tr>
   <!-- admin token -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ADMIN_TOKEN)}}</th>
+    <th i18n="@@adminToken">Admin Token</th>
     <td>
       <input class="w-100 p-2" [(ngModel)]="adminToken"
              (ngModelChange)="enableOrDisableDeleteButtonAccordingToInput()" />
@@ -31,12 +31,13 @@
 <!-- actions -->
 <div class="btn-group">
   <!-- cancel -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()">
-    {{loc.localize(MESSAGE_ID.ACTION_LABELS.CANCEL)}}
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()" i18n="@@cancel">
+    Cancel
   </button>
   <!-- delete -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="deleteQuiz()" [disabled]="!deletingEnabled" >
-    {{loc.localize(MESSAGE_ID.ACTION_LABELS.DELETE)}}
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="deleteQuiz()" [disabled]="!deletingEnabled"
+          i18n="@@delete">
+    Delete
   </button>
 </div>
 

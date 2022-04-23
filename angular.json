@@ -9,6 +9,15 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "de": {
+            "translation": "src/locale/messages.de.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -64,6 +73,16 @@
                   "with": "src/environments/environment.local.ts"
                 }
               ]
+            },
+            "local-de": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ],
+              "localize": ["de"],
+              "i18nMissingTranslation": "error"
             }
           }
         },
@@ -78,6 +97,9 @@
             },
             "local": {
               "browserTarget": "QuizMaster:build:local"
+            },
+            "local-de": {
+              "browserTarget": "QuizMaster:build:local-de"
             }
           }
         },

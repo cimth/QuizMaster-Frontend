@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from '../../service/question/question.service';
 import {QuestionInRawFormat} from '../../model/QuestionInRawFormat';
-import {LocalizationService} from '../../service/localization/localization.service';
-import {MESSAGE_ID} from '../../constants/localization/message-id';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {EditQuestionComponent} from './edit-question/edit-question.component';
 import {DeleteQuestionComponent} from './delete-question/delete-question.component';
@@ -20,8 +18,6 @@ export class ManageQuestionsComponent implements OnInit {
   /*======================================*
    * FIELDS
    *======================================*/
-
-  public MESSAGE_ID = MESSAGE_ID;
   public allQuestions: QuestionInRawFormat[] = [];
   public showAnswersIds: number[] = [];
   public isLoading: boolean = true;
@@ -30,8 +26,7 @@ export class ManageQuestionsComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private questionService: QuestionService,
+  constructor(private questionService: QuestionService,
               private modalService: NgbModal,
               private router: Router) { }
 

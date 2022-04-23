@@ -2,7 +2,7 @@
   <!-- finish info -->
   <div class ="row mb-5">
     <div class="col">
-      <h2 class="mb-5">{{loc.localize(MESSAGE_ID.HEADERS.FINISHED)}}</h2>
+      <h2 class="mb-5" i18n="@@hdrFinished">Finished!</h2>
     </div>
   </div>
 
@@ -18,11 +18,11 @@
   <!-- answer statistics -->
   <div class="row">
     <div class="col">
-      <span>{{loc.localize(MESSAGE_ID.INFO.CORRECT_ANSWERS)}}: </span>
+      <span i18n="@@correctAnswers">Correct Answers: </span>
       <span class="font-weight-bold">{{playQuizService.quizState.correctAnswers}}</span>
     </div>
     <div class="col">
-      <span>{{loc.localize(MESSAGE_ID.INFO.WRONG_ANSWERS)}}: </span>
+      <span i18n="@@wrongAnswers">Wrong Answers: </span>
       <span class="font-weight-bold">{{playQuizService.quizState.wrongAnswers}}</span>
     </div>
   </div>
@@ -31,8 +31,8 @@
 
   <!-- go to menu -->
   <div class="row my-4 mx-2" (click)="clearQuizStateAndGoToMenu()">
-    <button class="btn btn-block btn-info rounded p-3 m-3">
-      {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}
+    <button class="btn btn-block btn-info rounded p-3 m-3" i18n="@@backToStart">
+      Back to the main menu
     </button>
   </div>
 </div>

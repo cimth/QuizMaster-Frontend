@@ -1,6 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MESSAGE_ID} from '../../../constants/localization/message-id';
-import {LocalizationService} from '../../../service/localization/localization.service';
 import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {QuestionService} from '../../../service/question/question.service';
@@ -17,8 +15,6 @@ export class EditQuestionComponent implements OnInit {
    * FIELDS
    *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
-
   @Input() public originalQuestion: QuestionInRawFormat;
   @Input() public modalRef: NgbModalRef;
 
@@ -32,8 +28,7 @@ export class EditQuestionComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private questionService: QuestionService) { }
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit(): void {
     this.editedQuestion = new QuestionInRawFormat(
@@ -65,7 +60,7 @@ export class EditQuestionComponent implements OnInit {
 
     // show error for empty fields if necessary
     if (!this.savingEnabled) {
-      this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.NOT_EMPTY_ALL);
+      this.errorMessage = $localize `:@@errorEmptyInputFields:The shown input fields must not be empty.`;
     } else {
       this.errorMessage = undefined;
     }
@@ -112,7 +107,7 @@ export class EditQuestionComponent implements OnInit {
         if (err.status != 0) {
           this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       });
   }

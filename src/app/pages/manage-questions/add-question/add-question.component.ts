@@ -1,9 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
-import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
-import {LocalizationService} from '../../../service/localization/localization.service';
-import {QuestionService} from '../../../service/question/question.service';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';import {QuestionService} from '../../../service/question/question.service';
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
@@ -17,8 +14,6 @@ export class AddQuestionComponent implements OnInit {
    * FIELDS
    *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
-
   @Input() public modalRef: NgbModalRef;
 
   public newQuestion: QuestionInRawFormat;
@@ -30,8 +25,7 @@ export class AddQuestionComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private questionService: QuestionService) { }
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
     this.newQuestion = new QuestionInRawFormat(undefined, '', '', '', '', '');
@@ -56,7 +50,7 @@ export class AddQuestionComponent implements OnInit {
 
     // show error for empty fields if necessary
     if (!this.addingEnabled) {
-      this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.NOT_EMPTY_ALL);
+      this.errorMessage = $localize `:@@errorEmptyInputFields:The shown input fields must not be empty.`;
     } else {
       this.errorMessage = undefined;
     }
@@ -85,7 +79,8 @@ export class AddQuestionComponent implements OnInit {
         this.newQuestion.id = createdQuestion.id;
 
         // show success message
-        alert(this.loc.localize(MESSAGE_ID.SUCCESS.QUESTION_CREATED));
+        const dialogMessage = $localize `:@@successQuestionCreated:The Question was successfully created!`;
+        alert(dialogMessage);
 
         // close modal and return new question with added id
         this.modalRef.close(this.newQuestion);
@@ -96,7 +91,7 @@ export class AddQuestionComponent implements OnInit {
         if (err.status != 0) {
           this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       });
   }
