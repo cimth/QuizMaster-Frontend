@@ -44,22 +44,28 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
     // => question ids need to be resolved, thus load and resolve all data before initializing the display array
     const quizArray: PredefinedQuizWithResolvedQuestions[] = [];
     await this.quizService.getAllPredefinedQuizzes()
-      .subscribe(async allQuizzes => {
-        console.log(allQuizzes);
+      .then(async allQuizzes => {
         for (const quiz of allQuizzes) {
-          const resolvedQuiz = this.createPredefinedQuizWithResolvedQuestions(quiz);
+          const resolvedQuiz = await this.createPredefinedQuizWithResolvedQuestions(quiz);
           quizArray.push(resolvedQuiz);
           this.questionsRendered.set(quiz.quizId, false);
         }
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
-        console.log('Error while fetching predefined Quizzes: ', err)
+        console.log('Error while fetching predefined Quizzes: ', err);
         if (err.status == 0) {
           setTimeout(() => {
             void this.router.navigateByUrl('/backend-not-reachable');
           }, 1500);
         }
       });
+
+    // mark quizzes as loaded
+    // => use timeout to avoid to short (and thus confusing) loading spinner
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1500);
 
     // init display array after all data are fully loaded
     this.allQuizzes = quizArray;
@@ -82,27 +88,15 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       []
     );
 
-    // get all related quiz ids and resolve questions for them
+    // get the question data for the given quiz
     await this.quizService.getQuestionIdsOfPredefinedQuiz(quiz.quizId)
-      .subscribe(async questionIds => {
-
-        // resolve questions
+      .then(async questionIds => {
         for (const questionId of questionIds) {
-          await this.questionService.getQuestionInRawFormat(questionId)
-            .subscribe(question => {
-              resolvedQuiz.resolvedQuestions.push(question);
-            }, (err: HttpErrorResponse) => {
-              // go to backend-not-reachable page when connection fails
-              console.log('Error while fetching predefined Quizzes: ', err)
-              if (err.status == 0) {
-                setTimeout(() => {
-                  void this.router.navigateByUrl('/backend-not-reachable');
-                }, 1500);
-              }
-            });
+          const resolvedQuestion = await this.questionService.getQuestionInRawFormat(questionId);
+          resolvedQuiz.resolvedQuestions.push(resolvedQuestion);
         }
-
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while resolving questions: ', err)
         if (err.status == 0) {
@@ -111,12 +105,6 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
           }, 1500);
         }
       });
-
-    // mark quizzes as loaded
-    // => use timeout to avoid to short (and thus confusing) loading spinner
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 1500);
 
     // return the fully resolved quiz
     return resolvedQuiz;

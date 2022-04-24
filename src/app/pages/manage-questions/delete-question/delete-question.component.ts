@@ -63,11 +63,12 @@ export class DeleteQuestionComponent {
 
     // update question
     this.questionService.deleteQuestion(this.question.id, this.adminToken)
-      .subscribe(response => {
+      .then(response => {
         console.log('Response: ', response);
         alert(response);
         this.modalRef.close(true);
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while deleting the Question: ', err);
         if (err.status != 0) {

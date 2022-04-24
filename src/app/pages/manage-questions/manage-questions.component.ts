@@ -35,7 +35,7 @@ export class ManageQuestionsComponent implements OnInit {
    */
   ngOnInit(): void {
     this.questionService.getAllQuestions()
-      .subscribe(allQuestions => {
+      .then(allQuestions => {
         console.log(allQuestions);
         for(const q of allQuestions) {
           this.allQuestions.push(q);
@@ -46,7 +46,8 @@ export class ManageQuestionsComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
         }, 1500);
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching predefined Quizzes: ', err)
         if (err.status == 0) {

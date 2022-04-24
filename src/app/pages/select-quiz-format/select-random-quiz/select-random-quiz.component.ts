@@ -33,7 +33,7 @@ export class SelectRandomQuizComponent implements OnInit {
   ngOnInit() {
     // init total question count and adjust max questions if necessary
     this.questionService.getAllQuestions()
-      .subscribe(allQuestions => {
+      .then(allQuestions => {
         // total question count
         this.totalQuestions = allQuestions.length;
 
@@ -46,7 +46,8 @@ export class SelectRandomQuizComponent implements OnInit {
         if (this.questionCount > this.totalQuestions) {
           this.questionCount = Math.floor(this.totalQuestions / 2);
         }
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while fetching questions: ', err);
         if (err.status != 0) {

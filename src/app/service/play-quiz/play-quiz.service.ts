@@ -42,10 +42,11 @@ export class PlayQuizService {
     const randomQuizName = $localize `:@@randomQuiz:Random Quiz`;
 
     this.quizService.getRandomQuiz(questionCount)
-      .subscribe(questionIds => {
+      .then(questionIds => {
         this.initQuizState(randomQuizName, questionIds);
         void this.router.navigateByUrl('/play-quiz');
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching a random Quiz: ', err)
         if (err.status == 0) {
@@ -65,10 +66,11 @@ export class PlayQuizService {
     console.log('Start predefined quiz: ', quiz);
 
     this.quizService.getQuestionIdsOfPredefinedQuiz(quiz.quizId)
-      .subscribe(questionIds => {
+      .then(questionIds => {
         this.initQuizState(quiz.quizName, questionIds);
         void this.router.navigateByUrl('/play-quiz');
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching the selected predefined Quiz: ', err)
         if (err.status == 0) {

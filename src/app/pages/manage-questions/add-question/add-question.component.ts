@@ -73,7 +73,7 @@ export class AddQuestionComponent implements OnInit {
 
     // add question
     this.questionService.addQuestion(this.newQuestion, this.adminToken)
-      .subscribe(createdQuestion => {
+      .then(createdQuestion => {
         // add id of new question to new question object
         console.log('Response: ', createdQuestion);
         this.newQuestion.id = createdQuestion.id;
@@ -85,7 +85,8 @@ export class AddQuestionComponent implements OnInit {
         // close modal and return new question with added id
         this.modalRef.close(this.newQuestion);
 
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch ( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while adding the Question: ', err);
         if (err.status != 0) {

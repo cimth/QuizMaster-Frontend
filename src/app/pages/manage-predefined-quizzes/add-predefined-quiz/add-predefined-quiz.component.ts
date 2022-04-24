@@ -41,7 +41,7 @@ export class AddPredefinedQuizComponent implements OnInit {
 
     // init unused questions
     this.questionService.getAllQuestions()
-      .subscribe(allQuestions => {
+      .then(allQuestions => {
 
         // fill array of unused questions
         this.unusedQuestions = allQuestions.filter(q => {
@@ -61,7 +61,8 @@ export class AddPredefinedQuizComponent implements OnInit {
         this.unusedQuestions.sort((q1, q2) => {
           return q1.id - q2.id;
         })
-      }, (err : HttpErrorResponse) => {
+      })
+      .catch( (err : HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching unused questions: ', err)
         if (err.status == 0) {
@@ -110,7 +111,7 @@ export class AddPredefinedQuizComponent implements OnInit {
 
     // create (empty) quiz and update it for adding the selected questions to it
     this.quizService.addQuiz(this.newQuiz.quizName, this.adminToken)
-      .subscribe(createdQuiz => {
+      .then(createdQuiz => {
 
         // add id of new question to new question object
         console.log('Response: ', createdQuiz);
@@ -118,7 +119,7 @@ export class AddPredefinedQuizComponent implements OnInit {
 
         // add questions to the created quiz (separate update quiz)
         this.quizService.saveUpdatedQuiz(this.newQuiz, this.adminToken)
-          .subscribe(successMessage => {
+          .then(successMessage => {
 
             // show success message
             console.log('Response: ', successMessage);
@@ -128,7 +129,8 @@ export class AddPredefinedQuizComponent implements OnInit {
             // close modal and return new quiz with added id
             this.modalRef.close(this.newQuiz);
 
-          }, (err: HttpErrorResponse) => {
+          })
+          .catch( (err: HttpErrorResponse) => {
             // show error message
             console.log('Error while saving the questions of the Quiz: ', err)
             if (err.status != 0) {
@@ -138,7 +140,8 @@ export class AddPredefinedQuizComponent implements OnInit {
             }
           });
 
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while saving the Quiz: ', err)
         if (err.status != 0) {

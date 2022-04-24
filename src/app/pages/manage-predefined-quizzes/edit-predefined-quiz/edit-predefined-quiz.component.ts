@@ -44,7 +44,7 @@ export class EditPredefinedQuizComponent implements OnInit {
 
     // init unused questions
     this.questionService.getAllQuestions()
-      .subscribe(allQuestions => {
+      .then(allQuestions => {
 
         // fill array of unused questions
         this.unusedQuestions = allQuestions.filter(q => {
@@ -64,7 +64,8 @@ export class EditPredefinedQuizComponent implements OnInit {
         this.unusedQuestions.sort((q1, q2) => {
           return q1.id - q2.id;
         })
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while fetching the unused questions: ', err);
         if (err.status != 0) {
@@ -112,11 +113,12 @@ export class EditPredefinedQuizComponent implements OnInit {
 
     // update question
     this.quizService.saveUpdatedQuiz(this.editedQuiz, this.adminToken)
-      .subscribe(response => {
+      .then(response => {
         console.log('Response: ', response);
         alert(response);
         this.modalRef.close(this.editedQuiz);
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while saving the Quiz: ', err);
         if (err.status != 0) {

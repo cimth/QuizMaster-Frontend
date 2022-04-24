@@ -29,7 +29,7 @@ export class SelectPredefinedQuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.quizService.getAllPredefinedQuizzes()
-      .subscribe(allQuizzes => {
+      .then(allQuizzes => {
 
         // fill array with playable quizzes (at least 1 question)
         this.allPlayableQuizzes = allQuizzes.filter(q => {
@@ -46,7 +46,8 @@ export class SelectPredefinedQuizComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
         }, 1500);
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while fetching the predefined Quizzes: ', err);
         if (err.status != 0) {

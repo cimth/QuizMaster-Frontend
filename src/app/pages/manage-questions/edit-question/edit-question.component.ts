@@ -97,11 +97,12 @@ export class EditQuestionComponent implements OnInit {
 
     // update question
     this.questionService.saveUpdatedQuestion(this.editedQuestion, this.adminToken)
-      .subscribe(response => {
+      .then(response => {
         console.log('Response: ', response);
         alert(response);
         this.modalRef.close(this.editedQuestion);
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while saving the Question: ', err);
         if (err.status != 0) {

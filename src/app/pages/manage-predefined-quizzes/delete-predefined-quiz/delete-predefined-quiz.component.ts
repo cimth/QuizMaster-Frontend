@@ -61,13 +61,14 @@ export class DeletePredefinedQuizComponent {
 
     console.log('Delete: ', this.quiz);
 
-    // update question
+    // delete question
     this.quizService.deletePredefinedQuiz(this.quiz.quizId, this.adminToken)
-      .subscribe(response => {
+      .then(response => {
         console.log('Response: ', response);
         alert(response);
         this.modalRef.close(true);
-      }, (err: HttpErrorResponse) => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while deleting the predefined Quiz: ', err);
         if (err.status != 0) {

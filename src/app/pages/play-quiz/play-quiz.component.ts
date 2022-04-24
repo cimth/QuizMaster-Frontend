@@ -94,11 +94,12 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
     if (!restored) {
       const currentId = this.playQuizService.currentQuestionId;
       this.questionService.getQuestionInPlayFormat(currentId)
-        .subscribe(question => {
+        .then(question => {
           this.question = question;
           this.playQuizService.quizState.currentQuestion = question;
           this.isLoadingNextQuestion = false;
-        }, (err: HttpErrorResponse) => {
+        })
+        .catch( (err: HttpErrorResponse) => {
           // go to backend-not-reachable page when connection fails
           console.log('Error while resolving questions: ', err)
           if (err.status == 0) {
