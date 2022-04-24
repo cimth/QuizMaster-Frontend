@@ -1,89 +1,78 @@
-###########################################
+################################################################################
+
+#####################
 # BASIC UBUNTU IMAGE WITH NON-ROOT USER
-###########################################
+#####################
 FROM ubuntu:latest AS non-root
 SHELL ["/bin/bash", "-c"]
 
-# environment
+# get user data from docker-compose.yml
 ENV USER="docker"
-ENV USER_HOME="/home/$USER"
+ARG USER_PASSWORD
 
 # no interactive installation
 ENV DEBIAN_FRONTEND=noninteractive
 
-#######
-# ADD NON-ROOT USER
-#######
-
 # add user
-RUN adduser --disabled-password $USER
+RUN adduser --disabled-password $USER && \
+    echo "$USER":"$USER_PASSWORD" | chpasswd
 
 # add sudo privileges
 RUN apt-get update && \
     apt-get install -y sudo && \
-    echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER && \
     adduser $USER sudo
 
 # run as non-root user in the following
 USER $USER
-WORKDIR $USER_HOME
+WORKDIR /home/$USER
 
+################################################################################
 
-###########################################
-# INTERMEDIATE IMAGE FOR CONVERTING CRLF FILES TO LF FILES
-# See: https://willi.am/blog/2016/08/11/docker-for-windows-dealing-with-windows-line-endings/
-###########################################
-FROM non-root AS files
-
-# install dos2unix for converting from CRLF to LF
-RUN sudo apt-get update && \
-    sudo apt-get install -y dos2unix
-
-# copy needed files
-COPY --chown=$USER run_project.sh $USER_HOME/run_project.sh
-
-# convert CRLF to LF
-RUN dos2unix $USER_HOME/run_project.sh
-
-
-###########################################
-# PROJECT IMAGE
-###########################################
-FROM non-root AS project
-
-# build args
-ARG NODE_VERSION="16.14.2"
-
-#######
-# IMPORT CONVERTED FILES FROM INTERMEDIATE IMAGE
-#######
-
-COPY --from=files --chown=$USER $USER_HOME/run_project.sh $USER_HOME/run_project.sh
+#####################
+# ANGULAR IMAGE
+#####################
+FROM non-root AS angular
 
 #######
 # INSTALL NODE AND NPM VIA NVM
 # See: https://e.printstacktrace.blog/using-sdkman-as-a-docker-image-for-jenkins-pipeline-a-step-by-step-guide/
 #######
 
-RUN sudo apt-get update && \
-    sudo apt-get install -y curl
+# install prerequisites
+USER root
+
+RUN apt-get update && \
+    apt-get install -y curl
+
+# install nvm, Node LTS and Angular CLI for non-root user
+USER $USER
 
 RUN curl https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash && \
-    source $USER_HOME/.nvm/nvm.sh && \
+    source /home/$USER/.nvm/nvm.sh && \
     nvm install --lts && \
     nvm use --lts
 
-#######
-# INSTALL ANGULAR
-#######
-
-RUN source $USER_HOME/.nvm/nvm.sh && \
+RUN source /home/$USER/.nvm/nvm.sh && \
     npm install -g @angular/cli
 
-#######
-# RUN ENTRY SCRIPT
-#######
+################################################################################
 
-# make run script to entry point to have access on the latest project files as volume
-RUN chmod u+x run_project.sh
-ENTRYPOINT ["/bin/bash", "-c", "./run_project.sh"]
+#####################
+# ENTRYPOINT IMAGE
+#####################
+FROM angular AS entrypoint
+
+# allow sudo commands from entrypoint and project script to be executed without a password
+USER root
+RUN echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/chown" > /etc/sudoers.d/$USER
+
+# copy entrypoint script with root privileges so that it cannot be changed but only executed inside the container
+COPY --chown=root:root ./entrypoint.sh /home/$USER/entrypoint.sh
+RUN chmod o+x entrypoint.sh
+
+# set container user and starting directory when entering the container interactively
+USER $USER
+WORKDIR /home/$USER/project
+
+# use the entrypoint script to have access on the mounted project files
+ENTRYPOINT ["/bin/bash", "-c", "/home/$USER/entrypoint.sh"]

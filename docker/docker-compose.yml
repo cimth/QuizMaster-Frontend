@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        USER_PASSWORD: docker-password
     environment:
       USER: docker
       BACKEND_URL: http://localhost:8080
@@ -11,4 +13,10 @@ services:
     ports:
       - "4200:4200"
     volumes:
+      # project files without docker directory
       - ..:/home/docker/project
+      - /home/docker/project/docker
+      # project script
+      # => executed by entrypoint script, but mounted to be updated without a rebuild of the container
+      - ./run_project.sh:/home/docker/run_project.sh
+
