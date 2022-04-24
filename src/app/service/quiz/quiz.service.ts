@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
 import {URL} from '../../constants/web-requests';
-import {PredefinedQuiz, PredefinedQuizWithResolvedQuestions} from '../../model/quiz';
+import {PredefinedQuizWithResolvedQuestions} from '../../model/PredefinedQuizWithResolvedQuestions';
+import {PredefinedQuiz} from "../../model/PredefinedQuiz";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class QuizService {
    *
    * @return an Observable for the created question
    */
-  addQuiz(quizName: string, adminToken: string): Observable<PredefinedQuiz> {
+  addQuiz(quizName: string, adminToken: string): Promise<PredefinedQuiz> {
 
     // prepare request
     const url = URL.QUIZ_ENDPOINT;
@@ -46,7 +46,7 @@ export class QuizService {
     }
 
     // do request and return Observable
-    return this.httpClient.post<PredefinedQuiz>(url, body, httpOptions);
+    return this.httpClient.post<PredefinedQuiz>(url, body, httpOptions).toPromise();
   }
 
   /*======================================*
@@ -61,7 +61,7 @@ export class QuizService {
    * @param questionCount the question count for the random quiz
    * @param alreadyUsedQuestions optional array of question ids that were already used in this session
    */
-  public getRandomQuiz(questionCount: number, alreadyUsedQuestions: number[] = []): Observable<number[]> {
+  public getRandomQuiz(questionCount: number, alreadyUsedQuestions: number[] = []): Promise<number[]> {
 
     // prepare request
     const url = `${URL.QUIZ_ENDPOINT}/random`;
@@ -72,15 +72,15 @@ export class QuizService {
     }
 
     // do request and return Observable
-    return this.httpClient.post<number[]>(url, body);
+    return this.httpClient.post<number[]>(url, body).toPromise();
   }
 
   /**
    * Requests all predefined quizzes from the server and returns an Observable for this request.
    */
-  public getAllPredefinedQuizzes(): Observable<PredefinedQuiz[]> {
+  public getAllPredefinedQuizzes(): Promise<PredefinedQuiz[]> {
     const url = `${URL.QUIZ_ENDPOINT}/predefined`;
-    return this.httpClient.get<PredefinedQuiz[]>(url);
+    return this.httpClient.get<PredefinedQuiz[]>(url).toPromise();
   }
 
   /**
@@ -89,9 +89,9 @@ export class QuizService {
    *
    * @param quizId the id of the predefined quiz
    */
-  public getQuestionIdsOfPredefinedQuiz(quizId: number): Observable<number[]> {
+  public getQuestionIdsOfPredefinedQuiz(quizId: number): Promise<number[]> {
     const url = `${URL.QUIZ_ENDPOINT}/${quizId}`;
-    return this.httpClient.get<number[]>(url);
+    return this.httpClient.get<number[]>(url).toPromise();
   }
 
   /*======================================*
@@ -109,7 +109,7 @@ export class QuizService {
    *
    * @return an Observable for the success message
    */
-  saveUpdatedQuiz(quiz: PredefinedQuizWithResolvedQuestions, adminToken: string): Observable<string> {
+  saveUpdatedQuiz(quiz: PredefinedQuizWithResolvedQuestions, adminToken: string): Promise<string> {
 
     // prepare request
     const url = `${URL.QUIZ_ENDPOINT}/${quiz.quizId}`;
@@ -132,7 +132,7 @@ export class QuizService {
     }
 
     // do request and return Observable
-    return this.httpClient.put<string>(url, body, httpOptions);
+    return this.httpClient.put<string>(url, body, httpOptions).toPromise();
   }
 
   /*======================================*
@@ -150,7 +150,7 @@ export class QuizService {
    *
    * @return an Observable for the success message
    */
-  public deletePredefinedQuiz(quizId: number, adminToken: string) {
+  public deletePredefinedQuiz(quizId: number, adminToken: string): Promise<string> {
 
     // prepare request
     const url = `${URL.QUIZ_ENDPOINT}/${quizId}`;
@@ -163,6 +163,6 @@ export class QuizService {
     }
 
     // do request and return Observable
-    return this.httpClient.delete<string>(url, httpOptions);
+    return this.httpClient.delete<string>(url, httpOptions).toPromise();
   }
 }

@@ -1,6 +1,6 @@
 <!-- title and close button -->
 <div class="modal-header">
-  <h4>{{loc.localize(MESSAGE_ID.HEADERS.EDIT_QUIZ)}}</h4>
+  <h4 i18n="@@editQuiz">Edit Quiz</h4>
   <button type="button" class="close">
     <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
   </button>
@@ -17,12 +17,12 @@
   </thead>
   <!-- quiz ID -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ID)}}</th>
+    <th i18n="@@id">ID</th>
     <td>{{editedQuiz.quizId}}</td>
   </tr>
   <!-- quiz name -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUIZ_NAME)}}</th>
+    <th i18n="@@quizName">Quiz Name</th>
     <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="editedQuiz.quizName"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
@@ -30,30 +30,30 @@
   </tr>
   <!-- question count -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
+    <th i18n="@@questionCount">Question Count</th>
     <td>{{editedQuiz.questionCount}}</td>
   </tr>
   <!-- used questions -->
   <tr>
-    <th colspan="2">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.USED_QUESTIONS)}}</th>
+    <th colspan="2" i18n="@@usedQuestions">Used Questions</th>
   </tr>
-  <tr *ngIf="editedQuiz.resolvedQuestions.length == 0" class="text-center">
+  <tr *ngIf="editedQuiz.resolvedQuestions.length === 0" class="text-center">
     <!-- currently no used question -->
-    <td colspan="2">{{loc.localize(MESSAGE_ID.INFO.NO_USED_QUESTIONS)}}</td>
+    <td colspan="2" i18n="@@noUsedQuestions">There are no questions are assigned to this Quiz yet.</td>
   </tr>
   <tr *ngFor="let question of editedQuiz.resolvedQuestions; let idxResolvedQuestions = index">
     <!-- remove and sort buttons -->
     <td class="text-center">
       <div class="btn-group">
         <!-- swap with predecessor question -->
-        <button [disabled]="idxResolvedQuestions == 0"
+        <button [disabled]="idxResolvedQuestions === 0"
                 class="btn btn-info rounded my-0 mx-1 font-weight-bold"
                 (click)="swapQuestionWithPredecessor(idxResolvedQuestions)">&#8593;</button>
         <!-- remove -->
         <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button"
                 (click)="removeQuestion(idxResolvedQuestions)">&times;</button>
         <!-- swap with successor question -->
-        <button [disabled]="idxResolvedQuestions == (editedQuiz.questionCount - 1)"
+        <button [disabled]="idxResolvedQuestions === (editedQuiz.questionCount - 1)"
                 class="btn btn-info rounded my-0 mx-1 font-weight-bold"
                 (click)="swapQuestionWithSuccessor(idxResolvedQuestions)">&#8595;</button>
       </div>
@@ -63,11 +63,11 @@
   </tr>
   <!-- unused questions -->
   <tr>
-    <th colspan="2">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.UNUSED_QUESTIONS)}}</th>
+    <th colspan="2" i18n="@@unusedQuestions">Unused Questions</th>
   </tr>
-  <tr *ngIf="unusedQuestions.length == 0" class="text-center">
+  <tr *ngIf="unusedQuestions.length === 0" class="text-center">
     <!-- currently no unused question -->
-    <td colspan="2">{{loc.localize(MESSAGE_ID.INFO.NO_UNUSED_QUESTIONS)}}</td>
+    <td colspan="2" i18n="@@noUnusedQuestions">All existing questions are already assigned to this Quiz.</td>
   </tr>
   <tr *ngFor="let question of unusedQuestions; let idxUnusedQuestions = index">
     <!-- add button -->
@@ -80,7 +80,7 @@
   </tr>
   <!-- admin token -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ADMIN_TOKEN)}}</th>
+    <th i18n="@@adminToken">Admin Token</th>
     <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="adminToken"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
@@ -96,12 +96,13 @@
 <!-- actions -->
 <div class="btn-group modal-buttons">
   <!-- cancel -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()">
-    {{loc.localize(MESSAGE_ID.ACTION_LABELS.CANCEL)}}
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()" i18n="@@cancel">
+    Cancel
   </button>
   <!-- save -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="saveQuiz()" [disabled]="!savingEnabled">
-    {{loc.localize(MESSAGE_ID.ACTION_LABELS.SAVE)}}
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="saveQuiz()" [disabled]="!savingEnabled"
+          i18n="@@save">
+    Save
   </button>
 </div>
 

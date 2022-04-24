@@ -1,10 +1,9 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {QuestionInPlayFormat} from '../../model/question';
+import {QuestionInPlayFormat} from '../../model/QuestionInPlayFormat';
 import {PlayQuizService} from '../../service/play-quiz/play-quiz.service';
 import {QuestionService} from '../../service/question/question.service';
-import {LocalizationService} from '../../service/localization/localization.service';
-import {MESSAGE_ID} from '../../constants/localization/message-id';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-play-quiz',
@@ -17,8 +16,6 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
    * FIELDS
    *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
-
   public question: QuestionInPlayFormat;
   public isAnswerSelected: boolean;
   public isLastQuestion: boolean;
@@ -30,8 +27,7 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              public playQuizService: PlayQuizService,
+  constructor(public playQuizService: PlayQuizService,
               private questionService: QuestionService,
               private changeDetectorRef: ChangeDetectorRef,
               private router: Router) { }
@@ -39,7 +35,7 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     // if no quiz state is existing, go select-quiz-format page
     if (this.playQuizService.quizState.questionIds === undefined) {
-      this.router.navigateByUrl('/select-quiz-format');
+      void this.router.navigateByUrl('/select-quiz-format');
       return;
     }
 
@@ -98,16 +94,17 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
     if (!restored) {
       const currentId = this.playQuizService.currentQuestionId;
       this.questionService.getQuestionInPlayFormat(currentId)
-        .subscribe(question => {
+        .then(question => {
           this.question = question;
           this.playQuizService.quizState.currentQuestion = question;
           this.isLoadingNextQuestion = false;
-        }, err => {
+        })
+        .catch( (err: HttpErrorResponse) => {
           // go to backend-not-reachable page when connection fails
           console.log('Error while resolving questions: ', err)
           if (err.status == 0) {
             setTimeout(() => {
-              this.router.navigateByUrl('/backend-not-reachable');
+              void this.router.navigateByUrl('/backend-not-reachable');
             }, 1500);
           }
         });
@@ -216,6 +213,6 @@ export class PlayQuizComponent implements OnInit, AfterViewChecked {
    * Navigates to the 'finish quiz' page.
    */
   finishQuiz() {
-    this.router.navigateByUrl('/finish-quiz')
+    void this.router.navigateByUrl('/finish-quiz')
   }
 }

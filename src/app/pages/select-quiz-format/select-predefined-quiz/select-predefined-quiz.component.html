@@ -1,6 +1,6 @@
 <!-- title and close button -->
 <div class="modal-header">
-  <h4>{{loc.localize(MESSAGE_ID.HEADERS.SELECT_PREDEFINED_QUIZ)}}</h4>
+  <h4 i18n="@@selectPredefinedQuiz">Select predefined Quiz</h4>
   <button type="button" class="close">
     <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
   </button>
@@ -17,8 +17,8 @@
   </thead>
 
   <!-- info if there currently is no predefined quiz -->
-  <tr *ngIf="!isLoading && allPlayableQuizzes.length == 0" class="text-center">
-    <td colspan="2">{{loc.localize(MESSAGE_ID.INFO.NO_PREDEFINED_QUIZ)}}</td>
+  <tr *ngIf="!isLoading && allPlayableQuizzes.length === 0" class="text-center">
+    <td colspan="2" i18n="@@noPredefinedQuiz">There are no predefined Quizzes available.</td>
   </tr>
 
   <!-- loading spinner -->
@@ -44,12 +44,14 @@
     <!-- question text -->
     <td>
       {{quiz.quizName}}
-      <p class="font-italic mb-0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}: {{quiz.questionCount}}</p>
+      <p class="font-italic mb-0">
+        <ng-container i18n="@@questionCount">Question Count</ng-container>
+        <ng-container>: {{quiz.questionCount}}</ng-container>
     </td>
     <!-- play button -->
     <td class="text-center">
       <button class="btn btn-block btn-info rounded my-0 mx-1"
-              (click)="playQuiz(quiz)">{{loc.localize(MESSAGE_ID.ACTION_LABELS.PLAY)}}</button>
+              (click)="playQuiz(quiz)" i18n="@@play">Play</button>
     </td>
   </tr>
 </table>

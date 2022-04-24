@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {LocalizationService} from '../../../service/localization/localization.service';
 import {QuizService} from '../../../service/quiz/quiz.service';
-import {PredefinedQuiz} from '../../../model/quiz';
+import {PredefinedQuiz} from '../../../model/PredefinedQuiz';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-select-predefined-quiz',
@@ -16,8 +15,6 @@ export class SelectPredefinedQuizComponent implements OnInit {
    * FIELDS
    *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
-
   @Input() public modalRef: NgbModalRef;
 
   public allPlayableQuizzes: PredefinedQuiz[] = [];
@@ -28,12 +25,11 @@ export class SelectPredefinedQuizComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private quizService: QuizService) { }
+  constructor(private quizService: QuizService) { }
 
   ngOnInit(): void {
     this.quizService.getAllPredefinedQuizzes()
-      .subscribe(allQuizzes => {
+      .then(allQuizzes => {
 
         // fill array with playable quizzes (at least 1 question)
         this.allPlayableQuizzes = allQuizzes.filter(q => {
@@ -50,13 +46,14 @@ export class SelectPredefinedQuizComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
         }, 1500);
-      }, err => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while fetching the predefined Quizzes: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       });
   }

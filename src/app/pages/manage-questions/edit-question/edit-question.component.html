@@ -1,6 +1,6 @@
 <!-- title and close button -->
 <div class="modal-header">
-  <h4>{{loc.localize(MESSAGE_ID.HEADERS.EDIT_QUESTION)}}</h4>
+  <h4 i18n="@@editQuestion">Edit Question</h4>
   <button type="button" class="close">
     <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
   </button>
@@ -17,12 +17,12 @@
   </thead>
   <!-- question ID -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ID)}}</th>
+    <th i18n="@@id">ID</th>
     <td>{{editedQuestion.id}}</td>
   </tr>
   <!-- question text -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_TEXT)}}</th>
+    <th i18n="@@questionText">Question Text</th>
     <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="editedQuestion.questionText"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
@@ -30,11 +30,11 @@
   </tr>
   <!-- question correct answer -->
   <tr *ngIf="!editableAnswers">
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.CORRECT_ANSWER)}}</th>
+    <th i18n="@@correctAnswer">Correct Answer</th>
     <td>**********</td>
   </tr>
   <tr *ngIf="editableAnswers">
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.CORRECT_ANSWER)}}</th>
+    <th i18n="@@correctAnswer">Correct Answer</th>
     <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="editedQuestion.correctAnswer"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
@@ -42,11 +42,11 @@
   </tr>
   <!-- wrong answer 1 (once shown, once masked by stars for hiding the answer) -->
   <tr *ngIf="!editableAnswers">
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_1)}}</th>
+    <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
     <td>**********</td>
   </tr>
   <tr *ngIf="editableAnswers">
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_1)}}</th>
+    <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
     <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer1"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
@@ -54,11 +54,11 @@
   </tr>
   <!-- wrong answer 2 (once shown, once masked by stars for hiding the answer) -->
   <tr *ngIf="!editableAnswers">
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_2)}}</th>
+    <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
     <td>**********</td>
   </tr>
   <tr *ngIf="editableAnswers">
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_2)}}</th>
+    <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
     <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer2"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
@@ -66,11 +66,11 @@
   </tr>
   <!-- wrong answer 3 (once shown, once masked by stars for hiding the answer) -->
   <tr *ngIf="!editableAnswers">
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_3)}}</th>
+    <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
     <td>**********</td>
   </tr>
   <tr *ngIf="editableAnswers">
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_3)}}</th>
+    <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
     <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer3"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
@@ -78,7 +78,7 @@
   </tr>
   <!-- admin token -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ADMIN_TOKEN)}}</th>
+    <th i18n="@@adminToken">Admin Token</th>
     <td class="px-2">
       <input class="w-100 p-2" [(ngModel)]="adminToken"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
@@ -95,21 +95,24 @@
 <div class="btn-group modal-buttons">
   <!-- make answers editable if currently not editable -->
   <button *ngIf="!editableAnswers"
-          class="btn btn-block btn-info rounded my-0 mx-2" (click)="setEditableAnswers(true)">
-    {{loc.localize(MESSAGE_ID.ACTION_LABELS.EDIT_ANSWERS)}}
+          class="btn btn-block btn-info rounded my-0 mx-2" (click)="setEditableAnswers(true)"
+          i18n="@@editAnswers">
+    Edit Answers
   </button>
   <!-- make answers not editable if currently editable -->
   <button *ngIf="editableAnswers"
-          class="btn btn-block btn-info rounded my-0 mx-2" (click)="setEditableAnswers(false)">
-    {{loc.localize(MESSAGE_ID.ACTION_LABELS.NO_EDIT_ANSWERS)}}
+          class="btn btn-block btn-info rounded my-0 mx-2" (click)="setEditableAnswers(false)"
+          i18n="@@doNotEditAnswers">
+    Don't edit Answers
   </button>
   <!-- cancel -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()">
-    {{loc.localize(MESSAGE_ID.ACTION_LABELS.CANCEL)}}
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()" i18n="@@cancel">
+    Cancel
   </button>
   <!-- save -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="saveQuestion()" [disabled]="!savingEnabled">
-    {{loc.localize(MESSAGE_ID.ACTION_LABELS.SAVE)}}
+  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="saveQuestion()" [disabled]="!savingEnabled"
+          i18n="@@save">
+    Save
   </button>
 </div>
 

@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LocalizationService} from '../../../service/localization/localization.service';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
 import {QuestionService} from '../../../service/question/question.service';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-select-random-quiz',
@@ -14,8 +13,6 @@ export class SelectRandomQuizComponent implements OnInit {
   /*======================================*
    * FIELDS
    *======================================*/
-
-  public MESSAGE_ID = MESSAGE_ID;
 
   @Input() public modalRef: NgbModalRef;
 
@@ -31,13 +28,12 @@ export class SelectRandomQuizComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private questionService: QuestionService) { }
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit() {
     // init total question count and adjust max questions if necessary
     this.questionService.getAllQuestions()
-      .subscribe(allQuestions => {
+      .then(allQuestions => {
         // total question count
         this.totalQuestions = allQuestions.length;
 
@@ -50,13 +46,14 @@ export class SelectRandomQuizComponent implements OnInit {
         if (this.questionCount > this.totalQuestions) {
           this.questionCount = Math.floor(this.totalQuestions / 2);
         }
-      }, err => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while fetching questions: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       })
   }

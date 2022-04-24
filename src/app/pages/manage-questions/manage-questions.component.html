@@ -1,5 +1,8 @@
 <!-- back button -->
-<button class="btn btn-info mb-5" routerLink="/start">&#8592; {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}</button>
+<button class="btn btn-info mb-5" routerLink="/start">
+  <span>&#8592; </span>
+  <ng-container i18n="@@backToStart">Back to the main menu</ng-container>
+</button>
 
 <!-- vertical centered container -->
 <div class="container h-75">
@@ -7,16 +10,16 @@
     <div class="col my-auto">
 
       <!-- header -->
-      <h1 class="h1 text-center mb-4">{{loc.localize(MESSAGE_ID.HEADERS.MANAGE_QUESTIONS)}}</h1>
+      <h1 class="h1 text-center mb-4" i18n="@@manageQuestions">Manage Questions</h1>
 
       <!-- add question -->
-      <button class="btn btn-block btn-info" (click)="addQuestion()">
-        {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_QUESTION)}}
+      <button class="btn btn-block btn-info" (click)="addQuestion()" i18n="@@addQuestion">
+        Add Question
       </button>
 
       <!-- no questions -->
-      <h5 *ngIf="!isLoading && allQuestions.length == 0" class="text-center p-5">
-        {{loc.localize(MESSAGE_ID.INFO.NO_QUESTIONS)}}
+      <h5 *ngIf="!isLoading && allQuestions.length === 0" class="text-center p-5" i18n="@@noQuestions">
+        There are no questions available.
       </h5>
 
       <!-- loading spinner -->
@@ -40,48 +43,48 @@
               </thead>
               <!-- question ID -->
               <tr>
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ID)}}</th>
+                <th i18n="@@id">ID</th>
                 <td>{{question.id}}</td>
               </tr>
               <!-- question text -->
               <tr>
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_TEXT)}}</th>
+                <th i18n="@@questionText">Question Text</th>
                 <td>{{question.questionText}}</td>
               </tr>
               <!-- question correct answer -->
               <tr *ngIf="!showAnswersIds.includes(question.id)">
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.CORRECT_ANSWER)}}</th>
+                <th i18n="@@correctAnswer">Correct Answer</th>
                 <td>**********</td>
               </tr>
               <tr *ngIf="showAnswersIds.includes(question.id)">
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.CORRECT_ANSWER)}}</th>
+                <th i18n="@@correctAnswer">Correct Answer</th>
                 <td>{{question.correctAnswer}}</td>
               </tr>
               <!-- wrong answer 1 (once shown, once masked by stars for hiding the answer) -->
               <tr *ngIf="!showAnswersIds.includes(question.id)">
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_1)}}</th>
+                <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
                 <td>**********</td>
               </tr>
               <tr *ngIf="showAnswersIds.includes(question.id)">
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_1)}}</th>
+                <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
                 <td>{{question.wrongAnswer1}}</td>
               </tr>
               <!-- wrong answer 2 (once shown, once masked by stars for hiding the answer) -->
               <tr *ngIf="!showAnswersIds.includes(question.id)">
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_2)}}</th>
+                <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
                 <td>**********</td>
               </tr>
               <tr *ngIf="showAnswersIds.includes(question.id)">
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_2)}}</th>
+                <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
                 <td>{{question.wrongAnswer2}}</td>
               </tr>
               <!-- wrong answer 3 (once shown, once masked by stars for hiding the answer) -->
               <tr *ngIf="!showAnswersIds.includes(question.id)">
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_3)}}</th>
+                <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
                 <td>**********</td>
               </tr>
               <tr *ngIf="showAnswersIds.includes(question.id)">
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.WRONG_ANSWER_3)}}</th>
+                <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
                 <td>{{question.wrongAnswer3}}</td>
               </tr>
             </table>
@@ -90,31 +93,31 @@
             <!-- actions -->
             <table class="table table-borderless">
               <tr>
-                <th colspan="3">{{loc.localize(MESSAGE_ID.ACTION_LABELS.ACTIONS)}}</th>
+                <th colspan="3" i18n="@@actions">Actions</th>
               </tr>
               <tr>
                 <!-- show answers if currently hidden -->
                 <td style="width: 33.33%" *ngIf="!showAnswersIds.includes(question.id)">
-                  <button class="btn btn-block btn-info" (click)="showAnswers(question.id)">
-                    {{loc.localize(MESSAGE_ID.ACTION_LABELS.SHOW_ANSWERS)}}
+                  <button class="btn btn-block btn-info" (click)="showAnswers(question.id)" i18n="@@showAnswers">
+                    Show Answers
                   </button>
                 </td>
                 <!-- hide answers if currently shown -->
                 <td style="width: 33.33%" *ngIf="showAnswersIds.includes(question.id)">
-                  <button class="btn btn-block btn-info" (click)="hideAnswers(question.id)">
-                    {{loc.localize(MESSAGE_ID.ACTION_LABELS.HIDE_ANSWERS)}}
+                  <button class="btn btn-block btn-info" (click)="hideAnswers(question.id)" i18n="@@hideAnswers">
+                    Hide Answers
                   </button>
                 </td>
                 <!-- edit -->
                 <td style="width: 33.33%">
-                  <button class="btn btn-block btn-info" (click)="editQuestion(question.id, idx)">
-                    {{loc.localize(MESSAGE_ID.ACTION_LABELS.EDIT)}}
+                  <button class="btn btn-block btn-info" (click)="editQuestion(question.id, idx)" i18n="@@edit">
+                    Edit
                   </button>
                 </td>
                 <!-- delete -->
                 <td style="width: 33.33%">
-                  <button class="btn btn-block btn-info" (click)="deleteQuestion(question.id, idx)">
-                    {{loc.localize(MESSAGE_ID.ACTION_LABELS.DELETE)}}
+                  <button class="btn btn-block btn-info" (click)="deleteQuestion(question.id, idx)" i18n="@@delete">
+                    Delete
                   </button>
                 </td>
               </tr>

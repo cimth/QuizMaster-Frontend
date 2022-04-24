@@ -1,5 +1,8 @@
 <!-- back button -->
-<button class="btn btn-info mb-5" routerLink="/start">&#8592; {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}</button>
+<button class="btn btn-info mb-5" routerLink="/start">
+  <span>&#8592; </span>
+  <ng-container i18n="@@backToStart">Back to the main menu</ng-container>
+</button>
 
 <!-- vertical centered container -->
 <div class="container h-75">
@@ -7,16 +10,18 @@
     <div class="col my-auto">
 
       <!-- header -->
-      <h1 class="h1 text-center mb-4">{{loc.localize(MESSAGE_ID.HEADERS.MANAGE_PREDEFINED_QUIZZES)}}</h1>
+      <h1 class="h1 text-center mb-4" i18n="@@managePredefinedQuizzes">
+        Manage predefined Quizzes
+      </h1>
 
       <!-- add quiz -->
-      <button class="btn btn-block btn-info" (click)="addQuiz()" >
-        {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_PREDEFINED_QUIZ)}}
+      <button class="btn btn-block btn-info" (click)="addQuiz()" i18n="@@addPredefinedQuiz">
+        Add predefined Quiz
       </button>
 
       <!-- no quizzes -->
-      <h5 *ngIf="!isLoading && allQuizzes.length == 0" class="text-center p-5">
-        {{loc.localize(MESSAGE_ID.INFO.NO_PREDEFINED_QUIZ)}}
+      <h5 *ngIf="!isLoading && allQuizzes.length === 0" class="text-center p-5" i18n="@@noPredefinedQuiz">
+        There are no predefined Quizzes available.
       </h5>
 
       <!-- loading spinner -->
@@ -40,22 +45,22 @@
               </thead>
               <!-- quiz ID -->
               <tr>
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ID)}}</th>
+                <th i18n="@@id">ID</th>
                 <td>{{quiz.quizId}}</td>
               </tr>
               <!-- quiz name -->
               <tr>
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUIZ_NAME)}}</th>
+                <th i18n="@@quizName">Quiz Name</th>
                 <td>{{quiz.quizName}}</td>
               </tr>
               <!-- question count -->
               <tr>
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
+                <th i18n="@@questionCount">Question Count</th>
                 <td >{{quiz.questionCount}}</td>
               </tr>
               <!-- loading spinner while fetching and rendering questions -->
               <tr *ngIf="questionsRendered.get(quiz.quizId) !== true">
-                <th >{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
+                <th i18n="@@questions">Questions</th>
                 <td>
                   <div class="spinner-border spinner-border-sm text-info" role="status"></div>
                 </td>
@@ -64,12 +69,12 @@
               <tr id="questions-{{quiz.quizId}}" *ngFor="let resolvedQuestion of quiz.resolvedQuestions; let qArrIdx = index"
                   [hidden]="!questionsRendered.get(quiz.quizId)" >
                 <!-- only show header in front of first question -->
-                <th *ngIf="qArrIdx == 0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
-                <th *ngIf="qArrIdx != 0"></th>
+                <th *ngIf="qArrIdx === 0" i18n="@@questions">Questions</th>
+                <th *ngIf="qArrIdx !== 0"></th>
                 <!-- actual question -->
                 <td>{{resolvedQuestion.questionText}}</td>
                 <!-- set rendering flag on last index -->
-                {{qArrIdx == (quiz.resolvedQuestions.length - 1) ? markQuestionsAsRendered(quiz.quizId) : '' }}
+                {{qArrIdx === (quiz.resolvedQuestions.length - 1) ? markQuestionsAsRendered(quiz.quizId) : '' }}
               </tr>
             </table>
             <!-- horizontal line -->
@@ -77,19 +82,19 @@
             <!-- actions -->
             <table class="table table-borderless">
               <tr>
-                <th colspan="2">{{loc.localize(MESSAGE_ID.ACTION_LABELS.ACTIONS)}}</th>
+                <th colspan="2" i18n="@@actions">Actions</th>
               </tr>
               <tr>
                 <!-- edit -->
                 <td style="width: 33.33%">
-                  <button class="btn btn-block btn-info" (click)="editQuiz(quiz.quizId, idx)">
-                    {{loc.localize(MESSAGE_ID.ACTION_LABELS.EDIT)}}
+                  <button class="btn btn-block btn-info" (click)="editQuiz(quiz.quizId, idx)" i18n="@@edit">
+                    Edit
                   </button>
                 </td>
                 <!-- delete -->
                 <td style="width: 33.33%">
-                  <button class="btn btn-block btn-info" (click)="deleteQuiz(quiz.quizId, idx)" >
-                    {{loc.localize(MESSAGE_ID.ACTION_LABELS.DELETE)}}
+                  <button class="btn btn-block btn-info" (click)="deleteQuiz(quiz.quizId, idx)" i18n="@@delete">
+                    Delete
                   </button>
                 </td>
               </tr>

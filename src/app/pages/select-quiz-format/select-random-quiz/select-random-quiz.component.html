@@ -1,14 +1,14 @@
 <!-- title and close button -->
 <div class="modal-header">
-  <h4>{{loc.localize(MESSAGE_ID.HEADERS.SELECT_RANDOM_QUIZ)}}</h4>
+  <h4 i18n="@@createRandomQuiz">Create a random Quiz</h4>
   <button type="button" class="close">
     <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
   </button>
 </div>
 
 <!-- info about no questions -->
-<p *ngIf="totalQuestions == 0 && !errorMessage" class="text-center p-3">
-  {{loc.localize(MESSAGE_ID.INFO.NO_RANDOM_QUIZ_SINCE_NO_QUESTIONS)}}
+<p *ngIf="totalQuestions === 0 && !errorMessage" class="text-center p-3" i18n="@@noRandomQuizSinceNoQuestions">
+  You have not created any questions yet. Thus, you cannot play a random Quiz.
 </p>
 
 <!-- error message -->
@@ -27,13 +27,13 @@
   </thead>
   <!-- question count -->
   <tr>
-    <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
+    <th i18n="@@questionCount">Question Count</th>
     <td class="px-2">
       <div class="btn-group text-center">
-        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button" [disabled]="questionCount == MIN_QUESTION_COUNT"
+        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button" [disabled]="questionCount === MIN_QUESTION_COUNT"
                 (click)="decreaseQuestionCount()">&#8722;</button>
         <input class="px-2 text-center" [(ngModel)]="questionCount" readonly />
-        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold add-button" [disabled]="questionCount == MAX_QUESTION_COUNT"
+        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold add-button" [disabled]="questionCount === MAX_QUESTION_COUNT"
                 (click)="increaseQuestionCount()">+</button>
       </div>
     </td>
@@ -41,8 +41,9 @@
   <!-- play button -->
   <tr>
     <td colspan="2" class="text-center">
-      <button class="btn btn-block btn-info rounded my-0 mx-1"
-              (click)="playQuiz()">{{loc.localize(MESSAGE_ID.ACTION_LABELS.PLAY)}}</button>
+      <button class="btn btn-block btn-info rounded my-0 mx-1" (click)="playQuiz()" i18n="@@play">
+        Play
+      </button>
     </td>
   </tr>
 </table>

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {URL} from '../../constants/web-requests';
-import {QuestionInPlayFormat, QuestionInRawFormat} from '../../model/question';
-import {Observable} from 'rxjs';
+import {QuestionInRawFormat} from '../../model/QuestionInRawFormat';
+import {QuestionInPlayFormat} from "../../model/QuestionInPlayFormat";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class QuestionService {
    *
    * @return an Observable for the created question
    */
-  addQuestion(question: QuestionInRawFormat, adminToken: string): Observable<QuestionInRawFormat> {
+  addQuestion(question: QuestionInRawFormat, adminToken: string): Promise<QuestionInRawFormat> {
 
     // prepare request
     const url = URL.QUESTION_ENDPOINT;
@@ -52,7 +52,7 @@ export class QuestionService {
     }
 
     // do request and return Observable
-    return this.httpClient.post<QuestionInRawFormat>(url, body, httpOptions);
+    return this.httpClient.post<QuestionInRawFormat>(url, body, httpOptions).toPromise();
   }
 
   /*======================================*
@@ -64,8 +64,8 @@ export class QuestionService {
    *
    * @return an Observable for all questions
    */
-  public getAllQuestions(): Observable<QuestionInRawFormat[]> {
-    return this.httpClient.get<QuestionInRawFormat[]>(URL.QUESTION_ENDPOINT);
+  public getAllQuestions(): Promise<QuestionInRawFormat[]> {
+    return this.httpClient.get<QuestionInRawFormat[]>(URL.QUESTION_ENDPOINT).toPromise();
   }
 
   /**
@@ -75,9 +75,9 @@ export class QuestionService {
    *
    * @return an Observable of the fetched question
    */
-  public getQuestionInRawFormat(questionId: number): Observable<QuestionInRawFormat> {
+  public getQuestionInRawFormat(questionId: number): Promise<QuestionInRawFormat> {
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}`;
-    return this.httpClient.get<QuestionInRawFormat>(url);
+    return this.httpClient.get<QuestionInRawFormat>(url).toPromise();
   }
 
   /**
@@ -87,9 +87,9 @@ export class QuestionService {
    *
    * @return an Observable of the fetched question
    */
-  public getQuestionInPlayFormat(questionId: number): Observable<QuestionInPlayFormat> {
+  public getQuestionInPlayFormat(questionId: number): Promise<QuestionInPlayFormat> {
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}/playFormat`;
-    return this.httpClient.get<QuestionInPlayFormat>(url);
+    return this.httpClient.get<QuestionInPlayFormat>(url).toPromise();
   }
 
   /*======================================*
@@ -107,7 +107,7 @@ export class QuestionService {
    *
    * @return an Observable for the success message
    */
-  public saveUpdatedQuestion(question: QuestionInRawFormat, adminToken: string): Observable<string> {
+  public saveUpdatedQuestion(question: QuestionInRawFormat, adminToken: string): Promise<string> {
 
     // prepare request
     const url = `${URL.QUESTION_ENDPOINT}/${question.id}`;
@@ -130,7 +130,7 @@ export class QuestionService {
     }
 
     // do request and return Observable
-    return this.httpClient.put<string>(url, body, httpOptions);
+    return this.httpClient.put<string>(url, body, httpOptions).toPromise();
   }
 
   /*======================================*
@@ -148,7 +148,7 @@ export class QuestionService {
    *
    * @return an Observable for the success message
    */
-  public deleteQuestion(questionId: number, adminToken: string): Observable<string> {
+  public deleteQuestion(questionId: number, adminToken: string): Promise<string> {
 
     // prepare request
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}`;
@@ -161,6 +161,6 @@ export class QuestionService {
     }
 
     // do request and return Observable
-    return this.httpClient.delete<string>(url, httpOptions);
+    return this.httpClient.delete<string>(url, httpOptions).toPromise();
   }
 }
