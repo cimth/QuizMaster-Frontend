@@ -95,22 +95,22 @@
 <div class="btn-group modal-buttons">
   <!-- make answers editable if currently not editable -->
   <button *ngIf="!editableAnswers"
-          class="btn btn-block btn-info rounded my-0 mx-2" (click)="setEditableAnswers(true)"
+          class="btn btn-info w-100 rounded my-0 mx-2" (click)="setEditableAnswers(true)"
           i18n="@@editAnswers">
     Edit Answers
   </button>
   <!-- make answers not editable if currently editable -->
   <button *ngIf="editableAnswers"
-          class="btn btn-block btn-info rounded my-0 mx-2" (click)="setEditableAnswers(false)"
+          class="btn btn-info w-100 rounded my-0 mx-2" (click)="setEditableAnswers(false)"
           i18n="@@doNotEditAnswers">
     Don't edit Answers
   </button>
   <!-- cancel -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()" i18n="@@cancel">
+  <button class="btn btn-info w-100 rounded my-0 mx-2" (click)="modalRef.dismiss()" i18n="@@cancel">
     Cancel
   </button>
   <!-- save -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="saveQuestion()" [disabled]="!savingEnabled"
+  <button class="btn btn-info w-100 rounded my-0 mx-2" (click)="saveQuestion()" [disabled]="!savingEnabled"
           i18n="@@save">
     Save
   </button>

@@ -31,11 +31,11 @@
 <!-- actions -->
 <div class="btn-group modal-buttons">
   <!-- cancel -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()" i18n="@@cancel">
+  <button class="btn btn-info w-100 rounded my-0 mx-2" (click)="modalRef.dismiss()" i18n="@@cancel">
     Cancel
   </button>
   <!-- delete -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="deleteQuestion()" [disabled]="!deletingEnabled"
+  <button class="btn btn-info w-100 rounded my-0 mx-2" (click)="deleteQuestion()" [disabled]="!deletingEnabled"
           i18n="@@delete">
     Delete
   </button>

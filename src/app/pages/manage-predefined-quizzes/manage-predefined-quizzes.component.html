@@ -15,7 +15,7 @@
       </h1>
 
       <!-- add quiz -->
-      <button *ngIf="!isLoading" class="btn btn-block btn-info" (click)="addQuiz()" i18n="@@addPredefinedQuiz">
+      <button *ngIf="!isLoading" class="btn btn-info w-100" (click)="addQuiz()" i18n="@@addPredefinedQuiz">
         Add predefined Quiz
       </button>
 
@@ -92,13 +92,13 @@
               <tr>
                 <!-- edit -->
                 <td style="width: 33.33%">
-                  <button class="btn btn-block btn-info" (click)="editQuiz(quiz.quizId, idx)" i18n="@@edit">
+                  <button class="btn btn-info w-100" (click)="editQuiz(quiz.quizId, idx)" i18n="@@edit">
                     Edit
                   </button>
                 </td>
                 <!-- delete -->
                 <td style="width: 33.33%">
-                  <button class="btn btn-block btn-info" (click)="deleteQuiz(quiz.quizId, idx)" i18n="@@delete">
+                  <button class="btn btn-info w-100" (click)="deleteQuiz(quiz.quizId, idx)" i18n="@@delete">
                     Delete
                   </button>
                 </td>
