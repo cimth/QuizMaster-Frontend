@@ -22,6 +22,8 @@ export class SelectRandomQuizComponent implements OnInit {
   public MIN_QUESTION_COUNT: number = 1;
   public MAX_QUESTION_COUNT: number = 30;
 
+  public isLoading: boolean = true;
+
   public errorMessage: string = undefined;
 
   /*======================================*
@@ -46,6 +48,13 @@ export class SelectRandomQuizComponent implements OnInit {
         if (this.questionCount > this.totalQuestions) {
           this.questionCount = Math.floor(this.totalQuestions / 2);
         }
+
+        // mark quizzes as loaded
+        // => use timeout to avoid to short (and thus confusing) loading spinner
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1500);
+
       })
       .catch( (err: HttpErrorResponse) => {
         // show error message

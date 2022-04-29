@@ -17,7 +17,7 @@
   </thead>
 
   <!-- info if there currently is no predefined quiz -->
-  <tr *ngIf="!isLoading && allPlayableQuizzes.length === 0" class="text-center">
+  <tr *ngIf="!isLoading && !errorMessage && allPlayableQuizzes.length === 0" class="text-center">
     <td colspan="2" i18n="@@noPredefinedQuiz">There are no predefined Quizzes available.</td>
   </tr>
 

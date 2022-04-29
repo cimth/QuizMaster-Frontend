@@ -6,18 +6,8 @@
   </button>
 </div>
 
-<!-- info about no questions -->
-<p *ngIf="totalQuestions === 0 && !errorMessage" class="text-center p-3" i18n="@@noRandomQuizSinceNoQuestions">
-  You have not created any questions yet. Thus, you cannot play a random Quiz.
-</p>
-
-<!-- error message -->
-<div *ngIf="errorMessage" class="text-center m-5">
-  <p class="color-red">{{errorMessage}}</p>
-</div>
-
 <!-- list of playable predefined quizzes -->
-<table *ngIf="totalQuestions > 0" class="table table-borderless modal-table text-center">
+<table class="table table-borderless modal-table text-center">
   <!-- configure column size -->
   <thead>
   <tr>
@@ -25,8 +15,34 @@
     <td style="width: 70%"></td>
   </tr>
   </thead>
+
+  <!-- info about no questions -->
+  <tr *ngIf="!isLoading && !errorMessage && totalQuestions === 0" class="text-center">
+    <td colspan="2" i18n="@@noRandomQuizSinceNoQuestions">
+      You have not created any questions yet. Thus, you cannot play a random Quiz.
+    </td>
+  </tr>
+
+  <!-- loading spinner -->
+  <tr *ngIf="isLoading && !errorMessage">
+    <td colspan="2">
+      <div class="text-center">
+        <div class="spinner-border text-info" role="status"></div>
+      </div>
+    </td>
+  </tr>
+
+  <!-- error message -->
+  <tr *ngIf="errorMessage">
+    <td colspan="2">
+      <div class="text-center">
+        <p class="color-red">{{errorMessage}}</p>
+      </div>
+    </td>
+  </tr>
+
   <!-- question count -->
-  <tr>
+  <tr *ngIf="!isLoading && !errorMessage && totalQuestions > 0">
     <th i18n="@@questionCount">Question Count</th>
     <td class="px-2">
       <div class="btn-group text-center">
@@ -38,8 +54,9 @@
       </div>
     </td>
   </tr>
+
   <!-- play button -->
-  <tr>
+  <tr *ngIf="!isLoading && !errorMessage && totalQuestions > 0">
     <td colspan="2" class="text-center">
       <button class="btn btn-block btn-info rounded my-0 mx-1" (click)="playQuiz()" i18n="@@play">
         Play
@@ -47,3 +64,6 @@
     </td>
   </tr>
 </table>
+
+<!-- div with explicit space for workaround margin when scrollable -->
+<div>&nbsp;</div>
