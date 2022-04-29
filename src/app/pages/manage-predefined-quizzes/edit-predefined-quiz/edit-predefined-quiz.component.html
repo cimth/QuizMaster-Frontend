@@ -65,7 +65,7 @@
   <tr>
     <th colspan="2" i18n="@@unusedQuestions">Unused Questions</th>
   </tr>
-  <tr *ngIf="unusedQuestions.length === 0" class="text-center">
+  <tr *ngIf="unusedQuestions && unusedQuestions.length === 0" class="text-center">
     <!-- currently no unused question -->
     <td colspan="2" i18n="@@noUnusedQuestions">All existing questions are already assigned to this Quiz.</td>
   </tr>
