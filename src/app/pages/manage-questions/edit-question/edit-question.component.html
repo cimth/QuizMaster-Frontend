@@ -1,120 +1,160 @@
 <!-- title and close button -->
 <div class="modal-header">
   <h4 i18n="@@editQuestion">Edit Question</h4>
-  <button type="button" class="close">
-    <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
+  <button type="button" class="btn btn-danger fw-bold close" (click)="modalRef.dismiss()">
+    &times;
   </button>
 </div>
 
 <!-- question data -->
-<table class="table table-borderless modal-table">
-  <!-- configure column size -->
-  <thead>
-  <tr>
-    <td style="width: 30%"></td>
-    <td style="width: 70%"></td>
-  </tr>
-  </thead>
-  <!-- question ID -->
-  <tr>
-    <th i18n="@@id">ID</th>
-    <td>{{editedQuestion.id}}</td>
-  </tr>
-  <!-- question text -->
-  <tr>
-    <th i18n="@@questionText">Question Text</th>
-    <td class="px-2">
+<div class="container">
+  <div class="row g-3 mx-1 my-2 align-items-center">
+    <!-- question ID -->
+    <div class="col-3 fw-bold">
+      <label i18n="@@id">ID</label>
+    </div>
+    <div class="col-9">
+      <input class="form-control" [disabled]="true" [value]="editedQuestion.id"/>
+    </div>
+
+    <!-- question text -->
+    <div class="col-3 fw-bold">
+      <label class="form-label" i18n="@@questionText">Question Text</label>
+    </div>
+    <div class="col-9">
       <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.questionText"
-                               (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- question correct answer -->
-  <tr *ngIf="!editableAnswers">
-    <th i18n="@@correctAnswer">Correct Answer</th>
-    <td>**********</td>
-  </tr>
-  <tr *ngIf="editableAnswers">
-    <th i18n="@@correctAnswer">Correct Answer</th>
-    <td class="px-2">
-      <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.correctAnswer"
-                               (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- wrong answer 1 (once shown, once masked by stars for hiding the answer) -->
-  <tr *ngIf="!editableAnswers">
-    <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
-    <td>**********</td>
-  </tr>
-  <tr *ngIf="editableAnswers">
-    <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
-    <td class="px-2">
-      <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer1"
-                               (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- wrong answer 2 (once shown, once masked by stars for hiding the answer) -->
-  <tr *ngIf="!editableAnswers">
-    <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
-    <td>**********</td>
-  </tr>
-  <tr *ngIf="editableAnswers">
-    <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
-    <td class="px-2">
-      <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer2"
-                               (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- wrong answer 3 (once shown, once masked by stars for hiding the answer) -->
-  <tr *ngIf="!editableAnswers">
-    <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
-    <td>**********</td>
-  </tr>
-  <tr *ngIf="editableAnswers">
-    <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
-    <td class="px-2">
-      <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer3"
-                               (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- admin token -->
-  <tr>
-    <th i18n="@@adminToken">Admin Token</th>
-    <td class="px-2">
+             (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
+    </div>
+
+    <!-- correct answer (not editable) -->
+    <ng-container *ngIf="!editableAnswers">
+      <div class="col-3 fw-bold">
+        <label class="form-label" i18n="@@correctAnswer">Correct Answer</label>
+      </div>
+      <div class="col-9">
+        **********
+      </div>
+    </ng-container>
+
+    <!-- correct answer (editable) -->
+    <ng-container *ngIf="editableAnswers">
+      <div class="col-3 fw-bold">
+        <label class="form-label" i18n="@@correctAnswer">Correct Answer</label>
+      </div>
+      <div class="col-9">
+        <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.correctAnswer"
+               (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
+      </div>
+    </ng-container>
+
+    <!-- wrong answer 1 (not editable) -->
+    <ng-container *ngIf="!editableAnswers">
+      <div class="col-3 fw-bold">
+        <label class="form-label" i18n="@@wrongAnswer1">Wrong Answer 1</label>
+      </div>
+      <div class="col-9">
+        **********
+      </div>
+    </ng-container>
+
+    <!-- wrong answer 1 (editable) -->
+    <ng-container *ngIf="editableAnswers">
+      <div class="col-3 fw-bold">
+        <label class="form-label" i18n="@@wrongAnswer1">Wrong Answer 1</label>
+      </div>
+      <div class="col-9">
+        <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer1"
+               (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
+      </div>
+    </ng-container>
+
+    <!-- wrong answer 2 (not editable) -->
+    <ng-container *ngIf="!editableAnswers">
+      <div class="col-3 fw-bold">
+        <label class="form-label" i18n="@@wrongAnswer2">Wrong Answer 2</label>
+      </div>
+      <div class="col-9">
+        **********
+      </div>
+    </ng-container>
+
+    <!-- wrong answer 2 (editable) -->
+    <ng-container *ngIf="editableAnswers">
+      <div class="col-3 fw-bold">
+        <label class="form-label" i18n="@@wrongAnswer2">Wrong Answer 2</label>
+      </div>
+      <div class="col-9">
+        <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer2"
+               (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
+      </div>
+    </ng-container>
+
+    <!-- wrong answer 3 (not editable) -->
+    <ng-container *ngIf="!editableAnswers">
+      <div class="col-3 fw-bold">
+        <label class="form-label" i18n="@@wrongAnswer3">Wrong Answer 3</label>
+      </div>
+      <div class="col-9">
+        **********
+      </div>
+    </ng-container>
+
+    <!-- wrong answer 3 (editable) -->
+    <ng-container *ngIf="editableAnswers">
+      <div class="col-3 fw-bold">
+        <label class="form-label" i18n="@@wrongAnswer3">Wrong Answer 3</label>
+      </div>
+      <div class="col-9">
+        <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer3"
+               (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
+      </div>
+    </ng-container>
+
+    <!-- admin token -->
+    <div class="col-3 fw-bold">
+      <label class="form-label" i18n="@@adminToken">Admin Token</label>
+    </div>
+    <div class="col-9">
       <input class="form-control w-100 p-2" [(ngModel)]="adminToken"
-                               (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
-    </td>
-  </tr>
-</table>
+             (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
+    </div>
 
-<!-- error message -->
-<div *ngIf="errorMessage" class="text-center color-red modal-error">
-  <p>{{errorMessage}}</p>
+    <!-- error message -->
+    <div class="col-12 text-center color-red modal-error" *ngIf="errorMessage">
+      {{errorMessage}}
+    </div>
+
+    <!-- actions -->
+    <div class="col-12">
+      <div class="row">
+        <!-- make answers editable if currently not editable -->
+        <div class="col-4" *ngIf="!editableAnswers">
+          <button class="btn btn-info w-100 h-100" (click)="setEditableAnswers(true)" i18n="@@editAnswers">
+            Edit Answers
+          </button>
+        </div>
+
+        <!-- make answers not editable if currently editable -->
+        <div class="col-4" *ngIf="editableAnswers">
+          <button class="btn btn-info w-100 h-100" (click)="setEditableAnswers(false)" i18n="@@doNotEditAnswers">
+            Don't edit Answers
+          </button>
+        </div>
+
+        <!-- cancel -->
+        <div class="col-4">
+          <button class="btn btn-info w-100 h-100" (click)="modalRef.dismiss()" i18n="@@cancel">
+            Cancel
+          </button>
+        </div>
+
+        <!-- save -->
+        <div class="col-4">
+          <button class="btn btn-info w-100 h-100" (click)="saveQuestion()" [disabled]="!savingEnabled" i18n="@@save">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<!-- actions -->
-<div class="btn-group modal-buttons">
-  <!-- make answers editable if currently not editable -->
-  <button *ngIf="!editableAnswers"
-          class="btn btn-info w-100 rounded my-0 mx-2" (click)="setEditableAnswers(true)"
-          i18n="@@editAnswers">
-    Edit Answers
-  </button>
-  <!-- make answers not editable if currently editable -->
-  <button *ngIf="editableAnswers"
-          class="btn btn-info w-100 rounded my-0 mx-2" (click)="setEditableAnswers(false)"
-          i18n="@@doNotEditAnswers">
-    Don't edit Answers
-  </button>
-  <!-- cancel -->
-  <button class="btn btn-info w-100 rounded my-0 mx-2" (click)="modalRef.dismiss()" i18n="@@cancel">
-    Cancel
-  </button>
-  <!-- save -->
-  <button class="btn btn-info w-100 rounded my-0 mx-2" (click)="saveQuestion()" [disabled]="!savingEnabled"
-          i18n="@@save">
-    Save
-  </button>
-</div>
-
-<!-- div with explicit space for workaround margin when scrollable -->
-<div>&nbsp;</div>
