@@ -69,6 +69,15 @@ export class QuestionService {
   }
 
   /**
+   * Returns the question count of all existing questions on the backend.
+   * @return
+   */
+  public async getAllQuestionsCount(): Promise<number> {
+    const url = `${URL.QUESTION_ENDPOINT}/count`;
+    return this.httpClient.get<number>(url).toPromise();
+  }
+
+  /**
    * Requests the question with the given id from the server and returns an Observable for the fetched question.
    *
    * @param questionId the question to fetch

@@ -17,6 +17,8 @@ export class PlayQuizService {
    *======================================*/
 
   private _quizState: QuizState;
+  private _alreadyUsedQuestions: number[] = [];
+  private _totalQuestionCount: number = 0;
 
   /*======================================*
    * CONSTRUCTOR
@@ -36,14 +38,18 @@ export class PlayQuizService {
    *
    * @param questionCount the question count for the random quiz
    */
-  public startRandomQuiz(questionCount: number) {
+  public async startRandomQuiz(questionCount: number) {
     console.log(`Start random quiz with ${questionCount} questions`);
+
+    await this.updateTotalQuestionCount();
 
     const randomQuizName = $localize `:@@randomQuiz:Random Quiz`;
 
-    this.quizService.getRandomQuiz(questionCount)
+    this.quizService.getRandomQuiz(questionCount, this._alreadyUsedQuestions)
       .then(questionIds => {
+        console.log(questionIds)
         this.initQuizState(randomQuizName, questionIds);
+        void this.updateAlreadyUsedQuestions(questionIds);
         void this.router.navigateByUrl('/play-quiz');
       })
       .catch( (err: HttpErrorResponse) => {
@@ -62,12 +68,15 @@ export class PlayQuizService {
    *
    * @param quiz the predefined quiz to play
    */
-  public startPredefinedQuiz(quiz: PredefinedQuiz) {
+  public async startPredefinedQuiz(quiz: PredefinedQuiz) {
     console.log('Start predefined quiz: ', quiz);
+
+    await this.updateTotalQuestionCount();
 
     this.quizService.getQuestionIdsOfPredefinedQuiz(quiz.quizId)
       .then(questionIds => {
         this.initQuizState(quiz.quizName, questionIds);
+        this.updateAlreadyUsedQuestions(questionIds);
         void this.router.navigateByUrl('/play-quiz');
       })
       .catch( (err: HttpErrorResponse) => {
@@ -98,13 +107,34 @@ export class PlayQuizService {
     this.quizState.clearSelectedAnswer();
   }
 
+  /**
+   * Updates the count of all questions existing on the server at the time of the request.
+   *
+   * @private
+   */
+  private async updateTotalQuestionCount() {
+    await this.questionService.getAllQuestionsCount()
+      .then( (questionCount: number) => {
+        this._totalQuestionCount = questionCount;
+      })
+      .catch( (err: HttpErrorResponse) => {
+        // go to backend-not-reachable page when connection fails
+        console.log('Error while fetching the total question count: ', err)
+        if (err.status == 0) {
+          setTimeout(() => {
+            void this.router.navigateByUrl('/backend-not-reachable');
+          }, 1500);
+        }
+      });
+  }
+
   /*======================================*
    * UPDATE QUIZ STATE
    *======================================*/
 
   /**
    * Updates the quiz state to provide the next question.
-   * Therefore clears values from the previous question and updates the index to point to the next question.
+   * Therefor clears values from the previous question and updates the index to point to the next question.
    */
   public updateForNextQuestion() {
     this.quizState.currentIndex++;
@@ -123,6 +153,35 @@ export class PlayQuizService {
     } else {
       this.quizState.wrongAnswers++;
     }
+  }
+
+  /**
+   * Adds the given question IDs to the already used questions array if not already contained.
+   * If the array contains all questions, it is cleared because every question was already played and, thus, the
+   * cycle for avoiding already played questions begins from new.
+   * <br/>
+   * This is how new random quizzes can avoid having the same questions when there are left some not already asked
+   * questions in the question pool.
+   * The actual technique for filtering the already used questions is implemented on the backend.
+   *
+   * @param questionIds the question ids to add
+   * @private
+   */
+  private updateAlreadyUsedQuestions(questionIds: number[]) {
+    for(const questionId of questionIds) {
+      if (!this._alreadyUsedQuestions.includes(questionId)) {
+        // add if not already contained
+        this._alreadyUsedQuestions.push(questionId);
+
+        // clear array if it contains all questions
+        if (this._alreadyUsedQuestions.length === this._totalQuestionCount) {
+          this._alreadyUsedQuestions = [];
+          console.log('Clear already used questions.')
+        }
+      }
+    }
+
+    console.log(`Already used questions: ${this._alreadyUsedQuestions.toString()}`);
   }
 
   /*======================================*
