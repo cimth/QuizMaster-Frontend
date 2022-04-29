@@ -33,7 +33,7 @@
       <ngb-accordion *ngIf="allQuizzes.length > 0" [closeOthers]="true" activeIds="static-{{allQuizzes[0].quizId}}" type="info"
                      class="p-5" [hidden]="isLoading">
         <ngb-panel *ngFor="let quiz of allQuizzes; let idx = index" id="static-{{quiz.quizId}}" title="{{quiz.quizName}}">
-          <ng-template ngbPanelContent style="background: var(--info)">
+          <ng-template ngbPanelContent style="background: var(--bs-info)">
             <!-- quiz data -->
             <table class="table table-borderless">
               <!-- configure column size -->

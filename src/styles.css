@@ -13,7 +13,7 @@
  */
 
 .remove-button, .remove-button:focus, .remove-button:disabled {
-  background: var(--danger);
+  background: var(--bs-danger);
   font-size: 1.3em;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .add-button, .add-button:focus, .add-button:disabled {
-  background: var(--success);
+  background: var(--bs-success);
   font-size: 1.3em;
 }
 
@@ -104,11 +104,11 @@ html, body {
  */
 
 .answerbtn-correct, .answerbtn-correct:disabled {
-  background-color: var(--green);
+  background-color: var(--bs-green);
   opacity: 100%;
 }
 
 .answerbtn-wrong, .answerbtn-wrong:disabled {
-  background-color: var(--danger);
+  background-color: var(--bs-danger);
   opacity: 100%;
 }

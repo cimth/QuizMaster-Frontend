@@ -31,7 +31,7 @@
       <ngb-accordion *ngIf="allQuestions.length > 0" [closeOthers]="true" activeIds="static-{{allQuestions[0].id}}" type="info"
                      class="p-5" [hidden]="isLoading">
         <ngb-panel *ngFor="let question of allQuestions; let idx = index"  id="static-{{question.id}}" title="{{question.questionText}}">
-          <ng-template ngbPanelContent style="background: var(--info)">
+          <ng-template ngbPanelContent style="background: var(--bs-info)">
             <!-- question data -->
             <table class="table table-borderless">
               <!-- configure column size -->
