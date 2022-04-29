@@ -15,7 +15,7 @@
       </h1>
 
       <!-- add quiz -->
-      <button class="btn btn-block btn-info" (click)="addQuiz()" i18n="@@addPredefinedQuiz">
+      <button *ngIf="!isLoading" class="btn btn-block btn-info" (click)="addQuiz()" i18n="@@addPredefinedQuiz">
         Add predefined Quiz
       </button>
 

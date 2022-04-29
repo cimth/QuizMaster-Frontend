@@ -13,7 +13,7 @@
       <h1 class="h1 text-center mb-4" i18n="@@manageQuestions">Manage Questions</h1>
 
       <!-- add question -->
-      <button class="btn btn-block btn-info" (click)="addQuestion()" i18n="@@addQuestion">
+      <button *ngIf="!isLoading" class="btn btn-block btn-info" (click)="addQuestion()" i18n="@@addQuestion">
         Add Question
       </button>
 
