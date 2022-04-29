@@ -59,11 +59,16 @@
                 <td >{{quiz.questionCount}}</td>
               </tr>
               <!-- loading spinner while fetching and rendering questions -->
-              <tr *ngIf="questionsRendered.get(quiz.quizId) !== true">
+              <tr *ngIf="quiz.questionCount > 0 && questionsRendered.get(quiz.quizId) !== true">
                 <th i18n="@@questions">Questions</th>
                 <td>
                   <div class="spinner-border spinner-border-sm text-info" role="status"></div>
                 </td>
+              </tr>
+              <!-- currently no questions -->
+              <tr *ngIf="quiz.questionCount === 0">
+                <th i18n="@@questions">Questions</th>
+                <td colspan="2" i18n="@@noUsedQuestions">There are no questions are assigned to this Quiz yet.</td>
               </tr>
               <!-- resolved questions -->
               <tr id="questions-{{quiz.quizId}}" *ngFor="let resolvedQuestion of quiz.resolvedQuestions; let qArrIdx = index"
