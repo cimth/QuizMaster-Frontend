@@ -48,7 +48,7 @@
       <div class="btn-group text-center">
         <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button" [disabled]="questionCount === MIN_QUESTION_COUNT"
                 (click)="decreaseQuestionCount()">&#8722;</button>
-        <input class="px-2 text-center" [(ngModel)]="questionCount" readonly />
+        <input class="form-control px-2 text-center" [(ngModel)]="questionCount" readonly />
         <button class="btn btn-info rounded my-0 mx-1 font-weight-bold add-button" [disabled]="questionCount === MAX_QUESTION_COUNT"
                 (click)="increaseQuestionCount()">+</button>
       </div>

@@ -24,7 +24,7 @@
   <tr>
     <th i18n="@@questionText">Question Text</th>
     <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="editedQuestion.questionText"
+      <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.questionText"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
   </tr>
@@ -36,7 +36,7 @@
   <tr *ngIf="editableAnswers">
     <th i18n="@@correctAnswer">Correct Answer</th>
     <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="editedQuestion.correctAnswer"
+      <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.correctAnswer"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
   </tr>
@@ -48,7 +48,7 @@
   <tr *ngIf="editableAnswers">
     <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
     <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer1"
+      <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer1"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
   </tr>
@@ -60,7 +60,7 @@
   <tr *ngIf="editableAnswers">
     <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
     <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer2"
+      <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer2"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
   </tr>
@@ -72,7 +72,7 @@
   <tr *ngIf="editableAnswers">
     <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
     <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer3"
+      <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer3"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
   </tr>
@@ -80,7 +80,7 @@
   <tr>
     <th i18n="@@adminToken">Admin Token</th>
     <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="adminToken"
+      <input class="form-control w-100 p-2" [(ngModel)]="adminToken"
                                (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
   </tr>

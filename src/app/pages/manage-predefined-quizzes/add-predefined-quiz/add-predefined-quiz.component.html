@@ -19,7 +19,7 @@
   <tr>
     <th i18n="@@quizName">Quiz Name</th>
     <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="newQuiz.quizName"
+      <input class="form-control w-100 p-2" [(ngModel)]="newQuiz.quizName"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
   </tr>
@@ -77,7 +77,7 @@
   <tr>
     <th i18n="@@adminToken">Admin Token</th>
     <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="adminToken"
+      <input class="form-control w-100 p-2" [(ngModel)]="adminToken"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
     </td>
   </tr>
