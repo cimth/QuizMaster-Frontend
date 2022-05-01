@@ -11,7 +11,7 @@
   <div class="row g-3 mx-1 my-2 align-items-center">
     <!-- quiz ID -->
     <div class="col-3 fw-bold">
-      <label class="form-label" i18n="@@id">ID</label>
+      <label i18n="@@id">ID</label>
     </div>
     <div class="col-9">
       <input class="form-control w-100 p-2" [(ngModel)]="editedQuiz.quizId" [disabled]="true"
@@ -20,7 +20,7 @@
 
     <!-- quiz name -->
     <div class="col-3 fw-bold">
-      <label class="form-label" i18n="@@quizName">Quiz Name</label>
+      <label i18n="@@quizName">Quiz Name</label>
     </div>
     <div class="col-9">
       <input class="form-control w-100 p-2" [(ngModel)]="editedQuiz.quizName"
@@ -29,7 +29,7 @@
 
     <!-- question count -->
     <div class="col-3 fw-bold">
-      <label class="form-label" i18n="@@questionCount">Question Count</label>
+      <label i18n="@@questionCount">Question Count</label>
     </div>
     <div class="col-9">
       {{editedQuiz.questionCount}}
@@ -41,7 +41,7 @@
 
     <!-- used questions header -->
     <div class="col-12 fw-bold">
-      <label class="form-label" i18n="@@usedQuestions">Used Questions</label>
+      <label i18n="@@usedQuestions">Used Questions</label>
     </div>
 
     <!-- currently no used question -->
@@ -82,7 +82,7 @@
 
     <!-- unused questions header -->
     <div class="col-12 fw-bold">
-      <label class="form-label" i18n="@@unusedQuestions">Unused Questions</label>
+      <label i18n="@@unusedQuestions">Unused Questions</label>
     </div>
 
     <!-- currently unused question -->
@@ -110,7 +110,7 @@
 
     <!-- admin token -->
     <div class="col-3 fw-bold">
-      <label class="form-label" i18n="@@adminToken">Admin Token</label>
+      <label i18n="@@adminToken">Admin Token</label>
     </div>
     <div class="col-9">
       <input class="form-control w-100 p-2" [(ngModel)]="adminToken"

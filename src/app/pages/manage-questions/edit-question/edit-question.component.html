@@ -19,7 +19,7 @@
 
     <!-- question text -->
     <div class="col-3 fw-bold">
-      <label class="form-label" i18n="@@questionText">Question Text</label>
+      <label i18n="@@questionText">Question Text</label>
     </div>
     <div class="col-9">
       <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.questionText"
@@ -29,7 +29,7 @@
     <!-- correct answer (not editable) -->
     <ng-container *ngIf="!editableAnswers">
       <div class="col-3 fw-bold">
-        <label class="form-label" i18n="@@correctAnswer">Correct Answer</label>
+        <label i18n="@@correctAnswer">Correct Answer</label>
       </div>
       <div class="col-9">
         **********
@@ -39,7 +39,7 @@
     <!-- correct answer (editable) -->
     <ng-container *ngIf="editableAnswers">
       <div class="col-3 fw-bold">
-        <label class="form-label" i18n="@@correctAnswer">Correct Answer</label>
+        <label i18n="@@correctAnswer">Correct Answer</label>
       </div>
       <div class="col-9">
         <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.correctAnswer"
@@ -50,7 +50,7 @@
     <!-- wrong answer 1 (not editable) -->
     <ng-container *ngIf="!editableAnswers">
       <div class="col-3 fw-bold">
-        <label class="form-label" i18n="@@wrongAnswer1">Wrong Answer 1</label>
+        <label i18n="@@wrongAnswer1">Wrong Answer 1</label>
       </div>
       <div class="col-9">
         **********
@@ -60,7 +60,7 @@
     <!-- wrong answer 1 (editable) -->
     <ng-container *ngIf="editableAnswers">
       <div class="col-3 fw-bold">
-        <label class="form-label" i18n="@@wrongAnswer1">Wrong Answer 1</label>
+        <label i18n="@@wrongAnswer1">Wrong Answer 1</label>
       </div>
       <div class="col-9">
         <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer1"
@@ -71,7 +71,7 @@
     <!-- wrong answer 2 (not editable) -->
     <ng-container *ngIf="!editableAnswers">
       <div class="col-3 fw-bold">
-        <label class="form-label" i18n="@@wrongAnswer2">Wrong Answer 2</label>
+        <label i18n="@@wrongAnswer2">Wrong Answer 2</label>
       </div>
       <div class="col-9">
         **********
@@ -81,7 +81,7 @@
     <!-- wrong answer 2 (editable) -->
     <ng-container *ngIf="editableAnswers">
       <div class="col-3 fw-bold">
-        <label class="form-label" i18n="@@wrongAnswer2">Wrong Answer 2</label>
+        <label i18n="@@wrongAnswer2">Wrong Answer 2</label>
       </div>
       <div class="col-9">
         <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer2"
@@ -92,7 +92,7 @@
     <!-- wrong answer 3 (not editable) -->
     <ng-container *ngIf="!editableAnswers">
       <div class="col-3 fw-bold">
-        <label class="form-label" i18n="@@wrongAnswer3">Wrong Answer 3</label>
+        <label i18n="@@wrongAnswer3">Wrong Answer 3</label>
       </div>
       <div class="col-9">
         **********
@@ -102,7 +102,7 @@
     <!-- wrong answer 3 (editable) -->
     <ng-container *ngIf="editableAnswers">
       <div class="col-3 fw-bold">
-        <label class="form-label" i18n="@@wrongAnswer3">Wrong Answer 3</label>
+        <label i18n="@@wrongAnswer3">Wrong Answer 3</label>
       </div>
       <div class="col-9">
         <input class="form-control w-100 p-2" [(ngModel)]="editedQuestion.wrongAnswer3"
@@ -112,7 +112,7 @@
 
     <!-- admin token -->
     <div class="col-3 fw-bold">
-      <label class="form-label" i18n="@@adminToken">Admin Token</label>
+      <label i18n="@@adminToken">Admin Token</label>
     </div>
     <div class="col-9">
       <input class="form-control w-100 p-2" [(ngModel)]="adminToken"
