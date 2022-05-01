@@ -1,69 +1,54 @@
 <!-- title and close button -->
 <div class="modal-header">
   <h4 i18n="@@createRandomQuiz">Create a random Quiz</h4>
-  <button type="button" class="close">
-    <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
+  <button type="button" class="btn btn-danger fw-bold close" (click)="modalRef.dismiss()">
+    &times;
   </button>
 </div>
 
 <!-- list of playable predefined quizzes -->
-<table class="table table-borderless modal-table text-center">
-  <!-- configure column size -->
-  <thead>
-  <tr>
-    <td style="width: 30%"></td>
-    <td style="width: 70%"></td>
-  </tr>
-  </thead>
-
-  <!-- info about no questions -->
-  <tr *ngIf="!isLoading && !errorMessage && totalQuestions === 0" class="text-center">
-    <td colspan="2" i18n="@@noRandomQuizSinceNoQuestions">
+<div class="container">
+  <div class="row g-3 mx-1 my-2">
+    <!-- info about no questions -->
+    <div class="col-12 text-center"  *ngIf="!isLoading && !errorMessage && totalQuestions === 0"
+         i18n="@@noRandomQuizSinceNoQuestions">
       You have not created any questions yet. Thus, you cannot play a random Quiz.
-    </td>
-  </tr>
+    </div>
 
-  <!-- loading spinner -->
-  <tr *ngIf="isLoading && !errorMessage">
-    <td colspan="2">
-      <div class="text-center">
-        <div class="spinner-border text-info" role="status"></div>
+    <!-- loading spinner -->
+    <div class="col-12 text-center" *ngIf="isLoading && !errorMessage">
+      <div class="spinner-border text-info" role="status"></div>
+    </div>
+
+    <!-- error message -->
+    <div class="col-12 text-center color-red modal-error" *ngIf="errorMessage">
+      {{errorMessage}}
+    </div>
+
+    <!-- question count -->
+    <ng-container *ngIf="!isLoading && !errorMessage && totalQuestions > 0">
+      <div class="col-4 d-flex align-items-center" i18n="@@questionCount">
+        Question Count
       </div>
-    </td>
-  </tr>
-
-  <!-- error message -->
-  <tr *ngIf="errorMessage">
-    <td colspan="2">
-      <div class="text-center">
-        <p class="color-red">{{errorMessage}}</p>
+      <div class="col-8 d-flex">
+          <!-- minus button -->
+            <button class="btn btn-info fw-bold remove-button"
+                    [disabled]="questionCount === MIN_QUESTION_COUNT"
+                    (click)="decreaseQuestionCount()">&#8722;</button>
+          <!-- current selected question count -->
+            <input class="form-control mx-2 text-center" [(ngModel)]="questionCount" readonly />
+          <!-- plus button -->
+            <button [disabled]="questionCount === MAX_QUESTION_COUNT"
+                    class="btn btn-info fw-bold add-button"
+                    (click)="increaseQuestionCount()">+</button>
       </div>
-    </td>
-  </tr>
+    </ng-container>
 
-  <!-- question count -->
-  <tr *ngIf="!isLoading && !errorMessage && totalQuestions > 0">
-    <th i18n="@@questionCount">Question Count</th>
-    <td class="px-2">
-      <div class="btn-group text-center">
-        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button" [disabled]="questionCount === MIN_QUESTION_COUNT"
-                (click)="decreaseQuestionCount()">&#8722;</button>
-        <input class="form-control px-2 text-center" [(ngModel)]="questionCount" readonly />
-        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold add-button" [disabled]="questionCount === MAX_QUESTION_COUNT"
-                (click)="increaseQuestionCount()">+</button>
-      </div>
-    </td>
-  </tr>
-
-  <!-- play button -->
-  <tr *ngIf="!isLoading && !errorMessage && totalQuestions > 0">
-    <td colspan="2" class="text-center">
-      <button class="btn btn-info w-100 rounded my-0 mx-1" (click)="playQuiz()" i18n="@@play">
+    <!-- play button -->
+    <div class="col-12" *ngIf="!isLoading && !errorMessage && totalQuestions > 0">
+      <button class="btn btn-info w-100" (click)="playQuiz()" i18n="@@play">
         Play
       </button>
-    </td>
-  </tr>
-</table>
-
-<!-- div with explicit space for workaround margin when scrollable -->
-<div>&nbsp;</div>
+    </div>
+  </div>
+</div>
