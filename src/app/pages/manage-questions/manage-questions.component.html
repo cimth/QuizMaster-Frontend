@@ -8,7 +8,6 @@
 <div class="container h-75">
   <div class="row h-100">
     <div class="col my-auto">
-
       <!-- header -->
       <h1 class="h1 text-center mb-4" i18n="@@manageQuestions">Manage Questions</h1>
 
@@ -30,102 +29,124 @@
       <!-- questions -->
       <ngb-accordion *ngIf="allQuestions.length > 0" [closeOthers]="true" activeIds="static-{{allQuestions[0].id}}" type="info"
                      class="p-5" [hidden]="isLoading">
-        <ngb-panel *ngFor="let question of allQuestions; let idx = index"  id="static-{{question.id}}" title="{{question.questionText}}">
-          <ng-template ngbPanelContent style="background: var(--bs-info)">
-            <!-- question data -->
-            <table class="table table-borderless">
-              <!-- configure column size -->
-              <thead>
-                <tr>
-                  <td style="width: 25%"></td>
-                  <td style="width: 75%"></td>
-                </tr>
-              </thead>
-              <!-- question ID -->
-              <tr>
-                <th i18n="@@id">ID</th>
-                <td>{{question.id}}</td>
-              </tr>
-              <!-- question text -->
-              <tr>
-                <th i18n="@@questionText">Question Text</th>
-                <td>{{question.questionText}}</td>
-              </tr>
-              <!-- question correct answer -->
-              <tr *ngIf="!showAnswersIds.includes(question.id)">
-                <th i18n="@@correctAnswer">Correct Answer</th>
-                <td>&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;</td>
-              </tr>
-              <tr *ngIf="showAnswersIds.includes(question.id)">
-                <th i18n="@@correctAnswer">Correct Answer</th>
-                <td>{{question.correctAnswer}}</td>
-              </tr>
-              <!-- wrong answer 1 (once shown, once masked by stars for hiding the answer) -->
-              <tr *ngIf="!showAnswersIds.includes(question.id)">
-                <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
-                <td>&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;</td>
-              </tr>
-              <tr *ngIf="showAnswersIds.includes(question.id)">
-                <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
-                <td>{{question.wrongAnswer1}}</td>
-              </tr>
-              <!-- wrong answer 2 (once shown, once masked by stars for hiding the answer) -->
-              <tr *ngIf="!showAnswersIds.includes(question.id)">
-                <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
-                <td>&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;</td>
-              </tr>
-              <tr *ngIf="showAnswersIds.includes(question.id)">
-                <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
-                <td>{{question.wrongAnswer2}}</td>
-              </tr>
-              <!-- wrong answer 3 (once shown, once masked by stars for hiding the answer) -->
-              <tr *ngIf="!showAnswersIds.includes(question.id)">
-                <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
-                <td>&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;</td>
-              </tr>
-              <tr *ngIf="showAnswersIds.includes(question.id)">
-                <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
-                <td>{{question.wrongAnswer3}}</td>
-              </tr>
-            </table>
-            <!-- horizontal line -->
-            <hr />
-            <!-- actions -->
-            <table class="table table-borderless">
-              <tr>
-                <th colspan="3" i18n="@@actions">Actions</th>
-              </tr>
-              <tr>
-                <!-- show answers if currently hidden -->
-                <td style="width: 33.33%" *ngIf="!showAnswersIds.includes(question.id)">
-                  <button class="btn btn-info w-100" (click)="showAnswers(question.id)" i18n="@@showAnswers">
-                    Show Answers
-                  </button>
-                </td>
-                <!-- hide answers if currently shown -->
-                <td style="width: 33.33%" *ngIf="showAnswersIds.includes(question.id)">
-                  <button class="btn btn-info w-100" (click)="hideAnswers(question.id)" i18n="@@hideAnswers">
-                    Hide Answers
-                  </button>
-                </td>
-                <!-- edit -->
-                <td style="width: 33.33%">
-                  <button class="btn btn-info w-100" (click)="editQuestion(question.id, idx)" i18n="@@edit">
-                    Edit
-                  </button>
-                </td>
-                <!-- delete -->
-                <td style="width: 33.33%">
-                  <button class="btn btn-info w-100" (click)="deleteQuestion(question.id, idx)" i18n="@@delete">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </table>
+        <ngb-panel *ngFor="let question of allQuestions; let idx = index"  id="static-{{question.id}}">
+          <!-- header (question text -->
+          <ng-template ngbPanelHeader>
+            <button ngbPanelToggle class="accordion-button">
+              {{question.questionText}}
+            </button>
+          </ng-template>
+          <!-- content (question data) -->
+          <ng-template ngbPanelContent>
+            <div class="container">
+              <div class="row g-3 mx-1 my-2 align-items-center">
+                <!-- question ID -->
+                <div class="col-3 fw-bold">
+                  <label i18n="@@id">ID</label>
+                </div>
+                <div class="col-9">
+                  {{question.id}}
+                </div>
+
+                <!-- question text -->
+                <div class="col-3 fw-bold">
+                  <label i18n="@@questionText">Question Text</label>
+                </div>
+                <div class="col-9">
+                  {{question.questionText}}
+                </div>
+
+                <!-- question correct answer -->
+                <div class="col-3 fw-bold">
+                  <label i18n="@@correctAnswer">Correct Answer</label>
+                </div>
+                <div class="col-9" *ngIf="showAnswersIds.includes(question.id)">
+                  {{question.correctAnswer}}
+                </div>
+                <div class="col-9" *ngIf="!showAnswersIds.includes(question.id)">
+                  &lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;
+                </div>
+
+                <!-- wrong answer 1 -->
+                <div class="col-3 fw-bold">
+                  <label i18n="@@wrongAnswer1">Wrong Answer 1</label>
+                </div>
+                <div class="col-9" *ngIf="showAnswersIds.includes(question.id)">
+                  {{question.wrongAnswer1}}
+                </div>
+                <div class="col-9" *ngIf="!showAnswersIds.includes(question.id)">
+                  &lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;
+                </div>
+
+                <!-- wrong answer 2 -->
+                <div class="col-3 fw-bold">
+                  <label i18n="@@wrongAnswer2">Wrong Answer 2</label>
+                </div>
+                <div class="col-9" *ngIf="showAnswersIds.includes(question.id)">
+                  {{question.wrongAnswer2}}
+                </div>
+                <div class="col-9" *ngIf="!showAnswersIds.includes(question.id)">
+                  &lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;
+                </div>
+
+                <!-- wrong answer 3 -->
+                <div class="col-3 fw-bold">
+                  <label i18n="@@wrongAnswer3">Wrong Answer 3</label>
+                </div>
+                <div class="col-9" *ngIf="showAnswersIds.includes(question.id)">
+                  {{question.wrongAnswer3}}
+                </div>
+                <div class="col-9" *ngIf="!showAnswersIds.includes(question.id)">
+                  &lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;&lowast;
+                </div>
+
+                <!-- horizontal line -->
+                <div class="col-12">
+                  <hr/>
+                </div>
+
+                <!-- actions -->
+                <div class="col-12">
+                  <div class="row g-3">
+                    <!-- header -->
+                    <div class="col-12 fw-bold" i18n="@@actions">
+                      Actions
+                    </div>
+
+                    <!-- show answers if currently hidden -->
+                    <div class="col-4" *ngIf="!showAnswersIds.includes(question.id)">
+                      <button class="btn btn-info w-100" (click)="showAnswers(question.id)" i18n="@@showAnswers">
+                        Show Answers
+                      </button>
+                    </div>
+
+                    <!-- hide answers if currently shown -->
+                    <div class="col-4" *ngIf="showAnswersIds.includes(question.id)">
+                      <button class="btn btn-info w-100" (click)="hideAnswers(question.id)" i18n="@@hideAnswers">
+                        Hide Answers
+                      </button>
+                    </div>
+
+                    <!-- edit -->
+                    <div class="col-4">
+                      <button class="btn btn-info w-100" (click)="editQuestion(question.id, idx)" i18n="@@edit">
+                        Edit
+                      </button>
+                    </div>
+
+                    <!-- delete -->
+                    <div class="col-4">
+                      <button class="btn btn-info w-100" (click)="deleteQuestion(question.id, idx)" i18n="@@delete">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </ng-template>
         </ngb-panel>
       </ngb-accordion>
-
     </div>
   </div>
 </div>

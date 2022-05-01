@@ -30,6 +30,15 @@
   background-color: #0b7220;
 }
 
+.accordion-button, .accordion-button:not(.collapsed) {
+  background-color: var(--bs-info);
+  color: black !important;
+}
+
+.accordion-button:not(.collapsed) {
+  font-weight: bold;
+}
+
 /*
  * outer elements
  */
