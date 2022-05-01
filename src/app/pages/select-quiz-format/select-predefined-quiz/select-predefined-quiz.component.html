@@ -1,60 +1,55 @@
 <!-- title and close button -->
 <div class="modal-header">
   <h4 i18n="@@selectPredefinedQuiz">Select predefined Quiz</h4>
-  <button type="button" class="close">
-    <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
+  <button type="button" class="btn btn-danger fw-bold close" (click)="modalRef.dismiss()">
+    &times;
   </button>
 </div>
 
 <!-- list of playable predefined quizzes -->
-<table class="table table-borderless modal-table text-center">
-  <!-- configure column size -->
-  <thead>
-  <tr>
-    <td style="width: 70%"></td>
-    <td style="width: 30%"></td>
-  </tr>
-  </thead>
+<div class="container">
+  <div class="row g-3 mx-1 my-2 align-items-center">
 
-  <!-- info if there currently is no predefined quiz -->
-  <tr *ngIf="!isLoading && !errorMessage && allPlayableQuizzes.length === 0" class="text-center">
-    <td colspan="2" i18n="@@noPredefinedQuiz">There are no predefined Quizzes available.</td>
-  </tr>
+    <!-- info if there currently is no predefined quiz -->
+    <div class="col-12 text-center" *ngIf="!isLoading && !errorMessage && allPlayableQuizzes.length === 0"
+         i18n="@@noPredefinedQuiz">
+      There are no predefined Quizzes available.
+    </div>
 
-  <!-- loading spinner -->
-  <tr *ngIf="isLoading && !errorMessage">
-    <td colspan="2">
-      <div class="text-center">
-        <div class="spinner-border text-info" role="status"></div>
+    <!-- loading spinner -->
+    <div class="col-12 text-center" *ngIf="isLoading && !errorMessage">
+      <div class="spinner-border text-info" role="status"></div>
+    </div>
+
+    <!-- error message -->
+    <div class="col-12 text-center color-red modal-error" *ngIf="errorMessage">
+      {{errorMessage}}
+    </div>
+
+    <!-- list of predefined quizzes -->
+    <div class="col-12" [hidden]="isLoading">
+      <div class="row g-3">
+        <ng-container *ngFor="let quiz of allPlayableQuizzes">
+          <div class="col-6">
+            <!-- quiz name -->
+            <p class="fw-bold mb-0">
+              {{quiz.quizName}}
+            </p>
+            <!-- question count -->
+            <p class="fst-italic mb-0">
+              <ng-container i18n="@@questionCount">Question Count</ng-container>
+              <ng-container>: {{quiz.questionCount}}</ng-container>
+            </p>
+          </div>
+          <!-- play button -->
+          <div class="col-6 d-flex align-items-center">
+            <button class="btn btn-info w-100"
+                    (click)="playQuiz(quiz)" i18n="@@play">
+              Play
+            </button>
+          </div>
+        </ng-container>
       </div>
-    </td>
-  </tr>
-
-  <!-- error message -->
-  <tr *ngIf="errorMessage">
-    <td colspan="2">
-      <div class="text-center">
-        <p class="color-red">{{errorMessage}}</p>
-      </div>
-    </td>
-  </tr>
-
-  <!-- list of predefined quizzes -->
-  <tr *ngFor="let quiz of allPlayableQuizzes" [hidden]="isLoading">
-    <!-- question text -->
-    <td>
-      {{quiz.quizName}}
-      <p class="font-italic mb-0">
-        <ng-container i18n="@@questionCount">Question Count</ng-container>
-        <ng-container>: {{quiz.questionCount}}</ng-container>
-    </td>
-    <!-- play button -->
-    <td class="text-center">
-      <button class="btn btn-info w-100 rounded my-0 mx-1"
-              (click)="playQuiz(quiz)" i18n="@@play">Play</button>
-    </td>
-  </tr>
-</table>
-
-<!-- div with explicit space for workaround margin when scrollable -->
-<div>&nbsp;</div>
+    </div>
+  </div>
+</div>
