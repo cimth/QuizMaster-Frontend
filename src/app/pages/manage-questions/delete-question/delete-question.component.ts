@@ -7,7 +7,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 @Component({
   selector: 'app-delete-question',
   templateUrl: './delete-question.component.html',
-  styleUrls: ['./delete-question.component.css']
+  styleUrls: ['./delete-question.component.scss']
 })
 export class DeleteQuestionComponent {
 

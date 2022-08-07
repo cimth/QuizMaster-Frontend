@@ -6,7 +6,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 @Component({
   selector: 'app-select-random-quiz',
   templateUrl: './select-random-quiz.component.html',
-  styleUrls: ['./select-random-quiz.component.css']
+  styleUrls: ['./select-random-quiz.component.scss']
 })
 export class SelectRandomQuizComponent implements OnInit {
 

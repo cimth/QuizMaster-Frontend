@@ -7,7 +7,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 @Component({
   selector: 'app-select-predefined-quiz',
   templateUrl: './select-predefined-quiz.component.html',
-  styleUrls: ['./select-predefined-quiz.component.css']
+  styleUrls: ['./select-predefined-quiz.component.scss']
 })
 export class SelectPredefinedQuizComponent implements OnInit {
 

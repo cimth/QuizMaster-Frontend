@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-finish-quiz',
   templateUrl: './finish-quiz.component.html',
-  styleUrls: ['./finish-quiz.component.css']
+  styleUrls: ['./finish-quiz.component.scss']
 })
 export class FinishQuizComponent {
 

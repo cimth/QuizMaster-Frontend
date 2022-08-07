@@ -9,7 +9,7 @@ import {PredefinedQuiz} from "../../model/PredefinedQuiz";
 @Component({
   selector: 'app-select-quiz-format',
   templateUrl: './select-quiz-format.component.html',
-  styleUrls: ['./select-quiz-format.component.css']
+  styleUrls: ['./select-quiz-format.component.scss']
 })
 export class SelectQuizFormatComponent {
 

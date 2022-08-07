@@ -7,7 +7,7 @@ import {PredefinedQuizWithResolvedQuestions} from "../../../model/PredefinedQuiz
 @Component({
   selector: 'app-delete-predefined-quiz',
   templateUrl: './delete-predefined-quiz.component.html',
-  styleUrls: ['./delete-predefined-quiz.component.css']
+  styleUrls: ['./delete-predefined-quiz.component.scss']
 })
 export class DeletePredefinedQuizComponent {
 

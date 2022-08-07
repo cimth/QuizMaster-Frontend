@@ -9,7 +9,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 @Component({
   selector: 'app-edit-predefined-quiz',
   templateUrl: './edit-predefined-quiz.component.html',
-  styleUrls: ['./edit-predefined-quiz.component.css']
+  styleUrls: ['./edit-predefined-quiz.component.scss']
 })
 export class EditPredefinedQuizComponent implements OnInit {
 

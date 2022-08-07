@@ -11,7 +11,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 @Component({
   selector: 'app-manage-questions',
   templateUrl: './manage-questions.component.html',
-  styleUrls: ['./manage-questions.component.css']
+  styleUrls: ['./manage-questions.component.scss']
 })
 export class ManageQuestionsComponent implements OnInit {
 

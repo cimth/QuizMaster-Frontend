@@ -13,7 +13,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 @Component({
   selector: 'app-manage-predefined-quizzes',
   templateUrl: './manage-predefined-quizzes.component.html',
-  styleUrls: ['./manage-predefined-quizzes.component.css']
+  styleUrls: ['./manage-predefined-quizzes.component.scss']
 })
 export class ManagePredefinedQuizzesComponent implements OnInit {
 
