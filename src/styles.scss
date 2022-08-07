@@ -58,6 +58,19 @@ html, body {
 }
 
 /*
+ * Fix shifting when opening and closing modals because of the body's scrollbar
+ * See: https://stackoverflow.com/a/28816183
+ */
+
+body {
+  // always show scroll bar
+  overflow-y: scroll !important;
+
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+/*
  * remove button focus outlines
  */
 
