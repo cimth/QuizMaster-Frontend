@@ -1,87 +1,90 @@
 <!-- title and close button -->
 <div class="modal-header">
   <h4 i18n="@@addQuestion">Add Question</h4>
-  <button type="button" class="close">
-    <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
+  <button type="button" class="btn btn-danger fw-bold close" (click)="modalRef.dismiss()">
+    &times;
   </button>
 </div>
 
 <!-- question data -->
-<table class="table table-borderless">
-  <!-- configure column size -->
-  <thead>
-  <tr>
-    <td style="width: 25%"></td>
-    <td style="width: 75%"></td>
-  </tr>
-  </thead>
-  <!-- question text -->
-  <tr>
-    <th i18n="@@questionText">Question Text</th>
-    <td>
-      <input class="w-100 p-2" [(ngModel)]="newQuestion.questionText"
+<div class="container">
+  <div class="row g-3 mx-1 my-2 align-items-center">
+    <!-- question text -->
+    <div class="col-3 fw-bold">
+      <label i18n="@@questionText">Question Text</label>
+    </div>
+    <div class="col-9">
+      <input class="form-control w-100 p-2" [(ngModel)]="newQuestion.questionText"
              (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- question correct answer -->
-  <tr>
-    <th i18n="@@correctAnswer">Correct Answer</th>
-    <td>
-      <input class="w-100 p-2" [(ngModel)]="newQuestion.correctAnswer"
-             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- wrong answer 1 -->
-  <tr>
-    <th i18n="@@wrongAnswer1">Wrong Answer 1</th>
-    <td>
-      <input class="w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer1"
-             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- wrong answer 2 -->
-  <tr>
-    <th i18n="@@wrongAnswer2">Wrong Answer 2</th>
-    <td>
-      <input class="w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer2"
-             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- wrong answer 3 -->
-  <tr>
-    <th i18n="@@wrongAnswer3">Wrong Answer 3</th>
-    <td>
-      <input class="w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer3"
-             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- admin token -->
-  <tr>
-    <th i18n="@@adminToken">Admin Token</th>
-    <td>
-      <input class="w-100 p-2" [(ngModel)]="adminToken"
-             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
-    </td>
-  </tr>
-</table>
+    </div>
 
-<!-- error message -->
-<div *ngIf="errorMessage" class="text-center color-red">
-  <p>{{errorMessage}}</p>
+    <!-- question correct answer -->
+    <div class="col-3 fw-bold">
+      <label i18n="@@correctAnswer">Correct Answer</label>
+    </div>
+    <div class="col-9">
+      <input class="form-control w-100 p-2" [(ngModel)]="newQuestion.correctAnswer"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </div>
+
+    <!-- wrong answer 1 -->
+    <div class="col-3 fw-bold">
+      <label i18n="@@wrongAnswer1">Wrong Answer 1</label>
+    </div>
+    <div class="col-9">
+      <input class="form-control w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer1"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </div>
+
+    <!-- wrong answer 2 -->
+    <div class="col-3 fw-bold">
+      <label i18n="@@wrongAnswer2">Wrong Answer 2</label>
+    </div>
+    <div class="col-9">
+      <input class="form-control w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer2"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </div>
+
+    <!-- wrong answer 3 -->
+    <div class="col-3 fw-bold">
+      <label i18n="@@wrongAnswer3">Wrong Answer 3</label>
+    </div>
+    <div class="col-9">
+      <input class="form-control w-100 p-2" [(ngModel)]="newQuestion.wrongAnswer3"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </div>
+
+    <!-- admin token -->
+    <div class="col-3 fw-bold">
+      <label i18n="@@adminToken">Admin Token</label>
+    </div>
+    <div class="col-9">
+      <input class="form-control w-100 p-2" [(ngModel)]="adminToken"
+             (ngModelChange)="enableOrDisableAddButtonAccordingToInput()" />
+    </div>
+
+    <!-- error message -->
+    <div class="col-12 text-center color-red modal-error" *ngIf="errorMessage">
+      {{errorMessage}}
+    </div>
+
+    <!-- actions -->
+    <div class="col-12">
+      <div class="row">
+        <!-- cancel -->
+        <div class="col-6">
+          <button class="btn btn-info w-100 h-100" (click)="modalRef.dismiss()" i18n="@@cancel">
+            Cancel
+          </button>
+        </div>
+
+        <!-- save -->
+        <div class="col-6">
+          <button class="btn btn-info w-100 h-100" (click)="addQuestion()" [disabled]="!addingEnabled" i18n="@@save">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<!-- actions -->
-<div class="btn-group">
-  <!-- cancel -->
-  <button class="btn btn-block btn-info rounded my-0 mx-1" (click)="modalRef.dismiss()" i18n="@@cancel">
-    Cancel
-  </button>
-  <!-- save -->
-  <button class="btn btn-block btn-info rounded my-0 mx-1" (click)="addQuestion()" [disabled]="!addingEnabled"
-          i18n="@@save">
-    Save
-  </button>
-</div>
-
-<!-- div with explicit space for workaround margin when scrollable -->
-<div>&nbsp;</div>

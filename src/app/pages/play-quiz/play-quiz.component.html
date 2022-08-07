@@ -44,14 +44,14 @@
 
     <!-- next question after answering -->
     <div class="row my-4 mx-2" *ngIf="isAnswerSelected && !isLastQuestion" (click)="nextQuestion()">
-      <button class="btn btn-block btn-warning rounded p-3" i18n="@@nextQuestion">
+      <button class="btn btn-warning w-100 rounded p-3" i18n="@@nextQuestion">
         Next Question
       </button>
     </div>
 
     <!-- go to end page when the last question is answered -->
     <div class="row my-4 mx-2" *ngIf="isAnswerSelected && isLastQuestion" (click)="finishQuiz()">
-      <button class="btn btn-block btn-warning rounded p-3" i18n="@@finishQuiz">
+      <button class="btn btn-warning w-100 rounded p-3" i18n="@@finishQuiz">
         Finish Quiz
       </button>
     </div>
@@ -65,7 +65,7 @@
 
     <!-- answers -->
     <div *ngFor="let answer of question.possibleAnswers;" class="row my-4 mx-2">
-      <button id="answerbtn-{{answer.answerLetter}}" class="btn btn-block btn-info rounded p-3" [disabled]="isAnswerSelected"
+      <button id="answerbtn-{{answer.answerLetter}}" class="btn btn-info w-100 rounded p-3" [disabled]="isAnswerSelected"
               (click)="checkAnswer(answer.answerLetter, false)">
         <span class="font-weight-bold d-inline-block h-100 vertical-align-middle mr-3">{{answer.answerLetter}}: </span>
         <span class="d-inline-block w-90">{{answer.answerText}}</span>

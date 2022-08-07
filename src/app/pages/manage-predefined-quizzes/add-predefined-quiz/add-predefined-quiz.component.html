@@ -1,105 +1,135 @@
 <!-- title and close button -->
 <div class="modal-header">
   <h4 i18n="@@addQuiz">Add Quiz</h4>
-  <button type="button" class="close">
-    <span aria-hidden="true" (click)="modalRef.dismiss()">&times;</span>
+  <button type="button" class="btn btn-danger fw-bold close" (click)="modalRef.dismiss()">
+    &times;
   </button>
 </div>
 
 <!-- quiz data -->
-<table class="table table-borderless modal-table">
-  <!-- configure column size -->
-  <thead>
-  <tr>
-    <td style="width: 25%"></td>
-    <td style="width: 75%"></td>
-  </tr>
-  </thead>
-  <!-- quiz name -->
-  <tr>
-    <th i18n="@@quizName">Quiz Name</th>
-    <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="newQuiz.quizName"
+<div class="container">
+  <div class="row g-3 mx-1 my-2 align-items-center">
+    <!-- quiz name -->
+    <div class="col-3 fw-bold">
+      <label i18n="@@quizName">Quiz Name</label>
+    </div>
+    <div class="col-9">
+      <input class="form-control w-100 p-2" [(ngModel)]="newQuiz.quizName"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
-    </td>
-  </tr>
-  <!-- question count -->
-  <tr>
-    <th i18n="@@questionCount">Question Count</th>
-    <td>{{newQuiz.questionCount}}</td>
-  </tr>
-  <!-- used questions -->
-  <tr>
-    <th colspan="2" i18n="@@usedQuestions">Used Questions</th>
-  </tr>
-  <tr *ngIf="newQuiz.resolvedQuestions.length === 0" class="text-center">
+    </div>
+
+    <!-- question count -->
+    <div class="col-3 fw-bold">
+      <label i18n="@@questionCount">Question Count</label>
+    </div>
+    <div class="col-9">
+      {{newQuiz.questionCount}}
+    </div>
+
+    <!-------------------->
+    <!-- used questions -->
+    <!-------------------->
+
+    <!-- used questions header -->
+    <div class="col-12 fw-bold">
+      <label i18n="@@usedQuestions">Used Questions</label>
+    </div>
+
     <!-- currently no used question -->
-    <td colspan="2" i18n="@@noUsedQuestions">There are no questions are assigned to this Quiz yet.</td>
-  </tr>
-  <tr *ngFor="let question of newQuiz.resolvedQuestions; let idxResolvedQuestions = index">
-    <!-- remove and sort buttons -->
-    <td class="text-center">
-      <div class="btn-group">
-        <!-- swap with predecessor question -->
-        <button [disabled]="idxResolvedQuestions === 0"
-                class="btn btn-info rounded my-0 mx-1 font-weight-bold"
-                (click)="swapQuestionWithPredecessor(idxResolvedQuestions)">&#8593;</button>
-        <!-- remove -->
-        <button class="btn btn-info rounded my-0 mx-1 font-weight-bold remove-button"
-                (click)="removeQuestion(idxResolvedQuestions)">&times;</button>
-        <!-- swap with successor question -->
-        <button [disabled]="idxResolvedQuestions === (newQuiz.questionCount - 1)"
-                class="btn btn-info rounded my-0 mx-1 font-weight-bold"
-                (click)="swapQuestionWithSuccessor(idxResolvedQuestions)">&#8595;</button>
+    <div class="col-12 text-center" *ngIf="newQuiz.resolvedQuestions.length === 0">
+      <p i18n="@@noUsedQuestions">There are no questions are assigned to this Quiz yet.</p>
+    </div>
+
+    <!-- actual questions with action buttons -->
+    <div class="col-12">
+      <div class="row g-3">
+        <ng-container *ngFor="let question of newQuiz.resolvedQuestions; let idxResolvedQuestions = index">
+          <!-- actions for the question -->
+          <div class="col-4 text-center">
+            <!-- swap with predecessor question -->
+            <button [disabled]="idxResolvedQuestions === 0"
+                    class="btn btn-info h-100 fw-bold"
+                    (click)="swapQuestionWithPredecessor(idxResolvedQuestions)">&#8593;</button>
+            <!-- remove -->
+            <button class="btn h-100 fw-bold remove-button mx-2"
+                    (click)="removeQuestion(idxResolvedQuestions)">&times;</button>
+            <!-- swap with successor question -->
+            <button [disabled]="idxResolvedQuestions === (newQuiz.questionCount - 1)"
+                    class="btn btn-info h-100 fw-bold"
+                    (click)="swapQuestionWithSuccessor(idxResolvedQuestions)">&#8595;</button>
+          </div>
+
+          <!-- question text -->
+          <div class="col-8 d-flex align-items-center">
+            {{question.questionText}}
+          </div>
+        </ng-container>
       </div>
-    </td>
-    <!-- question text -->
-    <td>{{question.questionText}}</td>
-  </tr>
-  <!-- unused questions -->
-  <tr>
-    <th colspan="2" i18n="@@unusedQuestions">Unused Questions</th>
-  </tr>
-  <tr *ngIf="unusedQuestions.length === 0" class="text-center">
-    <!-- currently no unused question -->
-    <td colspan="2" i18n="@@noUnusedQuestions">All existing questions are already assigned to this Quiz.</td>
-  </tr>
-  <tr *ngFor="let question of unusedQuestions; let idxUnusedQuestions = index">
-    <!-- add button -->
-    <td class="text-center">
-      <button class="btn btn-info rounded my-0 mx-1 font-weight-bold add-button"
-              (click)="addQuestion(idxUnusedQuestions)">+</button>
-    </td>
-    <!-- question text -->
-    <td>{{question.questionText}}</td>
-  </tr>
-  <!-- admin token -->
-  <tr>
-    <th i18n="@@adminToken">Admin Token</th>
-    <td class="px-2">
-      <input class="w-100 p-2" [(ngModel)]="adminToken"
+    </div>
+
+    <!---------------------->
+    <!-- unused questions -->
+    <!---------------------->
+
+    <!-- unused questions header -->
+    <div class="col-12 fw-bold">
+      <label i18n="@@unusedQuestions">Unused Questions</label>
+    </div>
+
+    <!-- currently unused question -->
+    <div class="col-12 text-center" *ngIf="unusedQuestions.length === 0">
+      <p i18n="@@noUnusedQuestions">All existing questions are already assigned to this Quiz.</p>
+    </div>
+
+    <!-- actual questions with action buttons -->
+    <div class="col-12">
+      <div class="row g-3">
+        <ng-container *ngFor="let question of unusedQuestions; let idxUnusedQuestions = index">
+          <!-- add to used questions -->
+          <div class="col-4 text-center">
+            <button class="btn fw-bold add-button"
+                            (click)="addQuestion(idxUnusedQuestions)">+</button>
+          </div>
+
+          <!-- question text -->
+          <div class="col-8 d-flex align-items-center">
+            {{question.questionText}}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- admin token -->
+    <div class="col-3 fw-bold">
+      <label i18n="@@adminToken">Admin Token</label>
+    </div>
+    <div class="col-9">
+      <input class="form-control w-100 p-2" [(ngModel)]="adminToken"
              (ngModelChange)="enableOrDisableSaveButtonAccordingToInput()" />
-    </td>
-  </tr>
-</table>
+    </div>
 
-<!-- error message -->
-<div *ngIf="errorMessage" class="text-center color-red modal-error">
-  <p>{{errorMessage}}</p>
+    <!-- error message -->
+    <div class="col-12 text-center color-red modal-error" *ngIf="errorMessage">
+      {{errorMessage}}
+    </div>
+
+    <!-- actions -->
+    <div class="col-12">
+      <div class="row">
+        <!-- cancel -->
+        <div class="col-6">
+          <button class="btn btn-info w-100 h-100" (click)="modalRef.dismiss()" i18n="@@cancel">
+            Cancel
+          </button>
+        </div>
+
+        <!-- save -->
+        <div class="col-6">
+          <button class="btn btn-info w-100 h-100" (click)="saveQuiz()" [disabled]="!savingEnabled" i18n="@@save">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<!-- actions -->
-<div class="btn-group modal-buttons">
-  <!-- cancel -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="modalRef.dismiss()" i18n="@@cancel">
-    Cancel
-  </button>
-  <!-- save -->
-  <button class="btn btn-block btn-info rounded my-0 mx-2" (click)="saveQuiz()" [disabled]="!savingEnabled"
-          i18n="@@save">
-    Save
-  </button>
-</div>
-
-<!-- div with explicit space for workaround margin when scrollable -->
-<div>&nbsp;</div>
