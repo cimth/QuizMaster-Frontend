@@ -77,7 +77,7 @@
     </div>
 
     <!-- currently unused question -->
-    <div class="col-12 text-center" *ngIf="unusedQuestions.length === 0">
+    <div class="col-12 text-center" *ngIf="unusedQuestions && unusedQuestions.length === 0">
       <p i18n="@@noUnusedQuestions">All existing questions are already assigned to this Quiz.</p>
     </div>
 
