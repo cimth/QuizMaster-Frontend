@@ -11,6 +11,8 @@
 // variables to change
 $primary: LightSeaGreen;
 $secondary: SlateGray;
+$success: LimeGreen;
+$danger: OrangeRed;
 
 $min-contrast-ratio: 1.5;
 
@@ -117,7 +119,7 @@ html, body {
  */
 
 .answerbtn-correct, .answerbtn-correct:disabled {
-  background-color: var(--bs-green);
+  background-color: var(--bs-success);
   opacity: 100%;
 }
 
