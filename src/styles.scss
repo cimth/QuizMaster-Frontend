@@ -1,6 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
 /*
+ * overwrite bootstrap variables
+ *
+ * see:
+ * https://stackoverflow.com/questions/43394110/how-to-customise-bootstrap-4-scss-variables-using-angular-cli-ng-bootstrap
+ * https://javascript.plainenglish.io/step-by-step-guide-to-upgrade-your-angular-app-from-css-to-scss-fb347330fe28
+ */
+
+// variables to change
+$primary: LightSeaGreen;
+$secondary: SlateGray;
+
+$min-contrast-ratio: 2.5;
+
+// import bootstrap styles (with overwritten values from above)
+@import '~bootstrap/scss/bootstrap';
+
+/*
  * colors
  */
 
@@ -9,12 +26,12 @@
 }
 
 /*
- * special buttons
+ * accordion buttons
  */
 
 .accordion-button, .accordion-button:not(.collapsed) {
   background-color: var(--bs-primary);
-  color: var(--bs-white) !important;
+  color: black !important;
 }
 
 .accordion-button:not(.collapsed) {
