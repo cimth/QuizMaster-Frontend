@@ -1,5 +1,5 @@
 <!-- back button -->
-<button class="btn btn-info mb-5" routerLink="/start">
+<button class="btn btn-primary mb-5" routerLink="/start">
   <span>&#8592; </span>
   <ng-container i18n="@@backToStart">Back to the main menu</ng-container>
 </button>
@@ -65,7 +65,7 @@
 
     <!-- answers -->
     <div *ngFor="let answer of question.possibleAnswers;" class="row my-4 mx-2">
-      <button id="answerbtn-{{answer.answerLetter}}" class="btn btn-info w-100 rounded p-3" [disabled]="isAnswerSelected"
+      <button id="answerbtn-{{answer.answerLetter}}" class="btn btn-primary w-100 rounded p-3" [disabled]="isAnswerSelected"
               (click)="checkAnswer(answer.answerLetter, false)">
         <span class="font-weight-bold d-inline-block h-100 vertical-align-middle mr-3">{{answer.answerLetter}}: </span>
         <span class="d-inline-block w-90">{{answer.answerText}}</span>

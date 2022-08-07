@@ -129,28 +129,28 @@
       <div class="row">
         <!-- make answers editable if currently not editable -->
         <div class="col-4" *ngIf="!editableAnswers">
-          <button class="btn btn-info w-100 h-100" (click)="setEditableAnswers(true)" i18n="@@editAnswers">
+          <button class="btn btn-secondary w-100 h-100" (click)="setEditableAnswers(true)" i18n="@@editAnswers">
             Edit Answers
           </button>
         </div>
 
         <!-- make answers not editable if currently editable -->
         <div class="col-4" *ngIf="editableAnswers">
-          <button class="btn btn-info w-100 h-100" (click)="setEditableAnswers(false)" i18n="@@doNotEditAnswers">
+          <button class="btn btn-secondary w-100 h-100" (click)="setEditableAnswers(false)" i18n="@@doNotEditAnswers">
             Don't edit Answers
           </button>
         </div>
 
         <!-- cancel -->
         <div class="col-4">
-          <button class="btn btn-info w-100 h-100" (click)="modalRef.dismiss()" i18n="@@cancel">
+          <button class="btn btn-secondary w-100 h-100" (click)="modalRef.dismiss()" i18n="@@cancel">
             Cancel
           </button>
         </div>
 
         <!-- save -->
         <div class="col-4">
-          <button class="btn btn-info w-100 h-100" (click)="saveQuestion()" [disabled]="!savingEnabled" i18n="@@save">
+          <button class="btn btn-primary w-100 h-100" (click)="saveQuestion()" [disabled]="!savingEnabled" i18n="@@save">
             Save
           </button>
         </div>

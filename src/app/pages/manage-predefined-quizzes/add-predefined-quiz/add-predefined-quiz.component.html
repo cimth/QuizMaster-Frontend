@@ -48,14 +48,14 @@
           <div class="col-4 text-center">
             <!-- swap with predecessor question -->
             <button [disabled]="idxResolvedQuestions === 0"
-                    class="btn btn-info h-100 fw-bold"
+                    class="btn btn-primary h-100 fw-bold"
                     (click)="swapQuestionWithPredecessor(idxResolvedQuestions)">&#8593;</button>
             <!-- remove -->
             <button class="btn btn-danger h-100 fw-bold mx-2"
                     (click)="removeQuestion(idxResolvedQuestions)">&times;</button>
             <!-- swap with successor question -->
             <button [disabled]="idxResolvedQuestions === (newQuiz.questionCount - 1)"
-                    class="btn btn-info h-100 fw-bold"
+                    class="btn btn-primary h-100 fw-bold"
                     (click)="swapQuestionWithSuccessor(idxResolvedQuestions)">&#8595;</button>
           </div>
 
@@ -118,14 +118,14 @@
       <div class="row">
         <!-- cancel -->
         <div class="col-6">
-          <button class="btn btn-info w-100 h-100" (click)="modalRef.dismiss()" i18n="@@cancel">
+          <button class="btn btn-secondary w-100 h-100" (click)="modalRef.dismiss()" i18n="@@cancel">
             Cancel
           </button>
         </div>
 
         <!-- save -->
         <div class="col-6">
-          <button class="btn btn-info w-100 h-100" (click)="saveQuiz()" [disabled]="!savingEnabled" i18n="@@save">
+          <button class="btn btn-primary w-100 h-100" (click)="saveQuiz()" [disabled]="!savingEnabled" i18n="@@save">
             Save
           </button>
         </div>

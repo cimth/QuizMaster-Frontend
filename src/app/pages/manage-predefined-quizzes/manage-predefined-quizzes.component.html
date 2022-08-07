@@ -1,5 +1,5 @@
 <!-- back button -->
-<button class="btn btn-info mb-5" routerLink="/start">
+<button class="btn btn-primary mb-5" routerLink="/start">
   <span>&#8592; </span>
   <ng-container i18n="@@backToStart">Back to the main menu</ng-container>
 </button>
@@ -15,7 +15,7 @@
       </h1>
 
       <!-- add quiz -->
-      <button *ngIf="!isLoading" class="btn btn-info w-100" (click)="addQuiz()" i18n="@@addPredefinedQuiz">
+      <button *ngIf="!isLoading" class="btn btn-primary w-100" (click)="addQuiz()" i18n="@@addPredefinedQuiz">
         Add predefined Quiz
       </button>
 
@@ -114,14 +114,14 @@
 
                     <!-- edit -->
                     <div class="col-6">
-                      <button class="btn btn-info w-100" (click)="editQuiz(quiz.quizId, idx)" i18n="@@edit">
+                      <button class="btn btn-secondary w-100" (click)="editQuiz(quiz.quizId, idx)" i18n="@@edit">
                         Edit
                       </button>
                     </div>
 
                     <!-- delete -->
                     <div class="col-6">
-                      <button class="btn btn-info w-100" (click)="deleteQuiz(quiz.quizId, idx)" i18n="@@delete">
+                      <button class="btn btn-danger w-100" (click)="deleteQuiz(quiz.quizId, idx)" i18n="@@delete">
                         Delete
                       </button>
                     </div>

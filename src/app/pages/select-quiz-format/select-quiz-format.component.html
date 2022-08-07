@@ -1,5 +1,5 @@
 <!-- back button -->
-<button class="btn btn-info mb-5" routerLink="/start">
+<button class="btn btn-primary mb-5" routerLink="/start">
   <span>&#8592; </span>
   <ng-container i18n="@@backToStart">Back to the main menu</ng-container>
 </button>
@@ -26,7 +26,7 @@
       <!-- continue quiz -->
       <div *ngIf="!isQuizStarting && playQuizService.quizState.questionIds !== undefined" class="row m-3">
         <div class="col-12">
-          <button class="btn btn-info w-100" (click)="continueQuiz()" i18n="continueQuiz">
+          <button class="btn btn-primary w-100" (click)="continueQuiz()" i18n="continueQuiz">
             Continue previous started Quiz
           </button>
         </div>
@@ -35,7 +35,7 @@
       <!-- random quiz -->
       <div *ngIf="!isQuizStarting" class="row m-3">
         <div class="col-12">
-          <button class="btn btn-info w-100" (click)="selectRandomQuiz()" i18n="@@randomQuiz">
+          <button class="btn btn-primary w-100" (click)="selectRandomQuiz()" i18n="@@randomQuiz">
             Random Quiz
           </button>
         </div>
@@ -44,7 +44,7 @@
       <!-- predefined quiz -->
       <div *ngIf="!isQuizStarting" class="row m-3">
         <div class="col-12">
-          <button class="btn btn-info w-100" (click)="selectPredefinedQuiz()" i18n="@@predefinedQuiz">
+          <button class="btn btn-primary w-100" (click)="selectPredefinedQuiz()" i18n="@@predefinedQuiz">
             Predefined Quiz
           </button>
         </div>
