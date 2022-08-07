@@ -51,7 +51,7 @@
                     class="btn btn-info h-100 fw-bold"
                     (click)="swapQuestionWithPredecessor(idxResolvedQuestions)">&#8593;</button>
             <!-- remove -->
-            <button class="btn h-100 fw-bold remove-button mx-2"
+            <button class="btn btn-danger h-100 fw-bold mx-2"
                     (click)="removeQuestion(idxResolvedQuestions)">&times;</button>
             <!-- swap with successor question -->
             <button [disabled]="idxResolvedQuestions === (newQuiz.questionCount - 1)"
@@ -87,7 +87,7 @@
         <ng-container *ngFor="let question of unusedQuestions; let idxUnusedQuestions = index">
           <!-- add to used questions -->
           <div class="col-4 text-center">
-            <button class="btn fw-bold add-button"
+            <button class="btn btn-success fw-bold"
                             (click)="addQuestion(idxUnusedQuestions)">+</button>
           </div>
 

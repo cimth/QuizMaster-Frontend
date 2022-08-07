@@ -32,15 +32,15 @@
       </div>
       <div class="col-8 d-flex">
           <!-- minus button -->
-            <button class="btn btn-info fw-bold remove-button"
-                    [disabled]="questionCount === MIN_QUESTION_COUNT"
-                    (click)="decreaseQuestionCount()">&#8722;</button>
+          <button class="btn btn-danger fw-bold"
+                  [disabled]="questionCount === MIN_QUESTION_COUNT"
+                  (click)="decreaseQuestionCount()">&#8722;</button>
           <!-- current selected question count -->
-            <input class="form-control mx-2 text-center" [(ngModel)]="questionCount" readonly />
+          <input class="form-control mx-2 text-center" [(ngModel)]="questionCount" readonly />
           <!-- plus button -->
-            <button [disabled]="questionCount === MAX_QUESTION_COUNT"
-                    class="btn btn-info fw-bold add-button"
-                    (click)="increaseQuestionCount()">+</button>
+          <button [disabled]="questionCount === MAX_QUESTION_COUNT"
+                  class="btn btn-success fw-bold"
+                  (click)="increaseQuestionCount()">+</button>
       </div>
     </ng-container>
 

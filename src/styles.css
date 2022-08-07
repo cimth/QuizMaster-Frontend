@@ -12,24 +12,6 @@
  * special buttons
  */
 
-.remove-button, .remove-button:focus, .remove-button:disabled {
-  background: var(--bs-danger);
-  font-size: 1.3em;
-}
-
-.remove-button:hover:enabled {
-  background-color: #aa2330;
-}
-
-.add-button, .add-button:focus, .add-button:disabled {
-  background: var(--bs-success);
-  font-size: 1.3em;
-}
-
-.add-button:hover:enabled {
-  background-color: #0b7220;
-}
-
 .accordion-button, .accordion-button:not(.collapsed) {
   background-color: var(--bs-info);
   color: black !important;
