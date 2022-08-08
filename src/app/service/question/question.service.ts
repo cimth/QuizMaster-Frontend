@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {URL} from '../../constants/web-requests';
 import {QuestionInRawFormat} from '../../model/QuestionInRawFormat';
 import {QuestionInPlayFormat} from "../../model/QuestionInPlayFormat";
+import {firstValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class QuestionService {
     }
 
     // do request and return Observable
-    return this.httpClient.post<QuestionInRawFormat>(url, body, httpOptions).toPromise();
+    return firstValueFrom(this.httpClient.post<QuestionInRawFormat>(url, body, httpOptions));
   }
 
   /*======================================*
@@ -65,7 +66,7 @@ export class QuestionService {
    * @return an Observable for all questions
    */
   public getAllQuestions(): Promise<QuestionInRawFormat[]> {
-    return this.httpClient.get<QuestionInRawFormat[]>(URL.QUESTION_ENDPOINT).toPromise();
+    return firstValueFrom(this.httpClient.get<QuestionInRawFormat[]>(URL.QUESTION_ENDPOINT));
   }
 
   /**
@@ -74,7 +75,7 @@ export class QuestionService {
    */
   public async getAllQuestionsCount(): Promise<number> {
     const url = `${URL.QUESTION_ENDPOINT}/count`;
-    return this.httpClient.get<number>(url).toPromise();
+    return firstValueFrom(this.httpClient.get<number>(url));
   }
 
   /**
@@ -86,7 +87,7 @@ export class QuestionService {
    */
   public getQuestionInRawFormat(questionId: number): Promise<QuestionInRawFormat> {
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}`;
-    return this.httpClient.get<QuestionInRawFormat>(url).toPromise();
+    return firstValueFrom(this.httpClient.get<QuestionInRawFormat>(url));
   }
 
   /**
@@ -98,7 +99,7 @@ export class QuestionService {
    */
   public getQuestionInPlayFormat(questionId: number): Promise<QuestionInPlayFormat> {
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}/playFormat`;
-    return this.httpClient.get<QuestionInPlayFormat>(url).toPromise();
+    return firstValueFrom(this.httpClient.get<QuestionInPlayFormat>(url));
   }
 
   /*======================================*
@@ -139,7 +140,7 @@ export class QuestionService {
     }
 
     // do request and return Observable
-    return this.httpClient.put<string>(url, body, httpOptions).toPromise();
+    return firstValueFrom(this.httpClient.put<string>(url, body, httpOptions));
   }
 
   /*======================================*
@@ -170,6 +171,6 @@ export class QuestionService {
     }
 
     // do request and return Observable
-    return this.httpClient.delete<string>(url, httpOptions).toPromise();
+    return firstValueFrom(this.httpClient.delete<string>(url, httpOptions));
   }
 }

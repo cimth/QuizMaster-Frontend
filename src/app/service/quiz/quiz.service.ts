@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {URL} from '../../constants/web-requests';
 import {PredefinedQuizWithResolvedQuestions} from '../../model/PredefinedQuizWithResolvedQuestions';
 import {PredefinedQuiz} from "../../model/PredefinedQuiz";
+import {firstValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ export class QuizService {
     }
 
     // do request and return Observable
-    return this.httpClient.post<PredefinedQuiz>(url, body, httpOptions).toPromise();
+    return firstValueFrom(this.httpClient.post<PredefinedQuiz>(url, body, httpOptions));
   }
 
   /*======================================*
@@ -72,7 +73,7 @@ export class QuizService {
     }
 
     // do request and return Observable
-    return this.httpClient.post<number[]>(url, body).toPromise();
+    return firstValueFrom(this.httpClient.post<number[]>(url, body));
   }
 
   /**
@@ -80,7 +81,7 @@ export class QuizService {
    */
   public getAllPredefinedQuizzes(): Promise<PredefinedQuiz[]> {
     const url = `${URL.QUIZ_ENDPOINT}/predefined`;
-    return this.httpClient.get<PredefinedQuiz[]>(url).toPromise();
+    return firstValueFrom(this.httpClient.get<PredefinedQuiz[]>(url));
   }
 
   /**
@@ -91,7 +92,7 @@ export class QuizService {
    */
   public getQuestionIdsOfPredefinedQuiz(quizId: number): Promise<number[]> {
     const url = `${URL.QUIZ_ENDPOINT}/${quizId}`;
-    return this.httpClient.get<number[]>(url).toPromise();
+    return firstValueFrom(this.httpClient.get<number[]>(url));
   }
 
   /*======================================*
@@ -132,7 +133,7 @@ export class QuizService {
     }
 
     // do request and return Observable
-    return this.httpClient.put<string>(url, body, httpOptions).toPromise();
+    return firstValueFrom(this.httpClient.put<string>(url, body, httpOptions));
   }
 
   /*======================================*
@@ -163,6 +164,6 @@ export class QuizService {
     }
 
     // do request and return Observable
-    return this.httpClient.delete<string>(url, httpOptions).toPromise();
+    return firstValueFrom(this.httpClient.delete<string>(url, httpOptions));
   }
 }
