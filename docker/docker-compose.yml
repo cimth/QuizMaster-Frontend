@@ -16,7 +16,7 @@ services:
       # project files without docker directory
       - ..:/home/docker/project
       - /home/docker/project/docker
-      # project script
-      # => executed by entrypoint script, but mounted to be updated without a rebuild of the container
-      - ./run_project.sh:/home/docker/run_project.sh
+      # entrypoint script
+      # => is mounted so that it can be updated without rebuilding the container
+      - ./entrypoint.sh:/home/docker/entrypoint.sh
 
