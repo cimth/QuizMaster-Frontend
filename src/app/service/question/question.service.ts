@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {URL} from '../../constants/web-requests';
-import {QuestionInPlayFormat, QuestionInRawFormat} from '../../model/question';
-import {Observable} from 'rxjs';
+import {QuestionInRawFormat} from '../../model/QuestionInRawFormat';
+import {QuestionInPlayFormat} from "../../model/QuestionInPlayFormat";
+import {firstValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class QuestionService {
    *
    * @return an Observable for the created question
    */
-  addQuestion(question: QuestionInRawFormat, adminToken: string): Observable<QuestionInRawFormat> {
+  addQuestion(question: QuestionInRawFormat, adminToken: string): Promise<QuestionInRawFormat> {
 
     // prepare request
     const url = URL.QUESTION_ENDPOINT;
@@ -52,7 +53,7 @@ export class QuestionService {
     }
 
     // do request and return Observable
-    return this.httpClient.post<QuestionInRawFormat>(url, body, httpOptions);
+    return firstValueFrom(this.httpClient.post<QuestionInRawFormat>(url, body, httpOptions));
   }
 
   /*======================================*
@@ -64,8 +65,17 @@ export class QuestionService {
    *
    * @return an Observable for all questions
    */
-  public getAllQuestions(): Observable<QuestionInRawFormat[]> {
-    return this.httpClient.get<QuestionInRawFormat[]>(URL.QUESTION_ENDPOINT);
+  public getAllQuestions(): Promise<QuestionInRawFormat[]> {
+    return firstValueFrom(this.httpClient.get<QuestionInRawFormat[]>(URL.QUESTION_ENDPOINT));
+  }
+
+  /**
+   * Returns the question count of all existing questions on the backend.
+   * @return
+   */
+  public async getAllQuestionsCount(): Promise<number> {
+    const url = `${URL.QUESTION_ENDPOINT}/count`;
+    return firstValueFrom(this.httpClient.get<number>(url));
   }
 
   /**
@@ -75,9 +85,9 @@ export class QuestionService {
    *
    * @return an Observable of the fetched question
    */
-  public getQuestionInRawFormat(questionId: number): Observable<QuestionInRawFormat> {
+  public getQuestionInRawFormat(questionId: number): Promise<QuestionInRawFormat> {
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}`;
-    return this.httpClient.get<QuestionInRawFormat>(url);
+    return firstValueFrom(this.httpClient.get<QuestionInRawFormat>(url));
   }
 
   /**
@@ -87,9 +97,9 @@ export class QuestionService {
    *
    * @return an Observable of the fetched question
    */
-  public getQuestionInPlayFormat(questionId: number): Observable<QuestionInPlayFormat> {
+  public getQuestionInPlayFormat(questionId: number): Promise<QuestionInPlayFormat> {
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}/playFormat`;
-    return this.httpClient.get<QuestionInPlayFormat>(url);
+    return firstValueFrom(this.httpClient.get<QuestionInPlayFormat>(url));
   }
 
   /*======================================*
@@ -107,7 +117,7 @@ export class QuestionService {
    *
    * @return an Observable for the success message
    */
-  public saveUpdatedQuestion(question: QuestionInRawFormat, adminToken: string): Observable<string> {
+  public saveUpdatedQuestion(question: QuestionInRawFormat, adminToken: string): Promise<string> {
 
     // prepare request
     const url = `${URL.QUESTION_ENDPOINT}/${question.id}`;
@@ -126,11 +136,11 @@ export class QuestionService {
       headers: new HttpHeaders({
         'Authorization': adminToken       // admin token from backend console
       }),
-      responseType: 'text' as const       // necessary for processing the response correctly
+      responseType: 'text' as 'json'  // necessary for processing the response correctly
     }
 
     // do request and return Observable
-    return this.httpClient.put(url, body, httpOptions);
+    return firstValueFrom(this.httpClient.put<string>(url, body, httpOptions));
   }
 
   /*======================================*
@@ -148,7 +158,7 @@ export class QuestionService {
    *
    * @return an Observable for the success message
    */
-  public deleteQuestion(questionId: number, adminToken: string): Observable<string> {
+  public deleteQuestion(questionId: number, adminToken: string): Promise<string> {
 
     // prepare request
     const url = `${URL.QUESTION_ENDPOINT}/${questionId}`;
@@ -157,10 +167,10 @@ export class QuestionService {
       headers: new HttpHeaders({
         'Authorization': adminToken  // admin token from backend console
       }),
-      responseType: 'text' as const  // necessary for processing the response correctly
+      responseType: 'text' as 'json'  // necessary for processing the response correctly
     }
 
     // do request and return Observable
-    return this.httpClient.delete(url, httpOptions);
+    return firstValueFrom(this.httpClient.delete<string>(url, httpOptions));
   }
 }

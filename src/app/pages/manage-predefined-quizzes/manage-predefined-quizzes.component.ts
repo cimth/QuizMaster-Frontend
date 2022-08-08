@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
-import {PredefinedQuiz, PredefinedQuizWithResolvedQuestions} from '../../model/quiz';
-import {LocalizationService} from '../../service/localization/localization.service';
+import {PredefinedQuizWithResolvedQuestions} from '../../model/PredefinedQuizWithResolvedQuestions';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {QuizService} from '../../service/quiz/quiz.service';
 import {QuestionService} from '../../service/question/question.service';
@@ -9,11 +7,13 @@ import {DeletePredefinedQuizComponent} from './delete-predefined-quiz/delete-pre
 import {EditPredefinedQuizComponent} from './edit-predefined-quiz/edit-predefined-quiz.component';
 import {AddPredefinedQuizComponent} from './add-predefined-quiz/add-predefined-quiz.component';
 import {Router} from '@angular/router';
+import {PredefinedQuiz} from "../../model/PredefinedQuiz";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-manage-predefined-quizzes',
   templateUrl: './manage-predefined-quizzes.component.html',
-  styleUrls: ['./manage-predefined-quizzes.component.css']
+  styleUrls: ['./manage-predefined-quizzes.component.scss']
 })
 export class ManagePredefinedQuizzesComponent implements OnInit {
 
@@ -21,7 +21,6 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
    * FIELDS
    *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
   public allQuizzes: PredefinedQuizWithResolvedQuestions[] = [];
   public isLoading: boolean = true;
   public questionsRendered: Map<number, boolean> = new Map<number, boolean>();
@@ -30,8 +29,7 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private quizService: QuizService,
+  constructor(private quizService: QuizService,
               private questionService: QuestionService,
               private modalService: NgbModal,
               private router: Router) { }
@@ -44,24 +42,30 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
 
     // fill temporary array with data
     // => question ids need to be resolved, thus load and resolve all data before initializing the display array
-    const quizArray = [];
+    const quizArray: PredefinedQuizWithResolvedQuestions[] = [];
     await this.quizService.getAllPredefinedQuizzes()
-      .subscribe(async allQuizzes => {
-        console.log(allQuizzes);
-        for (let quiz of allQuizzes) {
+      .then(async allQuizzes => {
+        for (const quiz of allQuizzes) {
           const resolvedQuiz = await this.createPredefinedQuizWithResolvedQuestions(quiz);
           quizArray.push(resolvedQuiz);
           this.questionsRendered.set(quiz.quizId, false);
         }
-      }, err => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
-        console.log('Error while fetching predefined Quizzes: ', err)
+        console.log('Error while fetching predefined Quizzes: ', err);
         if (err.status == 0) {
           setTimeout(() => {
-            this.router.navigateByUrl('/backend-not-reachable');
+            void this.router.navigateByUrl('/backend-not-reachable');
           }, 1500);
         }
       });
+
+    // mark quizzes as loaded
+    // => use timeout to avoid to short (and thus confusing) loading spinner
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1500);
 
     // init display array after all data are fully loaded
     this.allQuizzes = quizArray;
@@ -77,48 +81,30 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
   private async createPredefinedQuizWithResolvedQuestions(quiz: PredefinedQuiz): Promise<PredefinedQuizWithResolvedQuestions> {
 
     // init resolved quiz, use empty array for resolved questions to push new resolved questions into it
-    let resolvedQuiz: PredefinedQuizWithResolvedQuestions = {
-      quizId: quiz.quizId,
-      quizName: quiz.quizName,
-      questionCount: quiz.questionCount,
-      resolvedQuestions: []
-    }
+    const resolvedQuiz = new PredefinedQuizWithResolvedQuestions(
+      quiz.quizId,
+      quiz.quizName,
+      quiz.questionCount,
+      []
+    );
 
-    // get all related quiz ids and resolve questions for them
+    // get the question data for the given quiz
     await this.quizService.getQuestionIdsOfPredefinedQuiz(quiz.quizId)
-      .subscribe(async questionIds => {
-
-        // resolve questions
-        for (let questionId of questionIds) {
-          await this.questionService.getQuestionInRawFormat(questionId)
-            .subscribe(question => {
-              resolvedQuiz.resolvedQuestions.push(question);
-            }, err => {
-              // go to backend-not-reachable page when connection fails
-              console.log('Error while fetching predefined Quizzes: ', err)
-              if (err.status == 0) {
-                setTimeout(() => {
-                  this.router.navigateByUrl('/backend-not-reachable');
-                }, 1500);
-              }
-            });
+      .then(async questionIds => {
+        for (const questionId of questionIds) {
+          const resolvedQuestion = await this.questionService.getQuestionInRawFormat(questionId);
+          resolvedQuiz.resolvedQuestions.push(resolvedQuestion);
         }
-
-      }, err => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while resolving questions: ', err)
         if (err.status == 0) {
           setTimeout(() => {
-            this.router.navigateByUrl('/backend-not-reachable');
+            void this.router.navigateByUrl('/backend-not-reachable');
           }, 1500);
         }
       });
-
-    // mark quizzes as loaded
-    // => use timeout to avoid to short (and thus confusing) loading spinner
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 1500);
 
     // return the fully resolved quiz
     return resolvedQuiz;
@@ -157,12 +143,15 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(AddPredefinedQuizComponent, options);
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as AddPredefinedQuizComponent;
+    modalComponent.modalRef = modal;
 
     // update UI with edited question data if the question was changed
-    modal.result.then(addedQuiz => {
+    modal.result.then( (addedQuiz: PredefinedQuizWithResolvedQuestions) => {
       this.allQuizzes.push(addedQuiz);
-    }, err => {
+    }, () => {
       console.log("Closed creation dialog without creating a quiz.");
     });
   }
@@ -188,13 +177,16 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(EditPredefinedQuizComponent, options);
-    modal.componentInstance.originalQuiz = this.allQuizzes[arrayIndex];
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as EditPredefinedQuizComponent;
+    modalComponent.originalQuiz = this.allQuizzes[arrayIndex];
+    modalComponent.modalRef = modal;
 
     // update UI with edited quiz data if the quiz was changed
-    modal.result.then(editedQuiz => {
+    modal.result.then( (editedQuiz: PredefinedQuizWithResolvedQuestions) => {
       this.allQuizzes[arrayIndex] = editedQuiz;
-    }, err => {
+    }, () => {
       console.log("Closed editing dialog without saving any changes.");
     });
   }
@@ -221,15 +213,18 @@ export class ManagePredefinedQuizzesComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(DeletePredefinedQuizComponent, options);
-    modal.componentInstance.quiz = this.allQuizzes[arrayIndex];
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as DeletePredefinedQuizComponent;
+    modalComponent.quiz = this.allQuizzes[arrayIndex];
+    modalComponent.modalRef = modal;
 
     // update UI if the quiz was deleted
     modal.result.then(deleted => {
       if (deleted === true) {
         this.allQuizzes.splice(arrayIndex, 1);
       }
-    }, err => {
+    }, () => {
       console.log("Closed confirmation dialog without deleting the quiz.");
     });
   }

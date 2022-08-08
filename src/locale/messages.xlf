@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="ngb.alert.close" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/alert/alert.ts</context>
+          <context context-type="linenumber">79,80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.slide-number" datatype="html">
+        <source> Slide <x id="INTERPOLATION" equiv-text="}
+
+  get wrap()"/> of <x id="INTERPOLATION_1" equiv-text="value; }
+
+  /**"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/carousel/carousel.ts</context>
+          <context context-type="linenumber">147,157</context>
+        </context-group>
+        <note priority="1" from="description">Currently selected slide number read by screen reader</note>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.previous" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/carousel/carousel.ts</context>
+          <context context-type="linenumber">174,175</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.next" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/carousel/carousel.ts</context>
+          <context context-type="linenumber">195</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.select-month" datatype="html">
+        <source>Select month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/datepicker/datepicker-navigation-select.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/datepicker/datepicker-navigation-select.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.select-year" datatype="html">
+        <source>Select year</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/datepicker/datepicker-navigation-select.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/datepicker/datepicker-navigation-select.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.previous-month" datatype="html">
+        <source>Previous month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/datepicker/datepicker-navigation.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/datepicker/datepicker-navigation.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.next-month" datatype="html">
+        <source>Next month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/datepicker/datepicker-navigation.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/datepicker/datepicker-navigation.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first" datatype="html">
+        <source>««</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">246,247</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous" datatype="html">
+        <source>«</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">264</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next" datatype="html">
+        <source>»</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">280,282</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.last" datatype="html">
+        <source>»»</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">301</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first-aria" datatype="html">
+        <source>First</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">316,318</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous-aria" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">331</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next-aria" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">340,341</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.last-aria" datatype="html">
+        <source>Last</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/pagination/pagination.ts</context>
+          <context context-type="linenumber">351</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.progressbar.value" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="() textType: st"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/progressbar/progressbar.ts</context>
+          <context context-type="linenumber">60,65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.HH" datatype="html">
+        <source>HH</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">132,133</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.hours" datatype="html">
+        <source>Hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">153,154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.MM" datatype="html">
+        <source>MM</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">171</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.minutes" datatype="html">
+        <source>Minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">185,186</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-hours" datatype="html">
+        <source>Increment hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">199,200</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
+        <source>Decrement hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">214,218</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
+        <source>Increment minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">233,236</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
+        <source>Decrement minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">256,258</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.SS" datatype="html">
+        <source>SS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">276</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.seconds" datatype="html">
+        <source>Seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">289,290</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
+        <source>Increment seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">295</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
+        <source>Decrement seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">295</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.PM" datatype="html">
+        <source><x id="INTERPOLATION"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">295</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.AM" datatype="html">
+        <source><x id="INTERPOLATION"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/timepicker/timepicker.ts</context>
+          <context context-type="linenumber">295</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.toast.close-aria" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/src/toast/toast.ts</context>
+          <context context-type="linenumber">106,109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="backToStart" datatype="html">
+        <source>Back to the main menu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backend-not-reachable/backend-not-reachable.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/play-quiz/finish-quiz/finish-quiz.component.html</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/play-quiz/play-quiz.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-quiz-format.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="hdrError" datatype="html">
+        <source>Error!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backend-not-reachable/backend-not-reachable.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorBackendNotReachable" datatype="html">
+        <source>The server is not reachable.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/backend-not-reachable/backend-not-reachable.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.ts</context>
+          <context context-type="linenumber">142</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.ts</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/delete-predefined-quiz/delete-predefined-quiz.component.ts</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.ts</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.ts</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.ts</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/delete-question/delete-question.component.ts</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.ts</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-predefined-quiz/select-predefined-quiz.component.ts</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-random-quiz/select-random-quiz.component.ts</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="addQuiz" datatype="html">
+        <source>Add Quiz</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="quizName" datatype="html">
+        <source>Quiz Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionCount" datatype="html">
+        <source>Question Count</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-predefined-quiz/select-predefined-quiz.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-random-quiz/select-random-quiz.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="usedQuestions" datatype="html">
+        <source>Used Questions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="noUsedQuestions" datatype="html">
+        <source>There are no questions are assigned to this Quiz yet.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="unusedQuestions" datatype="html">
+        <source>Unused Questions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="noUnusedQuestions" datatype="html">
+        <source>All existing questions are already assigned to this Quiz.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="adminToken" datatype="html">
+        <source>Admin Token</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/delete-predefined-quiz/delete-predefined-quiz.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/delete-question/delete-question.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cancel" datatype="html">
+        <source> Cancel </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.html</context>
+          <context context-type="linenumber">94,96</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/delete-predefined-quiz/delete-predefined-quiz.component.html</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">99,101</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.html</context>
+          <context context-type="linenumber">76,78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/delete-question/delete-question.component.html</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">109,111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="save" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.html</context>
+          <context context-type="linenumber">99,101</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">104,106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.html</context>
+          <context context-type="linenumber">81,83</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">114,116</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorEmptyInputFields" datatype="html">
+        <source>The shown input fields must not be empty.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.ts</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.ts</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="successQuizCreated" datatype="html">
+        <source>The Quiz was successfully created!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/add-predefined-quiz/add-predefined-quiz.component.ts</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deleteQuiz" datatype="html">
+        <source>Delete Quiz</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/delete-predefined-quiz/delete-predefined-quiz.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmationRequestDeleteQuiz" datatype="html">
+        <source> Do you really wish to delete the Quiz? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/delete-predefined-quiz/delete-predefined-quiz.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="delete" datatype="html">
+        <source> Delete </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/delete-predefined-quiz/delete-predefined-quiz.component.html</context>
+          <context context-type="linenumber">39,41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">96,98</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/delete-question/delete-question.component.html</context>
+          <context context-type="linenumber">39,41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">119,121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="errorMissingAdminToken" datatype="html">
+        <source>The Admin Token is missing.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/delete-predefined-quiz/delete-predefined-quiz.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/delete-question/delete-question.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editQuiz" datatype="html">
+        <source>Edit Quiz</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="id" datatype="html">
+        <source>ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/edit-predefined-quiz/edit-predefined-quiz.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="managePredefinedQuizzes" datatype="html">
+        <source> Manage predefined Quizzes </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">13,15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/start/start.component.html</context>
+          <context context-type="linenumber">22,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="addPredefinedQuiz" datatype="html">
+        <source> Add predefined Quiz </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">18,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="noPredefinedQuiz" datatype="html">
+        <source> There are no predefined Quizzes available. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">23,25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-predefined-quiz/select-predefined-quiz.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questions" datatype="html">
+        <source>Questions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="actions" datatype="html">
+        <source>Actions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="edit" datatype="html">
+        <source> Edit </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-predefined-quizzes/manage-predefined-quizzes.component.html</context>
+          <context context-type="linenumber">90,92</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">113,115</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="addQuestion" datatype="html">
+        <source>Add Question</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">16,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="questionText" datatype="html">
+        <source>Question Text</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="correctAnswer" datatype="html">
+        <source>Correct Answer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="wrongAnswer1" datatype="html">
+        <source>Wrong Answer 1</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="wrongAnswer2" datatype="html">
+        <source>Wrong Answer 2</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="wrongAnswer3" datatype="html">
+        <source>Wrong Answer 3</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="successQuestionCreated" datatype="html">
+        <source>The Question was successfully created!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/add-question/add-question.component.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deleteQuestion" datatype="html">
+        <source>Delete Question</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/delete-question/delete-question.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmationRequestDeleteQuestion" datatype="html">
+        <source> Do you really wish to delete the Question? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/delete-question/delete-question.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editQuestion" datatype="html">
+        <source>Edit Question</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editAnswers" datatype="html">
+        <source> Edit Answers </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">99,101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="doNotEditAnswers" datatype="html">
+        <source> Don&apos;t edit Answers </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/edit-question/edit-question.component.html</context>
+          <context context-type="linenumber">105,107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="manageQuestions" datatype="html">
+        <source>Manage Questions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/start/start.component.html</context>
+          <context context-type="linenumber">30,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="noQuestions" datatype="html">
+        <source> There are no questions available. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">21,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="showAnswers" datatype="html">
+        <source> Show Answers </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">101,103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="hideAnswers" datatype="html">
+        <source> Hide Answers </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/manage-questions/manage-questions.component.html</context>
+          <context context-type="linenumber">107,109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="hdrFinished" datatype="html">
+        <source>Finished!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/play-quiz/finish-quiz/finish-quiz.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="correctAnswers" datatype="html">
+        <source>Correct Answers: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/play-quiz/finish-quiz/finish-quiz.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/play-quiz/play-quiz.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="wrongAnswers" datatype="html">
+        <source>Wrong Answers: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/play-quiz/finish-quiz/finish-quiz.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/play-quiz/play-quiz.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="question" datatype="html">
+        <source>Question </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/play-quiz/play-quiz.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nextQuestion" datatype="html">
+        <source> Next Question </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/play-quiz/play-quiz.component.html</context>
+          <context context-type="linenumber">47,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="finishQuiz" datatype="html">
+        <source> Finish Quiz </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/play-quiz/play-quiz.component.html</context>
+          <context context-type="linenumber">54,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="selectPredefinedQuiz" datatype="html">
+        <source>Select predefined Quiz</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-predefined-quiz/select-predefined-quiz.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="play" datatype="html">
+        <source>Play</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-predefined-quiz/select-predefined-quiz.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-random-quiz/select-random-quiz.component.html</context>
+          <context context-type="linenumber">44,46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="selectQuizFormat" datatype="html">
+        <source> Select Quiz format </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-quiz-format.component.html</context>
+          <context context-type="linenumber">13,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="startingQuiz" datatype="html">
+        <source> Quiz is being started </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-quiz-format.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8574728790745553907" datatype="html">
+        <source> Continue previous started Quiz </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-quiz-format.component.html</context>
+          <context context-type="linenumber">29,31</context>
+        </context-group>
+        <note priority="1" from="description">continueQuiz</note>
+      </trans-unit>
+      <trans-unit id="randomQuiz" datatype="html">
+        <source> Random Quiz </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-quiz-format.component.html</context>
+          <context context-type="linenumber">38,40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/service/play-quiz/play-quiz.service.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="predefinedQuiz" datatype="html">
+        <source> Predefined Quiz </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-quiz-format.component.html</context>
+          <context context-type="linenumber">47,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createRandomQuiz" datatype="html">
+        <source>Create a random Quiz</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-random-quiz/select-random-quiz.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="noRandomQuizSinceNoQuestions" datatype="html">
+        <source> You have not created any questions yet. Thus, you cannot play a random Quiz.
+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/select-quiz-format/select-random-quiz/select-random-quiz.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="playQuiz" datatype="html">
+        <source> Play a Quiz </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/start/start.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

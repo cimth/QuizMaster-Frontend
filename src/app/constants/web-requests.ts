@@ -1,6 +1,6 @@
-const BACKEND_URL = 'https://localhost:8443'
+import { environment } from "src/environments/environment";
 
 export const URL = {
-  QUESTION_ENDPOINT: `${BACKEND_URL}/question`,
-  QUIZ_ENDPOINT: `${BACKEND_URL}/quiz`
+  QUESTION_ENDPOINT: `${environment.BACKEND_URL}/question`,
+  QUIZ_ENDPOINT: `${environment.BACKEND_URL}/quiz`
 }

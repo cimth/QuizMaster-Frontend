@@ -1,5 +1,8 @@
 <!-- back button -->
-<button class="btn btn-info mb-5" routerLink="/start">&#8592; {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}</button>
+<button class="btn btn-primary mb-5" routerLink="/start">
+  <span>&#8592; </span>
+  <ng-container i18n="@@backToStart">Back to the main menu</ng-container>
+</button>
 
 <!-- vertical centered container -->
 <div class="container h-75">
@@ -7,10 +10,10 @@
     <div class="col my-auto">
 
       <!-- header -->
-      <h1 class="h1 text-center mb-4">{{loc.localize(MESSAGE_ID.HEADERS.ERROR)}}</h1>
+      <h1 class="h1 text-center mb-4" i18n="@@hdrError">Error!</h1>
 
       <!-- info about not reachable backend -->
-      <p class="h5 text-center mb-4">{{loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE)}}</p>
+      <p class="h5 text-center mb-4" i18n="@@errorBackendNotReachable">The server is not reachable.</p>
 
     </div>
   </div>

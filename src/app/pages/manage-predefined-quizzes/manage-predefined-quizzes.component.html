@@ -1,5 +1,8 @@
 <!-- back button -->
-<button class="btn btn-info mb-5" routerLink="/start">&#8592; {{loc.localize(MESSAGE_ID.ACTION_LABELS.BACK_TO_START)}}</button>
+<button class="btn btn-primary mb-5" routerLink="/start">
+  <span>&#8592; </span>
+  <ng-container i18n="@@backToStart">Back to the main menu</ng-container>
+</button>
 
 <!-- vertical centered container -->
 <div class="container h-75">
@@ -7,93 +10,127 @@
     <div class="col my-auto">
 
       <!-- header -->
-      <h1 class="h1 text-center mb-4">{{loc.localize(MESSAGE_ID.HEADERS.MANAGE_PREDEFINED_QUIZZES)}}</h1>
+      <h1 class="h1 text-center mb-4" i18n="@@managePredefinedQuizzes">
+        Manage predefined Quizzes
+      </h1>
 
       <!-- add quiz -->
-      <button class="btn btn-block btn-info" (click)="addQuiz()" >
-        {{loc.localize(MESSAGE_ID.ACTION_LABELS.ADD_PREDEFINED_QUIZ)}}
+      <button *ngIf="!isLoading" class="btn btn-primary w-100" (click)="addQuiz()" i18n="@@addPredefinedQuiz">
+        Add predefined Quiz
       </button>
 
       <!-- no quizzes -->
-      <h5 *ngIf="!isLoading && allQuizzes.length == 0" class="text-center p-5">
-        {{loc.localize(MESSAGE_ID.INFO.NO_PREDEFINED_QUIZ)}}
+      <h5 *ngIf="!isLoading && allQuizzes.length === 0" class="text-center p-5" i18n="@@noPredefinedQuiz">
+        There are no predefined Quizzes available.
       </h5>
 
       <!-- loading spinner -->
       <div *ngIf="isLoading" class="text-center m-5">
-        <div class="spinner-border text-info" role="status"></div>
+        <div class="spinner-border text-primary" role="status"></div>
       </div>
 
       <!-- quizzes -->
       <ngb-accordion *ngIf="allQuizzes.length > 0" [closeOthers]="true" activeIds="static-{{allQuizzes[0].quizId}}" type="info"
                      class="p-5" [hidden]="isLoading">
-        <ngb-panel *ngFor="let quiz of allQuizzes; let idx = index" id="static-{{quiz.quizId}}" title="{{quiz.quizName}}">
-          <ng-template ngbPanelContent style="background: var(--info)">
-            <!-- quiz data -->
-            <table class="table table-borderless">
-              <!-- configure column size -->
-              <thead>
-              <tr>
-                <td style="width: 25%"></td>
-                <td style="width: 75%"></td>
-              </tr>
-              </thead>
-              <!-- quiz ID -->
-              <tr>
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.ID)}}</th>
-                <td>{{quiz.quizId}}</td>
-              </tr>
-              <!-- quiz name -->
-              <tr>
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUIZ_NAME)}}</th>
-                <td>{{quiz.quizName}}</td>
-              </tr>
-              <!-- question count -->
-              <tr>
-                <th>{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTION_COUNT)}}</th>
-                <td >{{quiz.questionCount}}</td>
-              </tr>
-              <!-- loading spinner while fetching and rendering questions -->
-              <tr *ngIf="questionsRendered.get(quiz.quizId) !== true">
-                <th >{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
-                <td>
-                  <div class="spinner-border spinner-border-sm text-info" role="status"></div>
-                </td>
-              </tr>
-              <!-- resolved questions -->
-              <tr id="questions-{{quiz.quizId}}" *ngFor="let resolvedQuestion of quiz.resolvedQuestions; let qArrIdx = index"
-                  [hidden]="!questionsRendered.get(quiz.quizId)" >
-                <!-- only show header in front of first question -->
-                <th *ngIf="qArrIdx == 0">{{loc.localize(MESSAGE_ID.ATTRIBUTE_NAMES.QUESTIONS)}}</th>
-                <th *ngIf="qArrIdx != 0"></th>
-                <!-- actual question -->
-                <td>{{resolvedQuestion.questionText}}</td>
-                <!-- set rendering flag on last index -->
-                {{qArrIdx == (quiz.resolvedQuestions.length - 1) ? markQuestionsAsRendered(quiz.quizId) : '' }}
-              </tr>
-            </table>
-            <!-- horizontal line -->
-            <hr />
-            <!-- actions -->
-            <table class="table table-borderless">
-              <tr>
-                <th colspan="2">{{loc.localize(MESSAGE_ID.ACTION_LABELS.ACTIONS)}}</th>
-              </tr>
-              <tr>
-                <!-- edit -->
-                <td style="width: 33.33%">
-                  <button class="btn btn-block btn-info" (click)="editQuiz(quiz.quizId, idx)">
-                    {{loc.localize(MESSAGE_ID.ACTION_LABELS.EDIT)}}
-                  </button>
-                </td>
-                <!-- delete -->
-                <td style="width: 33.33%">
-                  <button class="btn btn-block btn-info" (click)="deleteQuiz(quiz.quizId, idx)" >
-                    {{loc.localize(MESSAGE_ID.ACTION_LABELS.DELETE)}}
-                  </button>
-                </td>
-              </tr>
-            </table>
+        <ngb-panel *ngFor="let quiz of allQuizzes; let idx = index" id="static-{{quiz.quizId}}">
+          <!-- header (quiz name) --> -->
+          <ng-template ngbPanelHeader>
+            <button ngbPanelToggle class="accordion-button">
+              {{quiz.quizName}}
+            </button>
+          </ng-template>
+          <!-- content (quiz data) -->
+          <ng-template ngbPanelContent>
+
+            <div class="container">
+              <div class="row g-3 mx-1 my-2 align-items-center">
+
+                <!-- quiz ID -->
+                <div class="col-3 fw-bold">
+                  <label i18n="@@id">ID</label>
+                </div>
+                <div class="col-9">
+                  {{quiz.quizId}}
+                </div>
+
+                <!-- quiz name -->
+                <div class="col-3 fw-bold">
+                  <label i18n="@@quizName">Quiz Name</label>
+                </div>
+                <div class="col-9">
+                  {{quiz.quizName}}
+                </div>
+
+                <!-- question count -->
+                <div class="col-3 fw-bold">
+                  <label i18n="@@questionCount">Question Count</label>
+                </div>
+                <div class="col-9">
+                  {{quiz.questionCount}}
+                </div>
+
+                <!-- questions header -->
+                <div class="col-3 fw-bold align-self-start">
+                  <label i18n="@@questions">Questions</label>
+                </div>
+
+                <!-- currently no questions -->
+                <div class="col-9" *ngIf="quiz.questionCount === 0">
+                  <div i18n="@@noUsedQuestions">There are no questions are assigned to this Quiz yet.></div>
+                </div>
+
+                <!-- resolved question texts -->
+                <div class="col-9" *ngIf="quiz.questionCount > 0">
+
+                  <!-- loading spinner while fetching and rendering questions -->
+                  <div [hidden]="questionsRendered.get(quiz.quizId)"
+                       class="spinner-border spinner-border-sm text-primary" role="status"></div>
+
+                  <!-- questions -->
+                  <ng-container *ngFor="let resolvedQuestion of quiz.resolvedQuestions; let qArrIdx = index">
+                    <!-- actual question -->
+                    <div [hidden]="!questionsRendered.get(quiz.quizId)">
+                      {{resolvedQuestion.questionText}}
+                    </div>
+
+                    <!-- set rendering flag on last index so that the questions will only be shown after all questions
+                         of the expanded quiz are loaded -->
+                    {{qArrIdx === (quiz.resolvedQuestions.length - 1) ? markQuestionsAsRendered(quiz.quizId) : '' }}
+                  </ng-container>
+                </div>
+
+                <!-- horizontal line -->
+                <div class="col-12">
+                  <hr/>
+                </div>
+
+                <!-- actions -->
+                <div class="col-12">
+                  <div class="row g-3">
+                    <!-- header -->
+                    <div class="col-12 fw-bold" i18n="@@actions">
+                      Actions
+                    </div>
+
+                    <!-- edit -->
+                    <div class="col-6">
+                      <button class="btn btn-secondary w-100" (click)="editQuiz(quiz.quizId, idx)" i18n="@@edit">
+                        Edit
+                      </button>
+                    </div>
+
+                    <!-- delete -->
+                    <div class="col-6">
+                      <button class="btn btn-danger w-100" (click)="deleteQuiz(quiz.quizId, idx)" i18n="@@delete">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </ng-template>
         </ngb-panel>
       </ngb-accordion>

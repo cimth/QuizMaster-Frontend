@@ -1,24 +1,21 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
-import {PredefinedQuizWithResolvedQuestions} from '../../../model/quiz';
-import {LocalizationService} from '../../../service/localization/localization.service';
+import {PredefinedQuizWithResolvedQuestions} from '../../../model/PredefinedQuizWithResolvedQuestions';
 import {QuizService} from '../../../service/quiz/quiz.service';
 import {QuestionService} from '../../../service/question/question.service';
-import {QuestionInRawFormat} from '../../../model/question';
+import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-edit-predefined-quiz',
   templateUrl: './edit-predefined-quiz.component.html',
-  styleUrls: ['./edit-predefined-quiz.component.css']
+  styleUrls: ['./edit-predefined-quiz.component.scss']
 })
 export class EditPredefinedQuizComponent implements OnInit {
 
   /*======================================*
    * FIELDS
    *======================================*/
-
-  public MESSAGE_ID = MESSAGE_ID;
 
   @Input() public originalQuiz: PredefinedQuizWithResolvedQuestions;
   @Input() public modalRef: NgbModalRef;
@@ -33,28 +30,27 @@ export class EditPredefinedQuizComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private quizService: QuizService,
+  constructor(private quizService: QuizService,
               private questionService: QuestionService) { }
 
   ngOnInit(): void {
     // copy original quiz data into edited quiz
-    this.editedQuiz = {
-      quizId: this.originalQuiz.quizId,
-      quizName: this.originalQuiz.quizName,
-      questionCount: this.originalQuiz.questionCount,
-      resolvedQuestions: this.originalQuiz.resolvedQuestions.slice()   // copy array with slice()
-    }
+    this.editedQuiz = new PredefinedQuizWithResolvedQuestions(
+      this.originalQuiz.quizId,
+      this.originalQuiz.quizName,
+      this.originalQuiz.questionCount,
+      this.originalQuiz.resolvedQuestions.slice()   // copy array with slice()
+    );
 
     // init unused questions
     this.questionService.getAllQuestions()
-      .subscribe(allQuestions => {
+      .then(allQuestions => {
 
         // fill array of unused questions
         this.unusedQuestions = allQuestions.filter(q => {
 
           // remove all questions that are already used in the quiz
-          for (let usedQuestion of this.originalQuiz.resolvedQuestions) {
+          for (const usedQuestion of this.originalQuiz.resolvedQuestions) {
             if (q.id == usedQuestion.id) {
               return false;
             }
@@ -68,13 +64,14 @@ export class EditPredefinedQuizComponent implements OnInit {
         this.unusedQuestions.sort((q1, q2) => {
           return q1.id - q2.id;
         })
-      }, err => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while fetching the unused questions: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       });
   }
@@ -94,7 +91,7 @@ export class EditPredefinedQuizComponent implements OnInit {
 
     // show error for empty fields if necessary
     if (!this.savingEnabled) {
-      this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.NOT_EMPTY_ALL);
+      this.errorMessage = $localize `:@@errorEmptyInputFields:The shown input fields must not be empty.`;
     } else {
       this.errorMessage = undefined;
     }
@@ -116,17 +113,18 @@ export class EditPredefinedQuizComponent implements OnInit {
 
     // update question
     this.quizService.saveUpdatedQuiz(this.editedQuiz, this.adminToken)
-      .subscribe(response => {
+      .then(response => {
         console.log('Response: ', response);
         alert(response);
         this.modalRef.close(this.editedQuiz);
-      }, err => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while saving the Quiz: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       });
   }

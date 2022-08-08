@@ -1,0 +1,142 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*
+ * overwrite bootstrap variables
+ *
+ * see:
+ * https://stackoverflow.com/questions/43394110/how-to-customise-bootstrap-4-scss-variables-using-angular-cli-ng-bootstrap
+ * https://javascript.plainenglish.io/step-by-step-guide-to-upgrade-your-angular-app-from-css-to-scss-fb347330fe28
+ */
+
+// variables to change
+$primary: LightSeaGreen;
+$secondary: SlateGray;
+$success: LimeGreen;
+$danger: OrangeRed;
+
+$min-contrast-ratio: 1.5;
+
+// import bootstrap styles (with overwritten values from above)
+@import '~bootstrap/scss/bootstrap';
+
+/*
+ * explicitly set contrast color for the accordion header
+ */
+
+$contrast: white;
+
+/*
+ * accordion buttons
+ */
+
+// accordion header has primary color in background and correct contrast color for font
+.accordion-button, .accordion-button:not(.collapsed) {
+  background-color: var(--bs-primary);
+  color: $contrast !important;
+}
+
+// expanded accordion header has bold text
+.accordion-button:not(.collapsed) {
+  font-weight: bold;
+}
+
+// always the same expand button color
+.accordion-button::after, .accordion-button:not(.collapsed)::after, .accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$contrast}'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+/*
+ * outer elements
+ */
+
+:root {
+  --info-hover: #138496;
+}
+
+html, body {
+  background: ghostwhite;
+}
+
+/*
+ * Fix shifting when opening and closing modals because of the body's scrollbar
+ * See: https://stackoverflow.com/a/28816183
+ */
+
+body {
+  // always show scroll bar
+  overflow-y: scroll !important;
+
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+/*
+ * remove button focus outlines
+ */
+
+.btn:focus {
+  box-shadow: none;
+}
+
+/*
+ * accordion buttons
+ */
+
+.bg-info > button {
+  color: white;
+}
+
+.bg-info > button:hover {
+  color: white;
+  font-weight: bold;
+  text-decoration-line: underline;
+}
+
+/*
+ * modals
+ */
+.modal-content {
+  padding: 1em;
+}
+
+.component-host-scrollable {
+  overflow-y: auto !important;
+}
+
+.modal-table, .modal-error, .modal-buttons {
+  width: 95%;
+  align-self: center;
+}
+
+.modal-table td, .modal-table th {
+  vertical-align: middle;
+}
+
+/*
+ * alignment
+ */
+
+.vertical-align-middle {
+  vertical-align: middle;
+}
+
+/*
+ * width
+ */
+.w-90 {
+  width: 90%;
+}
+
+/*
+ * play quiz
+ */
+
+.answerbtn-correct, .answerbtn-correct:disabled {
+  background-color: var(--bs-success);
+  opacity: 100%;
+}
+
+.answerbtn-wrong, .answerbtn-wrong:disabled {
+  background-color: var(--bs-danger);
+  opacity: 100%;
+}

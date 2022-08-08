@@ -1,16 +1,15 @@
 import {Component} from '@angular/core';
-import {MESSAGE_ID} from 'src/app/constants/localization/message-id';
-import {LocalizationService} from '../../service/localization/localization.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SelectPredefinedQuizComponent} from './select-predefined-quiz/select-predefined-quiz.component';
 import {PlayQuizService} from '../../service/play-quiz/play-quiz.service';
 import {SelectRandomQuizComponent} from './select-random-quiz/select-random-quiz.component';
 import {Router} from '@angular/router';
+import {PredefinedQuiz} from "../../model/PredefinedQuiz";
 
 @Component({
   selector: 'app-select-quiz-format',
   templateUrl: './select-quiz-format.component.html',
-  styleUrls: ['./select-quiz-format.component.css']
+  styleUrls: ['./select-quiz-format.component.scss']
 })
 export class SelectQuizFormatComponent {
 
@@ -18,16 +17,13 @@ export class SelectQuizFormatComponent {
    * FIELDS
    *======================================*/
 
-  public MESSAGE_ID = MESSAGE_ID;
-
   public isQuizStarting: boolean = false;
 
   /*======================================*
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              public playQuizService: PlayQuizService,
+  constructor(public playQuizService: PlayQuizService,
               private modalService: NgbModal,
               private router: Router) { }
 
@@ -39,7 +35,7 @@ export class SelectQuizFormatComponent {
    * Redirects to the play-quiz page where the previous started quiz can be continued.
    */
   continueQuiz(): void {
-    this.router.navigateByUrl('/play-quiz');
+    void this.router.navigateByUrl('/play-quiz');
   }
 
   /*======================================*
@@ -60,13 +56,16 @@ export class SelectQuizFormatComponent {
       keyboard: false
     }
     const modal = this.modalService.open(SelectRandomQuizComponent, options);
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as SelectRandomQuizComponent;
+    modalComponent.modalRef = modal;
 
     // start quiz if a predefined quiz was selected
-    modal.result.then(quizToPlay => {
+    modal.result.then( (questionCount: number) => {
       this.isQuizStarting = true;
-      this.playQuizService.startRandomQuiz(quizToPlay);
-    }, err => {
+      this.playQuizService.startRandomQuiz(questionCount);
+    }, () => {
       console.log("Closed selection dialog without starting a quiz.");
     });
   }
@@ -89,13 +88,16 @@ export class SelectQuizFormatComponent {
       keyboard: false
     }
     const modal = this.modalService.open(SelectPredefinedQuizComponent, options);
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as SelectPredefinedQuizComponent;
+    modalComponent.modalRef = modal;
 
     // start quiz if a predefined quiz was selected
-    modal.result.then(quizToPlay => {
+    modal.result.then( (quizToPlay: PredefinedQuiz) => {
       this.isQuizStarting = true;
       this.playQuizService.startPredefinedQuiz(quizToPlay);
-    }, err => {
+    }, () => {
       console.log("Closed selection dialog without starting a quiz.");
     });
   }

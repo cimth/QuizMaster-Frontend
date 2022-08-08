@@ -1,0 +1,22 @@
+services:
+  run:
+    container_name: quizmaster-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_PASSWORD: docker-password
+    environment:
+      USER: docker
+      BACKEND_URL: http://localhost:8080
+      ANGULAR_ENVIRONMENT: local
+    ports:
+      - "4200:4200"
+    volumes:
+      # project files without docker directory
+      - ..:/home/docker/project
+      - /home/docker/project/docker
+      # entrypoint script
+      # => is mounted so that it can be updated without rebuilding the container
+      - ./entrypoint.sh:/home/docker/entrypoint.sh
+

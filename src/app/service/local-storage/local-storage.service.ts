@@ -11,7 +11,7 @@ export class LocalStorageService {
    * @param key the key of the local storage entry
    * @param obj the stored object
    */
-  public save(key: string, obj: any) {
+  public save(key: string, obj: unknown) {
     window.localStorage.setItem(key, JSON.stringify(obj));
   }
 
@@ -21,7 +21,7 @@ export class LocalStorageService {
    *
    * @param key the key of the local storage entry
    */
-  public get(key: string): any {
+  public get(key: string): unknown {
     return JSON.parse(window.localStorage.getItem(key));
   }
 
@@ -40,7 +40,7 @@ export class LocalStorageService {
    * @param keys the keys of the entries to be removed
    */
   public removeKeys(keys: string[]) {
-    for (let key of keys) {
+    for (const key of keys) {
       window.localStorage.removeItem(key);
     }
   }

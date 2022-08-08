@@ -1,26 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from '../../service/question/question.service';
-import {QuestionInRawFormat} from '../../model/question';
-import {LocalizationService} from '../../service/localization/localization.service';
-import {MESSAGE_ID} from '../../constants/localization/message-id';
+import {QuestionInRawFormat} from '../../model/QuestionInRawFormat';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {EditQuestionComponent} from './edit-question/edit-question.component';
 import {DeleteQuestionComponent} from './delete-question/delete-question.component';
 import {AddQuestionComponent} from './add-question/add-question.component';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-manage-questions',
   templateUrl: './manage-questions.component.html',
-  styleUrls: ['./manage-questions.component.css']
+  styleUrls: ['./manage-questions.component.scss']
 })
 export class ManageQuestionsComponent implements OnInit {
 
   /*======================================*
    * FIELDS
    *======================================*/
-
-  public MESSAGE_ID = MESSAGE_ID;
   public allQuestions: QuestionInRawFormat[] = [];
   public showAnswersIds: number[] = [];
   public isLoading: boolean = true;
@@ -29,8 +26,7 @@ export class ManageQuestionsComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private questionService: QuestionService,
+  constructor(private questionService: QuestionService,
               private modalService: NgbModal,
               private router: Router) { }
 
@@ -39,9 +35,9 @@ export class ManageQuestionsComponent implements OnInit {
    */
   ngOnInit(): void {
     this.questionService.getAllQuestions()
-      .subscribe(allQuestions => {
+      .then(allQuestions => {
         console.log(allQuestions);
-        for(let q of allQuestions) {
+        for(const q of allQuestions) {
           this.allQuestions.push(q);
         }
 
@@ -50,12 +46,13 @@ export class ManageQuestionsComponent implements OnInit {
         setTimeout(() => {
           this.isLoading = false;
         }, 1500);
-      }, err => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // go to backend-not-reachable page when connection fails
         console.log('Error while fetching predefined Quizzes: ', err)
         if (err.status == 0) {
           setTimeout(() => {
-            this.router.navigateByUrl('/backend-not-reachable');
+            void this.router.navigateByUrl('/backend-not-reachable');
           }, 1500);
         }
       });
@@ -106,12 +103,15 @@ export class ManageQuestionsComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(AddQuestionComponent, options);
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as AddQuestionComponent;
+    modalComponent.modalRef = modal;
 
     // update UI with edited question data if the question was changed
-    modal.result.then(addedQuestion => {
+    modal.result.then( (addedQuestion: QuestionInRawFormat) => {
       this.allQuestions.push(addedQuestion);
-    }, err => {
+    }, () => {
       console.log("Closed creation dialog without creating a question.");
     });
   }
@@ -137,13 +137,16 @@ export class ManageQuestionsComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(EditQuestionComponent, options);
-    modal.componentInstance.originalQuestion = this.allQuestions[arrayIndex];
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as EditQuestionComponent;
+    modalComponent.originalQuestion = this.allQuestions[arrayIndex];
+    modalComponent.modalRef = modal;
 
     // update UI with edited question data if the question was changed
-    modal.result.then(editedQuestion => {
+    modal.result.then( (editedQuestion: QuestionInRawFormat ) => {
       this.allQuestions[arrayIndex] = editedQuestion;
-    }, err => {
+    }, () => {
       console.log("Closed editing dialog without saving any changes.");
     });
   }
@@ -170,15 +173,18 @@ export class ManageQuestionsComponent implements OnInit {
       keyboard: false
     }
     const modal = this.modalService.open(DeleteQuestionComponent, options);
-    modal.componentInstance.question = this.allQuestions[arrayIndex];
-    modal.componentInstance.modalRef = modal;
+
+    // pass parameters to the shown component
+    const modalComponent = modal.componentInstance as DeleteQuestionComponent;
+    modalComponent.question = this.allQuestions[arrayIndex];
+    modalComponent.modalRef = modal;
 
     // update UI if the question was deleted
     modal.result.then(deleted => {
       if (deleted === true) {
         this.allQuestions.splice(arrayIndex, 1);
       }
-    }, err => {
+    }, () => {
       console.log("Closed confirmation dialog without deleting the question.");
     });
   }

@@ -1,22 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MESSAGE_ID} from '../../../constants/localization/message-id';
-import {LocalizationService} from '../../../service/localization/localization.service';
-import {QuestionInRawFormat} from '../../../model/question';
+import {QuestionInRawFormat} from '../../../model/QuestionInRawFormat';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {QuestionService} from '../../../service/question/question.service';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-edit-question',
   templateUrl: './edit-question.component.html',
-  styleUrls: ['./edit-question.component.css']
+  styleUrls: ['./edit-question.component.scss']
 })
 export class EditQuestionComponent implements OnInit {
 
   /*======================================*
    * FIELDS
    *======================================*/
-
-  public MESSAGE_ID = MESSAGE_ID;
 
   @Input() public originalQuestion: QuestionInRawFormat;
   @Input() public modalRef: NgbModalRef;
@@ -31,18 +28,17 @@ export class EditQuestionComponent implements OnInit {
    * CONSTRUCTOR AND INITIALIZATION
    *======================================*/
 
-  constructor(public loc: LocalizationService,
-              private questionService: QuestionService) { }
+  constructor(private questionService: QuestionService) { }
 
   ngOnInit(): void {
-    this.editedQuestion = {
-      id: this.originalQuestion.id,
-      questionText: this.originalQuestion.questionText,
-      correctAnswer: this.originalQuestion.correctAnswer,
-      wrongAnswer1: this.originalQuestion.wrongAnswer1,
-      wrongAnswer2: this.originalQuestion.wrongAnswer2,
-      wrongAnswer3: this.originalQuestion.wrongAnswer3,
-    }
+    this.editedQuestion = new QuestionInRawFormat(
+      this.originalQuestion.id,
+      this.originalQuestion.questionText,
+      this.originalQuestion.correctAnswer,
+      this.originalQuestion.wrongAnswer1,
+      this.originalQuestion.wrongAnswer2,
+      this.originalQuestion.wrongAnswer3
+    );
   }
 
   /*======================================*
@@ -64,7 +60,7 @@ export class EditQuestionComponent implements OnInit {
 
     // show error for empty fields if necessary
     if (!this.savingEnabled) {
-      this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.NOT_EMPTY_ALL);
+      this.errorMessage = $localize `:@@errorEmptyInputFields:The shown input fields must not be empty.`;
     } else {
       this.errorMessage = undefined;
     }
@@ -101,17 +97,18 @@ export class EditQuestionComponent implements OnInit {
 
     // update question
     this.questionService.saveUpdatedQuestion(this.editedQuestion, this.adminToken)
-      .subscribe(response => {
+      .then(response => {
         console.log('Response: ', response);
         alert(response);
         this.modalRef.close(this.editedQuestion);
-      }, err => {
+      })
+      .catch( (err: HttpErrorResponse) => {
         // show error message
         console.log('Error while saving the Question: ', err);
         if (err.status != 0) {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error as string;
         } else {
-          this.errorMessage = this.loc.localize(MESSAGE_ID.ERRORS.BACKEND_NOT_REACHABLE);
+          this.errorMessage = $localize `:@@errorBackendNotReachable:The server is not reachable.`;
         }
       });
   }

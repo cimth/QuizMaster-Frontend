@@ -1,6 +1,6 @@
 import {LocalStorageService} from '../service/local-storage/local-storage.service';
 import {QUIZ_STATE} from '../constants/local-storage';
-import {QuestionInPlayFormat} from './question';
+import {QuestionInPlayFormat} from "./QuestionInPlayFormat";
 
 export class QuizState {
 
@@ -35,37 +35,37 @@ export class QuizState {
 
     // quiz name
     if (this.localStorageService.hasKey(QUIZ_STATE.QUIZ_NAME)) {
-      this._quizName = this.localStorageService.get(QUIZ_STATE.QUIZ_NAME);
+      this._quizName = this.localStorageService.get(QUIZ_STATE.QUIZ_NAME) as string;
     }
 
     // question ids
     if (this.localStorageService.hasKey(QUIZ_STATE.QUESTION_IDS)) {
-      this._questionIds = this.localStorageService.get(QUIZ_STATE.QUESTION_IDS);
+      this._questionIds = this.localStorageService.get(QUIZ_STATE.QUESTION_IDS) as number[];
     }
 
     // current index
     if (this.localStorageService.hasKey(QUIZ_STATE.CURRENT_INDEX)) {
-      this._currentIndex = this.localStorageService.get(QUIZ_STATE.CURRENT_INDEX);
+      this._currentIndex = this.localStorageService.get(QUIZ_STATE.CURRENT_INDEX) as number;
     }
 
     // correct answers
     if (this.localStorageService.hasKey(QUIZ_STATE.CORRECT_ANSWERS)) {
-      this._correctAnswers = this.localStorageService.get(QUIZ_STATE.CORRECT_ANSWERS);
+      this._correctAnswers = this.localStorageService.get(QUIZ_STATE.CORRECT_ANSWERS) as number;
     }
 
     // wrong answers
     if (this.localStorageService.hasKey(QUIZ_STATE.WRONG_ANSWERS)) {
-      this._wrongAnswers = this.localStorageService.get(QUIZ_STATE.WRONG_ANSWERS);
+      this._wrongAnswers = this.localStorageService.get(QUIZ_STATE.WRONG_ANSWERS) as number;
     }
 
     // current question
     if (this.localStorageService.hasKey(QUIZ_STATE.CURRENT_QUESTION)) {
-      this._currentQuestion = this.localStorageService.get(QUIZ_STATE.CURRENT_QUESTION);
+      this._currentQuestion = this.localStorageService.get(QUIZ_STATE.CURRENT_QUESTION) as QuestionInPlayFormat;
     }
 
     // answer selected
     if (this.localStorageService.hasKey(QUIZ_STATE.SELECTED_ANSWER)) {
-      this._selectedAnswer = this.localStorageService.get(QUIZ_STATE.SELECTED_ANSWER);
+      this._selectedAnswer = this.localStorageService.get(QUIZ_STATE.SELECTED_ANSWER) as string;
     }
   }
 
